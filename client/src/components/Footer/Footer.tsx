@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <div>
       {" "}
-      <footer className="bg-muted text-primary font-sans border-t-2 border-gray-500">
+      <footer className="bg-muted pb-5 px-5 text-primary font-sans border-t-2 border-gray-500">
         <div className="grid grid-cols-1 mt-5 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
           <div>
             <h3 className="text-lg font-semibold text-popover-foreground mb-4">
@@ -34,81 +34,84 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
-            <h3 className="text-lg font-semibold text-popover-foreground mb-4">
-              Products
-            </h3>
-            <ul className="text-sm space-y-2">
-              <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
-                  Prices Drop
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
-                  New Products
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
-                  Best Sales
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
-                  Contact Us
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
-                  Sitemap
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
-                  Stores
-                </a>
-              </li>
-            </ul>
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-lg font-semibold text-popover-foreground mb-4">
+                Products
+              </h3>
+              <ul className="text-sm space-y-2">
+                <li>
+                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                    Prices Drop
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                    New Products
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                    Best Sales
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                    Contact Us
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                    Sitemap
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                    Stores
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold text-popover-foreground mb-4">
+                Our Company
+              </h3>
+              <ul className="text-sm space-y-2">
+                <li>
+                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                    Delivery
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                    Legal Notice
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                    Terms And Conditions Of Use
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                    Secure Payment
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                    Login
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
 
-          <div>
-            <h3 className="text-lg font-semibold text-popover-foreground mb-4">
-              Our Company
-            </h3>
-            <ul className="text-sm space-y-2">
-              <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
-                  Delivery
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
-                  Legal Notice
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
-                  Terms And Conditions Of Use
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
-                  Secure Payment
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
-                  Login
-                </a>
-              </li>
-            </ul>
-          </div>
 
           <div>
             <h3 className="text-lg font-semibold text-popover-foreground mb-4">
