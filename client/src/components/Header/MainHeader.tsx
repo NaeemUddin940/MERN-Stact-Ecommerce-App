@@ -1,0 +1,120 @@
+import { Link } from "react-router-dom";
+
+import { Heart, ShoppingCart, User } from "lucide-react";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { Toggle } from "../ui/Toggle";
+import { Sidebar } from "../Sidebar/Sidebar";
+
+import Search from "../Search/Search";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { usenavItemContext } from "../../context/NavItemContext";
+
+export default function MainHeader() {
+  const { navItem } = usenavItemContext();
+  return (
+    <header>
+      <section className="flex bg-muted border-b-1 border-ring justify-center items-center">
+        <div className="container-sm md:container-md flex items-center gap-5 justify-between">
+          <div className="animate-slide-in-left flex items-center">
+            <div className="md:hidden">
+              <Sidebar navItem={navItem} />
+            </div>
+            <Tooltip>
+              <TooltipTrigger>
+                <Link to="/">
+                  <img
+                    className="h-10 w-30"
+                    src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/img/logo-1691412328.jpg"
+                    alt=""
+                  />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">Go to Home</TooltipContent>
+            </Tooltip>
+          </div>
+
+          <div className="lg:w-[500px] my-2 hidden lg:block">
+            <Search />
+          </div>
+
+          {/* Login & Register Button */}
+          <div className=" flex items-center justify-end gap-5">
+            {/* Login / Register For large Device */}
+            <div className="md:flex hidden">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link className="hover:text-chart-4" to="/login">
+                    Login
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">Login</TooltipContent>
+              </Tooltip>
+              <span className="mx-2">/</span>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link className="hover:text-chart-4" to="/register">
+                    Register
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">Register</TooltipContent>
+              </Tooltip>
+            </div>
+
+            {/* Login Register for Small Device */}
+
+            <div className="md:hidden flex">
+              <DropdownMenu>
+                <Tooltip>
+                  <DropdownMenuTrigger asChild>
+                    <TooltipTrigger>
+                      <User />
+                    </TooltipTrigger>
+                  </DropdownMenuTrigger>
+                  <TooltipContent side="bottom">
+                    Login / Register
+                  </TooltipContent>
+                </Tooltip>
+                <DropdownMenuContent className="data-[state=open]:animate-slide-in-bottom data-[state=closed]:animate-fade-out delay-200">
+                  <DropdownMenuItem asChild>
+                    <Link to="/login">Login</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/register">register</Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+
+            {/* Compare & Wishlist & Shopping Cart Icon */}
+
+            <Tooltip>
+              <TooltipTrigger className="relative group">
+                <Heart className="hover:text-chart-1 cursor-pointer" />
+                <div className="absolute top-0 -right-3 bg-chart-1 animate-pulse h-5 w-4 flex justify-center items-center rounded-full font-mono">
+                  0
+                </div>
+              </TooltipTrigger>
+              <TooltipContent side="bottom">Wishlist</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger className="relative group">
+                <ShoppingCart className="hover:text-chart-1 cursor-pointer" />
+                <div className="absolute top-0 -right-3 animate-bounce bg-chart-1 h-5 w-4 flex justify-center items-center rounded-full font-mono">
+                  0
+                </div>
+              </TooltipTrigger>
+              <TooltipContent side="bottom">Cart</TooltipContent>
+            </Tooltip>
+            <Toggle />
+          </div>
+        </div>
+      </section>
+    </header>
+  );
+}

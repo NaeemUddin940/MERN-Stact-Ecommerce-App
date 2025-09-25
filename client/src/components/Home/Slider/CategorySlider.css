@@ -1,0 +1,33 @@
+.mySwiperr {
+  overflow: none;
+  padding: 20px 0;
+}
+
+.mySwiperr .swiper-button-next,
+.mySwiperr .swiper-button-prev {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  background-color: var(--color-chart-4);
+  color: #000;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 7px;
+  font-size: 10px;
+}
+
+.mySwiperr:hover .swiper-button-next,
+.mySwiperr:hover .swiper-button-prev {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mySwiperr .swiper-button-next::after,
+.mySwiperr .swiper-button-prev::after {
+  font-size: 18px;
+  font-weight: bold;
+}
