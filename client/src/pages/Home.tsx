@@ -107,7 +107,7 @@ export default function Home() {
       </div>
 
       {/* Home Page 5 Use Big Banner */}
-      <div className="flex items-center overflow-hidden justify-between gap-5 container-sm md:container-md">
+      <div className="grid grid-cols-1 md:grid-cols-2 overflow-hidden gap-5 container-sm md:container-md">
         <div data-aos="slide-up" data-aos-delay="200" data-aos-duration="400">
           <BigBanner
             image="https://demos.codezeel.com/prestashop/PRS21/PRS210502/img/cms/cms-banner-4.jpg"
@@ -148,7 +148,7 @@ export default function Home() {
       </div>
 
       {/* Home Page 9 Big Banner */}
-      <div className="flex items-center overflow-hidden justify-between gap-5 container-sm md:container-md">
+      <div className="grid grid-cols-1 md:grid-cols-2 overflow-hidden gap-5 container-sm md:container-md">
         <div data-aos="slide-up" data-aos-delay="200" data-aos-duration="400">
           <BigBanner
             image="https://demos.codezeel.com/prestashop/PRS21/PRS210502/img/cms/cms-banner-6.jpg"
@@ -166,7 +166,7 @@ export default function Home() {
       </div>
 
       {/* Home Page 10 What Our Clients Say / Clients Reviews */}
-      <div className="container-sm md:container-md my-5">
+      <div className="container-sm md:container-md grid grid-cols-1 my-5">
         <ClientReview />
       </div>
 

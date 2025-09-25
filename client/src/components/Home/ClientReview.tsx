@@ -53,28 +53,32 @@ export default function ClientReview() {
         speed={800} // animation smooth হবে
         modules={[Navigation, Autoplay]}
         className="mySwiperr">
-        {clientReviews.map((client, index) => (
-          <SwiperSlide key={index}>
-            <div className="bg-secondary p-6 rounded-xl shadow-lg w-full max-w-lg font-sans">
-              <div className="flex items-center mb-4">
-                <img
-                  src={client.image}
-                  height={10}
-                  width={10}
-                  alt={client.name}
-                  className="rounded-full h-20 w-20 object-cover mr-4 border-2 border-gray-200"
-                />
-                <div>
-                  <h4 className="font-semibold text-foreground text-lg">
-                    {client.name}
-                  </h4>
-                  <p className="text-sm text-muted-foreground">{client.email}</p>
+        <div className="grid grid-cols-1">
+          {clientReviews.map((client, index) => (
+            <SwiperSlide key={index}>
+              <div className="bg-secondary p-6 rounded-xl shadow-lg w-full max-w-lg font-sans">
+                <div className="flex items-center mb-4">
+                  <img
+                    src={client.image}
+                    height={10}
+                    width={10}
+                    alt={client.name}
+                    className="rounded-full h-20 w-20 object-cover mr-4 border-2 border-gray-200"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-foreground text-lg">
+                      {client.name}
+                    </h4>
+                    <p className="text-sm text-muted-foreground">
+                      {client.email}
+                    </p>
+                  </div>
                 </div>
+                <p className="text-gray-500 leading-relaxed">{client.review}</p>
               </div>
-              <p className="text-gray-500 leading-relaxed">{client.review}</p>
-            </div>
-          </SwiperSlide>
-        ))}
+            </SwiperSlide>
+          ))}
+        </div>
       </Swiper>
     </div>
   );

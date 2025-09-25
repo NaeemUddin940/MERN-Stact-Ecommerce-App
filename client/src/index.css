@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
+@font-face {
+  font-family: "dm-sans";
+  src: url("/client/assest/DMSans-VariableFont_opsz\,wght.ttf");
+}
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@midudev/tailwind-animations";
@@ -9,7 +14,7 @@ body {
 }
 
 .DmSans {
-  font-family: "DM Sans", sans-serif;
+  font-family: "dm-sans", sans-serif;
 }
 .container-sm {
   width: 95%;

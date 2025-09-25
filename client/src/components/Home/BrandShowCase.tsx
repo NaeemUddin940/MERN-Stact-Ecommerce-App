@@ -86,7 +86,7 @@ export default function BrandShowCase() {
   return (
     <div className="page-4 mb-5 overflow-hidden">
       <Swiper
-        slidesPerView={10}
+        slidesPerView={3}
         loop={true}
         autoplay={{
           delay: 2000,
@@ -94,9 +94,11 @@ export default function BrandShowCase() {
         }}
         spaceBetween={30}
         breakpoints={{
-          640: { slidesPerView: 3 },
-          768: { slidesPerView: 5 },
-          1024: { slidesPerView: 8 },
+          7600: { slidesPerView: 4, spaceBetween: 20 },
+          700: { slidesPerView: 5, spaceBetween: 20 },
+          930: { slidesPerView: 6, spaceBetween: 20 },
+          1150: { slidesPerView: 7, spaceBetween: 20 },
+          1300: { slidesPerView: 9, spaceBetween: 20 },
         }}
         modules={[Navigation, Autoplay]}
         className="mySwiperr">
