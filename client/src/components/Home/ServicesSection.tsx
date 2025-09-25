@@ -15,11 +15,6 @@ const featureData = [
     description: "Payment Cards Accepted",
   },
   {
-    url: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDIwMDEwOTA0Ly9FTiIKICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+CjxzdmcgdmVyc2lvbj0iMS4wIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiB3aWR0aD0iNTEyLjAwMDAwMHB0IiBoZWlnaHQ9IjUxMi4wMDAwMDBwdCIgdmlld0JveD0iMCAwIDUxMi4wMDAwMDAgNTEyLjAwMDAwMCIKIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIG1lZXQiPgoKPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC4wMDAwMDAsNTEyLjAwMDAwMCkgc2NhbGUoMC4xMDAwMDAsLTAuMTAwMDAwKSIKZmlsbD0iIzAwMDAwMCIgc3Ryb2tlPSJub25lIj4KPHBhdGggZD0iTTE2NDQgNTExMCBjLTQ0NiAtNjUgLTY3NiAtNTc5IC00MjggLTk1NiA2OCAtMTAzIDIyMSAtMjMzIDM3NCAtMzE4Cmw3NSAtNDEgLTc5NSAtNSBjLTg3MyAtNSAtODI0IC0yIC04NTUgLTY2IC0xMyAtMjcgLTE1IC0xMDQgLTE1IC00OTYgMCAtMzQ3CjMgLTQ2OSAxMyAtNDg3IDIyIC00NCA2MCAtNjMgMTM2IC02OSBsNzEgLTUgMCAtMTI4MSBjMCAtMTIwMCAxIC0xMjgzIDE4Ci0xMzE2IDEwIC0yMCAzMiAtNDIgNTIgLTUyIDMzIC0xNyAxNjIgLTE4IDIyNzAgLTE4IDIxMDggMCAyMjM3IDEgMjI3MCAxOCAyMAoxMCA0MiAzMiA1MiA1MiAxNyAzMyAxOCAxMTYgMTggMTMxNiBsMCAxMjgxIDcxIDUgYzc2IDYgMTE0IDI1IDEzNiA2OSAxMCAxOAoxMyAxNDAgMTMgNDg3IDAgMzkyIC0yIDQ2OSAtMTUgNDk2IC0zMSA2NCAxOCA2MSAtODU1IDY2IGwtNzk1IDUgNzUgNDEgYzE1Mwo4NSAzMDYgMjE1IDM3NCAzMTggMTg2IDI4MyAxMDcgNjczIC0xNzUgODYwIC0xMjIgODAgLTI4OCAxMTcgLTQzMiA5NiAtMjE0Ci0zMSAtMzY2IC0xNDAgLTUyNCAtMzc1IC00NyAtNzEgLTE1MCAtMjczIC0xODQgLTM2MiAtMTMgLTM1IC0yNiAtNjMgLTI5IC02MwotMyAwIC0xNiAyOCAtMjkgNjMgLTM0IDg5IC0xMzcgMjkxIC0xODQgMzYyIC0xNTUgMjMxIC0zMDkgMzQzIC01MTQgMzc0IC03OQoxMiAtMTEyIDEyIC0xODkgMXogbTE3OCAtMjIxIGMxODMgLTM4IDM1MyAtMjM3IDQ5MiAtNTcyIDYzIC0xNTMgMTM2IC00MjgKMTM2IC01MTQgMCAtNDAgLTMxMSAyOCAtNTE3IDExMyAtMTk5IDgyIC0zOTQgMjAzIC00NzkgMjk3IC0xMzAgMTQ0IC0xNTEgMzQ1Ci01MyA0OTggOTEgMTQzIDI1NiAyMTIgNDIxIDE3OHogbTE2NDAgMCBjMTA2IC0yMyAxOTkgLTg3IDI1NyAtMTc4IDcyIC0xMTIKODEgLTI2MiAyNCAtMzg0IC02OSAtMTQ2IC0yNjYgLTI5MSAtNTU2IC00MTEgLTIwNiAtODUgLTUxNyAtMTUzIC01MTcgLTExMyAwCjQyIDM3IDIxOCA2NiAzMTQgODAgMjY2IDE5OSA0OTIgMzM1IDYzNyAxMTAgMTE5IDI0NyAxNjUgMzkxIDEzNXogbS0xNDYyCi0xNjU5IGwwIC0zMzAgLTg5MCAwIC04OTAgMCAwIDMzMCAwIDMzMCA4OTAgMCA4OTAgMCAwIC0zMzB6IG04OTAgMCBsMCAtMzMwCi0zMzAgMCAtMzMwIDAgMCAzMzAgMCAzMzAgMzMwIDAgMzMwIDAgMCAtMzMweiBtMjAxMCAwIGwwIC0zMzAgLTg5MCAwIC04OTAgMAowIDMzMCAwIDMzMCA4OTAgMCA4OTAgMCAwIC0zMzB6IG0tMjkwMCAtMTc4MCBsMCAtMTIyMCAtNzc1IDAgLTc3NSAwIDAgMTIyMAowIDEyMjAgNzc1IDAgNzc1IDAgMCAtMTIyMHogbTg5MCAwIGwwIC0xMjIwIC0zMzAgMCAtMzMwIDAgMCAxMjIwIDAgMTIyMCAzMzAKMCAzMzAgMCAwIC0xMjIweiBtMTc4MCAwIGwwIC0xMjIwIC03NzUgMCAtNzc1IDAgMCAxMjIwIDAgMTIyMCA3NzUgMCA3NzUgMCAwCi0xMjIweiIvPgo8L2c+Cjwvc3ZnPgo=",
-    title: "Special Gifts",
-    description: "Our First Product Order",
-  },
-  {
     url: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDIwMDEwOTA0Ly9FTiIKICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+CjxzdmcgdmVyc2lvbj0iMS4wIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiB3aWR0aD0iNTEyLjAwMDAwMHB0IiBoZWlnaHQ9IjUxMi4wMDAwMDBwdCIgdmlld0JveD0iMCAwIDUxMi4wMDAwMDAgNTEyLjAwMDAwMCIKIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIG1lZXQiPgoKPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC4wMDAwMDAsNTEyLjAwMDAwMCkgc2NhbGUoMC4xMDAwMDAsLTAuMTAwMDAwKSIKZmlsbD0iIzAwMDAwMCIgc3Ryb2tlPSJub25lIj4KPHBhdGggZD0iTTI0MzAgNTExNCBjLTEyNyAtMTQgLTIxNyAtMjkgLTMwMCAtNTAgLTMwNSAtNzYgLTU3OCAtMjMxIC04MDUKLTQ1OSAtMzA3IC0zMDcgLTQ4MyAtNjk2IC01MTEgLTExMzMgLTcgLTEwMCAtOCAtMTAzIC0zMyAtMTA4IC0xOTggLTQzIC0zMjcKLTEzNCAtMzk2IC0yNzkgLTYwIC0xMjggLTYwIC0xMjYgLTYwIC03NTAgMCAtNTEzIDIgLTU3NiAxOCAtNjM0IDU2IC0yMDMgMTk2Ci0zMzggNDAwIC0zODUgNTAgLTEyIDEyMiAtMTYgMjc2IC0xNiBsMjA4IDAgMjUgMjUgYzE0IDE0IDI4IDM5IDMyIDU2IDggNDEgOAoxODY3IDAgMTkwOCAtNCAxNyAtMTggNDIgLTMxIDU2IC0yMyAyMyAtMzMgMjUgLTEzNyAyNyBsLTExMSAzIDMgODAgYzEyIDI4NwoxMTYgNTg1IDI4OSA4MjggMTE3IDE2NCAzMjggMzUyIDUxMCA0NTQgMjEyIDExOCA1MDQgMTkzIDc1MyAxOTMgMjQ5IDAgNTQxCi03NSA3NTMgLTE5MyAxODIgLTEwMiAzOTMgLTI5MCA1MTAgLTQ1NCAxNzMgLTI0MyAyNzcgLTU0MSAyODkgLTgyOCBsMyAtODAKLTExMSAtMyBjLTEwNSAtMiAtMTE0IC00IC0xMzcgLTI4IC0xNiAtMTYgLTI4IC00MiAtMzIgLTY3IC0zIC0yMyAtNSAtNDY0IC0zCi05ODAgbDMgLTkzOSAzMyAtMjkgYzMyIC0yOCAzNSAtMjkgMTQyIC0yOSBsMTA5IDAgLTUgLTUyIGMtMjggLTI4OSAtOTYgLTQ2NQotMjI4IC01ODYgLTEzMCAtMTE4IC0zNTEgLTE4OSAtNjQ3IC0yMDggbC0xMDYgLTcgLTYgNjIgYy04IDc0IC0yNCAxMDggLTcxCjE0OSAtNTUgNDggLTEwNiA1NCAtNDY0IDUwIC0yODcgLTMgLTMyMCAtNSAtMzUyIC0yMiAtNDkgLTI2IC02OSAtNDYgLTkxIC04OAotMTcgLTMzIC0xOSAtNjEgLTE5IC0yNDIgMCAtMjE3IDQgLTI0MyA0OCAtMjkwIDYwIC02NCA3MSAtNjYgNDUyIC02NiAzMzkgMAozNDcgMCAzOTAgMjMgNjMgMzEgMTAwIDg4IDEwNyAxNjUgbDYgNjEgNTEgNSBjMjggMyAxMDMgMTAgMTY2IDE2IDQzMSA0MSA2OTUKMTkwIDgzNSA0NzAgNjMgMTI2IDk3IDI1NSAxMTggNDQ5IGwxMiAxMTUgNzEgMTcgYzIwMiA1MCAzMzYgMTgwIDM5MiAzODEgMTUKNTcgMTcgMTIyIDE3IDYzOCAwIDUyNyAtMiA1ODAgLTE4IDY0MCAtNjAgMjEwIC0xOTggMzMyIC00MzggMzg0IC0yNSA1IC0yNiA4Ci0zMyAxMDggLTUzIDgyMyAtNjU1IDE0OTAgLTE0NjYgMTYyNCAtODUgMTQgLTM0NSAyNiAtNDEwIDE4eiBtLTEzNDAgLTI3NzQKbDAgLTg1MCAtOTcgMCBjLTI5OCAxIC00MzMgODYgLTQ3MiAyOTUgLTE1IDgwIC0xNSAxMDMwIDAgMTExMCAyMiAxMjAgODUgMjA2CjE4NSAyNTIgNjQgMjkgMTM3IDQwIDI3NyA0MiBsMTA3IDEgMCAtODUweiBtMzI5MCA4MTYgYzEwMiAtMzggMTc3IC0xMTUgMjA3Ci0yMTQgMTYgLTUyIDE4IC0xMDYgMTYgLTYwMiAtMiAtNTIwIC0zIC01NDggLTIzIC02MTMgLTE4IC01NyAtMzEgLTc5IC03OAotMTI3IC04MyAtODQgLTEzNiAtMTAyIC0zMjQgLTEwOCBsLTE0OCAtNCAwIDg0NyAwIDg0NyAxNTMgLTUgYzEwNyAtMyAxNjUgLTkKMTk3IC0yMXogbS0xNDUwIC0yODA2IGwwIC0xNjAgLTMwNSAwIC0zMDUgMCAwIDE2MCAwIDE2MCAzMDUgMCAzMDUgMCAwIC0xNjB6Ii8+CjwvZz4KPC9zdmc+Cg==",
     title: "Support 24/7",
     description: "Contact us Anytime",
@@ -28,28 +23,26 @@ const featureData = [
 
 export default function ServicesSection() {
   return (
-    <div className="flex .DmSans bg-primary-foreground  w-full h-70 items-center justify-center font-sans">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-7xl mx-auto w-full">
-        {featureData.map((feature, index) => (
-          <div
-            key={index}
-            className="flex group  flex-col items-center text-center p-4 bg-secondary rounded-lg shadow-xl border border-white transition-transform transform hover:scale-105">
-            <div className="w-12 h-12 flex items-center justify-center text-rose-800 mb-2">
-              <img
-                className="group-hover:animate-slide-out-top delay-100 duration-500 h-10"
-                src={feature.url}
-                alt={feature.title}
-              />
-            </div>
-            <h3 className="text-sm sm:text-lg font-semibold text-foreground mb-1">
-              {feature.title}
-            </h3>
-            <p className="text-xs sm:text-sm text-gray-500">
-              {feature.description}
-            </p>
+    <div className="grid grid-cols-2 my-5 lg:grid-cols-4 gap-8 max-w-7xl mx-auto w-full">
+      {featureData.map((feature, index) => (
+        <div
+          key={index}
+          className="flex group  flex-col items-center text-center p-4 bg-secondary rounded-lg shadow-xl border border-white transition-transform transform hover:scale-105">
+          <div className="w-12 h-12 flex items-center justify-center text-rose-800 mb-2">
+            <img
+              className="group-hover:animate-slide-out-top delay-100 duration-500 h-10"
+              src={feature.url}
+              alt={feature.title}
+            />
           </div>
-        ))}
-      </div>
+          <h3 className="text-sm sm:text-lg font-semibold text-foreground mb-1">
+            {feature.title}
+          </h3>
+          <p className="text-xs sm:text-sm text-gray-500">
+            {feature.description}
+          </p>
+        </div>
+      ))}
     </div>
   );
 }
