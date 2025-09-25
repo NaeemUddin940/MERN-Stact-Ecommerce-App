@@ -28,13 +28,12 @@ const featureData = [
 
 export default function ServicesSection() {
   return (
-    <div className="flex bg-primary-foreground  w-full h-70 items-center justify-center font-sans">
+    <div className="flex .DmSans bg-primary-foreground  w-full h-70 items-center justify-center font-sans">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-7xl mx-auto w-full">
         {featureData.map((feature, index) => (
           <div
             key={index}
             className="flex group  flex-col items-center text-center p-4 bg-secondary rounded-lg shadow-xl border border-white transition-transform transform hover:scale-105">
-            {/* The SVGIcon component renders the icon dynamically */}
             <div className="w-12 h-12 flex items-center justify-center text-rose-800 mb-2">
               <img
                 className="group-hover:animate-slide-out-top delay-100 duration-500 h-10"

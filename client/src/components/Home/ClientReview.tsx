@@ -67,13 +67,13 @@ export default function ClientReview() {
                 className="rounded-full h-20 w-20 object-cover mr-4 border-2 border-gray-200"
               />
               <div className="flex flex-col justify-start items-start">
-                <h4 className="font-semibold text-foreground text-lg">
+                <h4 className="font-semibold .DmSans text-foreground text-lg">
                   {client.name}
                 </h4>
-                <p className="text-sm text-muted-foreground">{client.email}</p>
+                <p className="text-sm .DmSans text-muted-foreground">{client.email}</p>
               </div>
             </div>
-            <p className="text-gray-500 line-clamp-2 text-left leading-relaxed">
+            <p className="text-gray-500 .DmSans line-clamp-2 text-left leading-relaxed">
               {client.review}
             </p>
           </div>

@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <div>
       {" "}
-      <footer className="bg-muted pb-5 px-5 text-primary font-sans border-t-2 border-gray-500">
+      <footer className="bg-muted DmSans pb-5 px-5 text-primary font-sans border-t-2 border-gray-500">
         <div className="grid grid-cols-1 mt-5 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
           <div>
             <h3 className="text-lg font-semibold text-popover-foreground mb-4">
