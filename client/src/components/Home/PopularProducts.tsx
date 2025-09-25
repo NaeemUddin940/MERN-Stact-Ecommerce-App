@@ -214,7 +214,7 @@ export default function PopularProducts() {
         return (
           <TabsContent key={cat.title} value={cat.title}>
             <Swiper
-              slidesPerView={1}
+              slidesPerView={2}
               loop={true}
               spaceBetween={10}
               className="mySwiperr"
@@ -227,10 +227,10 @@ export default function PopularProducts() {
                 prevEl: ".swiper-prev",
               }}
               breakpoints={{
-                668: { slidesPerView: 2, spaceBetween: 30 },
-                880: { slidesPerView: 3, spaceBetween: 30 },
-                1050: { slidesPerView: 4, spaceBetween: 10 },
-                1280: { slidesPerView: 5, spaceBetween: 20 },
+                700: { slidesPerView: 3, spaceBetween: 30 },
+                930: { slidesPerView: 4, spaceBetween: 30 },
+                1150: { slidesPerView: 5, spaceBetween: 10 },
+                1300: { slidesPerView: 6, spaceBetween: 20 },
               }}
               modules={[Navigation, Autoplay]}>
               {filteredProducts.map((product, i) => (

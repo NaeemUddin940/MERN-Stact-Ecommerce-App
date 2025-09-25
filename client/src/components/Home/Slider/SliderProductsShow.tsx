@@ -61,12 +61,18 @@ export const SliderProductsShow: React.FC<SliderProductsShowProps> = ({
       {/* Slider */}
       {filteredProducts.length >= 0 ? (
         <Swiper
-          slidesPerView={5}
+          slidesPerView={2}
           loop={true}
           spaceBetween={30}
           navigation={{
             nextEl: ".custom1-next",
             prevEl: ".custom1-prev",
+          }}
+          breakpoints={{
+            700: { slidesPerView: 3, spaceBetween: 30 },
+            930: { slidesPerView: 4, spaceBetween: 30 },
+            1150: { slidesPerView: 5, spaceBetween: 10 },
+            1300: { slidesPerView: 6, spaceBetween: 20 },
           }}
           modules={[Navigation]}
           className="mySwiper">

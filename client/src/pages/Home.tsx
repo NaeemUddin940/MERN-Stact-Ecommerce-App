@@ -85,7 +85,7 @@ export default function Home() {
           />
           <div className="absolute top-6 lg:top-[18%] lg:right-[50%] md:translate-x-[50%] translate-x-[20%] flex items-center justify-center gap-5">
             <h4 className="text-4xl font-bold text-white">Watch</h4>
-            <div className="space-y-3 text-white">
+            <div className="lg:text-xl text-smspace-y-3 text-white">
               <p className="lg:text-xl text-sm">
                 M6 Smart Band 2.3 – Fitness Band
               </p>
