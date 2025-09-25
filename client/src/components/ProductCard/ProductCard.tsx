@@ -80,10 +80,10 @@ export default function ProductCard({ product, filter }: ProductCardProps) {
 
   return (
     <div
-      className="flex group"
+      className="flex group max-w-sm w-full"
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}>
-      <div className="border-1 relative border-gray-400 rounded product-card w-[250px] overflow-hidden">
+      <div className="border-1 relative border-gray-400 rounded product-card w-full overflow-hidden">
         {/* Image Section */}
         <div className="relative overflow-hidden rounded">
           <img

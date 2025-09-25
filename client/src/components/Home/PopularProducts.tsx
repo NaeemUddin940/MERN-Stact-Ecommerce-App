@@ -1,7 +1,7 @@
 import { useCategoryContext } from "../../context/CategoryContext";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import ProductCard from "../ProductCard/ProductCard";
 export default function PopularProducts() {
@@ -168,9 +168,23 @@ export default function PopularProducts() {
 
   return (
     <Tabs defaultValue={categories[0]?.title}>
-      {/* Tabs buttons + Navigation */}
-      <div className="flex items-center rounded-sm justify-between bg-muted shadow border py-1 px-2">
-        <h3 className="lg:text-4xl font-bold ">Popular Products</h3>
+      <div className="flex items-center justify-between">
+        <h3 className="lg:text-4xl xl:hidden block text-3xl font-bold ">
+          Popular Products
+        </h3>
+        <div className="flex gap-2 md:hidden">
+          <div className="swiper-prev bg-ring hover:bg-chart-1 p-2 rounded-full cursor-pointer">
+            <ChevronLeft />
+          </div>
+          <div className="swiper-next bg-ring hover:bg-chart-1 p-2 rounded-full cursor-pointer">
+            <ChevronRight />
+          </div>
+        </div>
+      </div>
+      <div className="flex items-center rounded-sm justify-between bg-muted shadow border py-4 px-2">
+        <h3 className="lg:text-4xl hidden xl:block text-4xl font-bold ">
+          Popular Products
+        </h3>
         <TabsList className="flex gap-2">
           <div>
             {categories.map((cat) => (
@@ -182,7 +196,7 @@ export default function PopularProducts() {
         </TabsList>
 
         {/* Important: make navigation buttons persistent (outside of TabsContent) */}
-        <div className="flex gap-2">
+        <div className="md:flex gap-2 hidden">
           <div className="swiper-prev bg-ring hover:bg-chart-1 p-2 rounded-full cursor-pointer">
             <ChevronLeft />
           </div>
@@ -200,10 +214,14 @@ export default function PopularProducts() {
         return (
           <TabsContent key={cat.title} value={cat.title}>
             <Swiper
-              slidesPerView={2}
+              slidesPerView={1}
               loop={true}
               spaceBetween={10}
-              // centeredSlides={true}
+              className="mySwiperr"
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
               navigation={{
                 nextEl: ".swiper-next",
                 prevEl: ".swiper-prev",
@@ -214,7 +232,7 @@ export default function PopularProducts() {
                 1050: { slidesPerView: 4, spaceBetween: 10 },
                 1280: { slidesPerView: 5, spaceBetween: 20 },
               }}
-              modules={[Navigation]}>
+              modules={[Navigation, Autoplay]}>
               {filteredProducts.map((product, i) => (
                 <SwiperSlide key={i}>
                   <ProductCard product={product} />
