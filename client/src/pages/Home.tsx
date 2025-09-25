@@ -1,14 +1,14 @@
-import HeroSection from "@/components/Home/HeroSection";
-import SmallBanner from "@/components/Home/Banner/SmallBanner";
-import CategorySection from "@/components/Home/Slider/CategorySection";
-import PopularProducts from "@/components/Home/PopularProducts";
-import BigBanner from "@/components/Home/Banner/BigBanner";
-import { SliderProductsShow } from "@/components/Home/Slider/SliderProductsShow";
-import { useProductContext } from "@/context/ProductContext";
-import BrandShowCase from "@/components/Home/BrandShowCase";
-import ServicesSection from "@/components/Home/ServicesSection";
-import ClientReview from "@/components/Home/ClientReview";
-import { Separator } from "@/components/ui/separator";
+import HeroSection from "../components/Home/HeroSection";
+import SmallBanner from "../components/Home/Banner/SmallBanner";
+import CategorySection from "../components/Home/Slider/CategorySection";
+import PopularProducts from "../components/Home/PopularProducts";
+import BigBanner from "../components/Home/Banner/BigBanner";
+import { SliderProductsShow } from "../components/Home/Slider/SliderProductsShow";
+import { useProductContext } from "../context/ProductContext";
+import BrandShowCase from "../components/Home/BrandShowCase";
+import ServicesSection from "../components/Home/ServicesSection";
+import ClientReview from "../components/Home/ClientReview";
+import { Separator } from "../components/ui/separator";
 
 export default function Home() {
   const { products } = useProductContext();
@@ -18,7 +18,6 @@ export default function Home() {
       {/* Home Page 1 */}
       <div className="page-1 container-sm md:container-md">
         <HeroSection />
-
         <CategorySection />
       </div>
       <Separator />
@@ -78,17 +77,19 @@ export default function Home() {
       <div className="page-3 container-sm md:container-md">
         <PopularProducts />
         {/* Banner */}
-        <div className="relative w-full mt-10 group overflow-hidden">
+        <div className="relative w-full mt-5 group overflow-hidden">
           <img
-            className="group-hover:scale-110 transition-all duration-800 delay-100"
+            className="group-hover:scale-110  h-[100px] transition-all duration-800 delay-100"
             src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/img/cms/offer-banner.jpg"
             alt=""
           />
-          <div className="absolute top-[18%] right-[50%] translate-x-[50%] flex items-center justify-cebter gap-5">
+          <div className="absolute top-6 lg:top-[18%] lg:right-[50%] md:translate-x-[50%] translate-x-[20%] flex items-center justify-center gap-5">
             <h4 className="text-4xl font-bold text-white">Watch</h4>
             <div className="space-y-3 text-white">
-              <p className="text-xl">M6 Smart Band 2.3 – Fitness Band</p>
-              <p className="text-xl">
+              <p className="lg:text-xl text-sm">
+                M6 Smart Band 2.3 – Fitness Band
+              </p>
+              <p className="lg:text-lg whitespace-nowrap text-sm">
                 Men’s and Women’s Health Tracking, Red Strap
               </p>
             </div>
