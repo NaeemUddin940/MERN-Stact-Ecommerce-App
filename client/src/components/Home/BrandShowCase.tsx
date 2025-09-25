@@ -94,7 +94,7 @@ export default function BrandShowCase() {
         }}
         spaceBetween={30}
         breakpoints={{
-          7600: { slidesPerView: 4, spaceBetween: 20 },
+          600: { slidesPerView: 4, spaceBetween: 20 },
           700: { slidesPerView: 5, spaceBetween: 20 },
           930: { slidesPerView: 6, spaceBetween: 20 },
           1150: { slidesPerView: 7, spaceBetween: 20 },

@@ -166,12 +166,10 @@ export default function Home() {
       </div>
 
       {/* Home Page 10 What Our Clients Say / Clients Reviews */}
-      <div className="container-sm md:container-md grid grid-cols-1 my-5">
+      <div className="container-sm md:container-md my-5">
         <ClientReview />
+        {/* <ServicesSection /> */}
       </div>
-
-      {/* Home Page 11 Service Section */}
-      <ServicesSection />
     </div>
   );
 }

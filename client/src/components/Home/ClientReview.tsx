@@ -41,45 +41,44 @@ const clientReviews = [
 
 export default function ClientReview() {
   return (
-    <div className="overflow-hidden">
-      <Swiper
-        slidesPerView={3} // mobile responsive হলে breakpoints দাও
-        spaceBetween={20}
-        loop={true}
-        autoplay={{
-          delay: 2000,
-          disableOnInteraction: false,
-        }}
-        speed={800} // animation smooth হবে
-        modules={[Navigation, Autoplay]}
-        className="mySwiperr">
-        <div className="grid grid-cols-1">
-          {clientReviews.map((client, index) => (
-            <SwiperSlide key={index}>
-              <div className="bg-secondary p-6 rounded-xl shadow-lg w-full max-w-lg font-sans">
-                <div className="flex items-center mb-4">
-                  <img
-                    src={client.image}
-                    height={10}
-                    width={10}
-                    alt={client.name}
-                    className="rounded-full h-20 w-20 object-cover mr-4 border-2 border-gray-200"
-                  />
-                  <div>
-                    <h4 className="font-semibold text-foreground text-lg">
-                      {client.name}
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      {client.email}
-                    </p>
-                  </div>
-                </div>
-                <p className="text-gray-500 leading-relaxed">{client.review}</p>
+    <Swiper
+      slidesPerView={1}
+      spaceBetween={20}
+      loop={true}
+      autoplay={{
+        delay: 2000,
+        disableOnInteraction: false,
+      }}
+      breakpoints={{
+        930: { slidesPerView: 2, spaceBetween: 20 },
+        1200: { slidesPerView: 3, spaceBetween: 20 },
+      }}
+      speed={800}
+      modules={[Navigation, Autoplay]}>
+      {clientReviews.map((client, index) => (
+        <SwiperSlide key={index}>
+          <div className="bg-secondary p-6 rounded-xl shadow-lg w-full max-w-lg font-sans">
+            <div className="flex items-center mb-2">
+              <img
+                src={client.image}
+                height={10}
+                width={10}
+                alt={client.name}
+                className="rounded-full h-20 w-20 object-cover mr-4 border-2 border-gray-200"
+              />
+              <div className="flex flex-col justify-start items-start">
+                <h4 className="font-semibold text-foreground text-lg">
+                  {client.name}
+                </h4>
+                <p className="text-sm text-muted-foreground">{client.email}</p>
               </div>
-            </SwiperSlide>
-          ))}
-        </div>
-      </Swiper>
-    </div>
+            </div>
+            <p className="text-gray-500 line-clamp-2 text-left leading-relaxed">
+              {client.review}
+            </p>
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 }
