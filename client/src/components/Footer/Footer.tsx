@@ -18,7 +18,7 @@ export default function Footer() {
             <p className="mt-4 text-sm">
               <a
                 href="mailto:sales@yourcompany.com"
-                className="text-chart-4 hover:text-chart-1 DmSans text-[17px]">
+                className="text-chart-4 hover:text-chart-1 DmSans DmSans text-[17px]">
                 mdnaeemuddin14@gmail.com
               </a>
             </p>
@@ -46,27 +46,27 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                  <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                     New Products
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                  <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                     Best Sales
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                  <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                     Contact Us
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                  <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                     Sitemap
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                  <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                     Stores
                   </a>
                 </li>
@@ -79,32 +79,32 @@ export default function Footer() {
               </h3>
               <ul className="text-sm space-y-2">
                 <li>
-                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                  <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                     Delivery
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                  <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                     Legal Notice
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                  <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                     Terms And Conditions Of Use
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                  <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                     About Us
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                  <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                     Secure Payment
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                  <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                     Login
                   </a>
                 </li>
@@ -118,32 +118,32 @@ export default function Footer() {
             </h3>
             <ul className="text-sm space-y-2">
               <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
+                <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                   Prices Drop
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
+                <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                   New Products
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
+                <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                   Best Sales
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
+                <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                   Contact Us
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
+                <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                   Sitemap
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
+                <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                   Stores
                 </a>
               </li>
@@ -156,32 +156,32 @@ export default function Footer() {
             </h3>
             <ul className="text-sm space-y-2">
               <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
+                <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                   Delivery
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
+                <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                   Legal Notice
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
+                <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                   Terms And Conditions Of Use
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
+                <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                   About Us
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
+                <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                   Secure Payment
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-chart-1 text-[17px]">
+                <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                   Login
                 </a>
               </li>
