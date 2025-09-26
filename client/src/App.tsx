@@ -9,6 +9,7 @@ import TopNavbar from "./components/Header/TopNavbar";
 import ServicesSection from "./components/Home/ServicesSection";
 import Shop from "./pages/Shop";
 import Login from "./pages/Login";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/auth/login" element={<Login />} />
+        <Route path="/product-details" element={<ProductDetails />} />
 
         {/* Fallback Route Setup */}
         <Route path="*" element={<NotFound />} />

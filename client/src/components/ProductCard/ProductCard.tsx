@@ -137,7 +137,7 @@ export default function ProductCard({ product, filter }: ProductCardProps) {
 
         {/* Detailed Section */}
         <div className="p-4 space-y-5 text-left bg-muted">
-          <Link to="/sdf">
+          <Link to="/product-details">
             <div className="text-gray-700 my-1 dark:text-gray-400 text-sm">
               {product.brand}
             </div>
