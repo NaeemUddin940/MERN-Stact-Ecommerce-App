@@ -7,6 +7,7 @@ import Navigation from "./components/Header/Navigation";
 import Footer from "./components/Footer/Footer";
 import TopNavbar from "./components/Header/TopNavbar";
 import ServicesSection from "./components/Home/ServicesSection";
+import Shop from "./pages/Shop";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
 
         {/* Fallback Route Setup */}
         <Route path="*" element={<NotFound />} />

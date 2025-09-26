@@ -129,7 +129,7 @@ export const Sidebar: React.FC<SidebarProps> = () => {
           <DrawerTrigger asChild>
             <Button variant={"default"} className="flex items-center gap-3">
               <RiMenuFold2Fill size={35} />
-              <span className="text-lg font-bold hidden md:flex">
+              <span className="text-lg font-bold hidden lg:flex">
                 Shop By Categories
               </span>
             </Button>

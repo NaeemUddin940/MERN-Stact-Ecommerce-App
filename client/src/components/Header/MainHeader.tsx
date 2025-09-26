@@ -22,7 +22,7 @@ export default function MainHeader() {
       <section className="flex bg-muted border-b-1 border-ring justify-center items-center">
         <div className="container-sm md:container-md flex items-center gap-5 justify-between">
           <div className="animate-slide-in-left flex items-center">
-            <div className="md:hidden">
+            <div className="lg:hidden">
               <Sidebar navItem={navItem} />
             </div>
             <Tooltip>
