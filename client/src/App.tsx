@@ -6,6 +6,7 @@ import MainHeader from "./components/Header/MainHeader";
 import Navigation from "./components/Header/Navigation";
 import Footer from "./components/Footer/Footer";
 import TopNavbar from "./components/Header/TopNavbar";
+import ServicesSection from "./components/Home/ServicesSection";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         {/* Fallback Route Setup */}
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <ServicesSection />
       <Footer />
     </>
   );

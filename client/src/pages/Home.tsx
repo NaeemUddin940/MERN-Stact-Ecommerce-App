@@ -6,7 +6,6 @@ import BigBanner from "../components/Home/Banner/BigBanner";
 import { SliderProductsShow } from "../components/Home/Slider/SliderProductsShow";
 import { useProductContext } from "../context/ProductContext";
 import BrandShowCase from "../components/Home/BrandShowCase";
-import ServicesSection from "../components/Home/ServicesSection";
 import ClientReview from "../components/Home/ClientReview";
 import { Separator } from "../components/ui/separator";
 
@@ -168,7 +167,6 @@ export default function Home() {
       {/* Home Page 10 What Our Clients Say / Clients Reviews */}
       <div className="container-sm md:container-md bg-secondary">
         <ClientReview />
-        <ServicesSection />
       </div>
     </div>
   );

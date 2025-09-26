@@ -23,26 +23,28 @@ const featureData = [
 
 export default function ServicesSection() {
   return (
-    <div className="grid grid-cols-2 my-5 lg:grid-cols-4 gap-8 max-w-7xl mx-auto w-full">
-      {featureData.map((feature, index) => (
-        <div
-          key={index}
-          className="flex group  flex-col items-center text-center p-4 bg-secondary rounded-lg shadow-xl border border-white transition-transform transform hover:scale-105">
-          <div className="w-12 h-12 flex items-center justify-center mb-2">
-            <img
-              className="group-hover:animate-slide-out-top delay-100 duration-500 h-10"
-              src={feature.url}
-              alt={feature.title}
-            />
+    <div className="bg-background  py-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto w-full">
+        {featureData.map((feature, index) => (
+          <div
+            key={index}
+            className="flex group flex-col items-center text-center p-4 rounded-lg shadow-xl border border-white transition-transform transform hover:scale-105">
+            <div className="w-12 h-12 flex items-center justify-center mb-2">
+              <img
+                className="group-hover:animate-slide-out-top delay-100 duration-500 h-10"
+                src={feature.url}
+                alt={feature.title}
+              />
+            </div>
+            <h3 className="text-sm sm:text-lg font-semibold text-foreground mb-1">
+              {feature.title}
+            </h3>
+            <p className="text-xs sm:text-sm text-gray-500">
+              {feature.description}
+            </p>
           </div>
-          <h3 className="text-sm sm:text-lg font-semibold text-foreground mb-1">
-            {feature.title}
-          </h3>
-          <p className="text-xs sm:text-sm text-gray-500">
-            {feature.description}
-          </p>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
