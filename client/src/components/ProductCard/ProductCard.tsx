@@ -83,11 +83,11 @@ export default function ProductCard({ product, filter }: ProductCardProps) {
       className="flex group max-w-sm w-full"
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}>
-      <div className="border-1 relative border-gray-400 rounded product-card w-full overflow-hidden">
+      <div className="border-1 relative  border-gray-400 rounded product-card w-full overflow-hidden">
         {/* Image Section */}
-        <div className="relative overflow-hidden rounded">
+        <div className="relative  overflow-hidden rounded">
           <img
-            className="w-[230px] h-[250px] hover:scale-115 transition-all duration-700 object-cover"
+            className="w-full h-full hover:scale-115 transition-all duration-700 object-cover"
             src={product.image}
             alt={product.name}
           />

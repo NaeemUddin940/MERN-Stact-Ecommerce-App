@@ -13,8 +13,17 @@ import { Separator } from "../components/ui/separator";
 import FilterCheckbox from "@/components/Shop/FilterCheckbox";
 import { useProductContext } from "@/context/ProductContext";
 import ProductCard from "../components/ProductCard/ProductCard";
-import { ChevronDown, Grid3X3, List, Star } from "lucide-react";
+import { Grid3X3, List } from "lucide-react";
 import { FaStar } from "react-icons/fa";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const availability = [
   {
@@ -86,7 +95,7 @@ export default function Shop() {
     <div>
       {/* Breadcrumb Design */}
       <div className="py-3 px-10 flex items-center justify-center">
-        <div className="container-sm md:container-md">
+        <div className="container-sm md:container-md flex items-center justify-between">
           <Breadcrumb>
             <BreadcrumbList>
               {/* Home link */}
@@ -119,62 +128,94 @@ export default function Shop() {
               })}
             </BreadcrumbList>
           </Breadcrumb>
-        </div>
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8 gap-4">
-          <h1 className="text-xl sm:text-2xl font-semibold text-dark-gray-2">
-            dfgsdfg
-            <span className="text-primary-500">dji phantom</span>
-          </h1>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-            {/* Sort Dropdown */}
-            <div className="relative">
-              <select
-                // value={sortBy}
-                // onChange={(e) => setSortBy(e.target.value)}
-                className="appearance-none w-full sm:w-auto bg-white border border-light-gray-2 rounded-md px-3 sm:px-4 py-2 pr-8 text-sm text-dark-gray-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                <option value="featured">Sort by Featured</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="rating">Highest Rated</option>
-              </select>
-              <ChevronDown
-                size={16}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-mid-gray-4 pointer-events-none"
-              />
-            </div>
+          <div className="flex gap-4 items-center text-white">
+            <h1 className="text-lg flex font-semi text-dark-gray-2">
+              There are 15 Products By Using Your Filter
+              <span className="text-primary-500">phantom</span>
+            </h1>
 
-            {/* View Toggle */}
-            <div className="flex rounded-md overflow-hidden border border-light-gray-2">
-              <button
-              // onClick={() => setViewMode("grid")}
-              // className={`p-2 transition-colors ${
-              //   viewMode === "grid"
-              //     ? "bg-light-gray-3 text-dark-gray-2"
-              //     : "bg-light-gray-5 text-mid-gray-5 hover:bg-light-gray-3"
-              // }`}
-              >
-                <Grid3X3 size={20} />
-              </button>
-              <button
-              // onClick={() => setViewMode("list")}
-              // className={`p-2 transition-colors ${
-              //   viewMode === "list"
-              //     ? "bg-light-gray-3 text-dark-gray-2"
-              //     : "bg-light-gray-5 text-mid-gray-5 hover:bg-light-gray-3"
-              // }`}
-              >
-                <List size={20} />
-              </button>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+              {/* Sort Dropdown */}
+              <Select>
+                <SelectTrigger className="cursor-pointer">
+                  <SelectValue placeholder="Newest To Oldest" />
+                </SelectTrigger>
+
+                <SelectContent className="data-[state=open]:animate-slide-in-bottom data-[state=closed]:animate-fade-out delay-200">
+                  <SelectGroup>
+                    <SelectLabel>Short By This</SelectLabel>
+                    <SelectItem defaultChecked value="newToOld">
+                      <span className="flex items-center gap-2">
+                        Newest To Oldest
+                      </span>
+                    </SelectItem>
+                    <SelectItem defaultChecked value="OldToNew">
+                      <span className="flex items-center gap-2">
+                        Oldest To Newest
+                      </span>
+                    </SelectItem>
+                    <SelectItem value="aToZ">
+                      <span className="flex items-center gap-2">
+                        Name, A To Z
+                      </span>
+                    </SelectItem>
+
+                    <SelectItem value="zToA">
+                      <span className="flex items-center gap-2">
+                        Name, Z To A
+                      </span>
+                    </SelectItem>
+
+                    <SelectItem value="highToLow">
+                      <span className="flex items-center gap-2">
+                        Price, High To Low
+                      </span>
+                    </SelectItem>
+
+                    <SelectItem value="lowToHigh">
+                      <span className="flex items-center gap-2">
+                        Price, Low To High
+                      </span>
+                    </SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+
+              {/* View Toggle */}
+              <div className="flex rounded-md overflow-hidden border px-3 py-2 gap-3 border-light-gray-2">
+                <button
+                  className="cursor-pointer"
+                  // onClick={() => setViewMode("grid")}
+                  // className={`p-2 transition-colors ${
+                  //   viewMode === "grid"
+                  //     ? "bg-light-gray-3 text-dark-gray-2"
+                  //     : "bg-light-gray-5 text-mid-gray-5 hover:bg-light-gray-3"
+                  // }`}
+                >
+                  <Grid3X3 size={20} />
+                </button>
+                <button
+                  className="cursor-pointer"
+                  // onClick={() => setViewMode("list")}
+                  // className={`p-2 transition-colors ${
+                  //   viewMode === "list"
+                  //     ? "bg-light-gray-3 text-dark-gray-2"
+                  //     : "bg-light-gray-5 text-mid-gray-5 hover:bg-light-gray-3"
+                  // }`}
+                >
+                  <List size={20} />
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <div className="flex items-center justify-center">
-        <div className="container-sm md:container-md grid grid-cols-1 lg:grid-cols-14 grid-rows-6 gap-4">
+        <div className="container-sm  md:container-md grid grid-cols-1 lg:grid-cols-14 grid-rows-6 gap-4">
           {/* Filter Sidebar */}
-          <div className="lg:col-span-3 lg:row-span-6 py-3 bg-sidebar border-1 rounded-sm hidden lg:block">
+          <div className="lg:col-span-3  lg:row-span-6 py-3 bg-sidebar border-1 rounded-sm hidden lg:block">
             <div className="flex items-center justify-between px-3 pb-3">
               <h4 className="text-xl font-semibold DmSans">Filter Products</h4>
               <Button variant="secondary">Clear Filter</Button>
@@ -235,9 +276,9 @@ export default function Shop() {
           </div>
           {/* Filtered Products */}
           <div className="lg:col-span-11 lg:row-span-6 lg:col-start-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-1">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {products.map((product, i) => (
-                <ProductCard key={i} product={product} />
+                <ProductCard product={product} />
               ))}
             </div>
           </div>
