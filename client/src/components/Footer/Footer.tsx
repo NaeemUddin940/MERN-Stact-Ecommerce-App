@@ -4,13 +4,13 @@ export default function Footer() {
   return (
     <div>
       {" "}
-      <footer className="bg-muted DmSans pb-5 px-5 text-primary font-sans border-t-2 border-gray-500">
+      <footer className="bg-muted  pb-5 px-5 text-primary border-t-2 border-gray-500">
         <div className="grid grid-cols-1 mt-5 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
           <div>
-            <h3 className="text-lg font-semibold text-popover-foreground mb-4">
+            <h3 className="text-lg DmSans font-semibold text-popover-foreground mb-4">
               Contact Us
             </h3>
-            <address className="not-italic text-[17px] space-y-2">
+            <address className="not-italic DmSans text-[17px] space-y-2">
               <p>Classyshop - Mega Super Store</p>
               <p>507-Union Trade Centre</p>
               <p>France</p>
@@ -18,15 +18,15 @@ export default function Footer() {
             <p className="mt-4 text-sm">
               <a
                 href="mailto:sales@yourcompany.com"
-                className="text-chart-4 hover:text-chart-1 text-[17px]">
+                className="text-chart-4 hover:text-chart-1 DmSans text-[17px]">
                 mdnaeemuddin14@gmail.com
               </a>
             </p>
-            <p className="mt-2 text-sm text-chart-1 font-semibold">
+            <p className="mt-2 DmSans text-sm text-chart-1 font-semibold">
               (+91) 9876-543-210
             </p>
             <div className="flex items-center mt-4">
-              <span className="ml-2 text-[17px]">
+              <span className="ml-2 DmSans text-[17px]">
                 Online Chat
                 <br />
                 Get Expert Help
@@ -36,12 +36,12 @@ export default function Footer() {
 
           <div className="flex md:hidden items-center justify-between">
             <div>
-              <h3 className="text-lg font-semibold text-popover-foreground mb-4">
+              <h3 className="text-lg DmSans font-semibold text-popover-foreground mb-4">
                 Products
               </h3>
               <ul className="text-sm space-y-2">
                 <li>
-                  <a href="#" className="hover:text-chart-1 text-[17px]">
+                  <a href="#" className="hover:text-chart-1 DmSans text-[17px]">
                     Prices Drop
                   </a>
                 </li>
