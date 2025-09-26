@@ -18,12 +18,12 @@ interface ProductType {
   colors: string[];
   category: string;
   isLatest: boolean;
+  description: string;
   isPopular: boolean;
   isFeatured: boolean;
   countdown?: string;
 }
-
-const initialProducts: ProductType[] = [
+export const initialProducts: ProductType[] = [
   {
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/71-home_default/mug-today-is-a-good-day.jpg",
@@ -40,6 +40,8 @@ const initialProducts: ProductType[] = [
     isPopular: true,
     isFeatured: false,
     countdown: "9:10:22:10",
+    description:
+      "Experience responsive cushioning with the Nike Air Zoom. Perfect for daily runs and long distances.",
   },
   {
     image:
@@ -57,6 +59,8 @@ const initialProducts: ProductType[] = [
     isPopular: false,
     isFeatured: true,
     countdown: "2:11:23:00",
+    description:
+      "The Ultraboost 22 provides incredible energy return and comfort, designed for the ultimate running experience.",
   },
   {
     image:
@@ -73,6 +77,9 @@ const initialProducts: ProductType[] = [
     isLatest: true,
     isPopular: true,
     isFeatured: false,
+    countdown: null,
+    description:
+      "A light and breezy floral dress, perfect for sunny days and outdoor gatherings. Made with sustainable cotton.",
   },
   {
     image:
@@ -89,6 +96,9 @@ const initialProducts: ProductType[] = [
     isLatest: false,
     isPopular: true,
     isFeatured: true,
+    countdown: null,
+    description:
+      "Your everyday essential. This soft cotton t-shirt offers a comfortable fit for any casual occasion.",
   },
   {
     image:
@@ -106,6 +116,8 @@ const initialProducts: ProductType[] = [
     isPopular: false,
     isFeatured: false,
     countdown: "8:02:03:13",
+    description:
+      "Stay cool and comfortable during your workout with these lightweight, breathable running shorts from Puma.",
   },
   {
     image:
@@ -122,6 +134,9 @@ const initialProducts: ProductType[] = [
     isLatest: false,
     isPopular: true,
     isFeatured: true,
+    countdown: null,
+    description:
+      "A timeless classic. These Levi's slim fit jeans offer a modern silhouette with all-day comfort and style.",
   },
   {
     image:
@@ -139,6 +154,8 @@ const initialProducts: ProductType[] = [
     isPopular: false,
     isFeatured: false,
     countdown: "5:01:23:13",
+    description:
+      "The perfect layer for your workout or cool-down. This Reebok hoodie combines soft fabric with a sporty design.",
   },
   {
     image:
@@ -155,6 +172,9 @@ const initialProducts: ProductType[] = [
     isLatest: true,
     isPopular: true,
     isFeatured: false,
+    countdown: null,
+    description:
+      "Push your limits with this performance-driven gym tank top, engineered to keep you dry and comfortable.",
   },
   {
     image:
@@ -172,6 +192,8 @@ const initialProducts: ProductType[] = [
     isLatest: false,
     isPopular: true,
     isFeatured: true,
+    description:
+      "Elevate your style with this exquisite Gucci handbag, a statement piece of luxury craftsmanship and timeless design.",
   },
   {
     image:
@@ -188,8 +210,10 @@ const initialProducts: ProductType[] = [
     isLatest: true,
     isPopular: true,
     isFeatured: false,
+    countdown: null,
+    description:
+      "Protect your eyes in style with these chic Prada sunglasses, featuring a bold design and superior UV protection.",
   },
-  // --- 10 more products ---
   {
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/71-home_default/mug-today-is-a-good-day.jpg",
@@ -205,6 +229,9 @@ const initialProducts: ProductType[] = [
     isLatest: true,
     isPopular: true,
     isFeatured: true,
+    countdown: null,
+    description:
+      "Immerse yourself in crystal-clear audio with intelligent Active Noise Canceling. Perfect for music and calls.",
   },
   {
     image:
@@ -222,6 +249,8 @@ const initialProducts: ProductType[] = [
     isPopular: true,
     isFeatured: true,
     countdown: "9:11:23:13",
+    description:
+      "Experience high-fidelity audio and industry-leading Active Noise Cancellation with a breathtaking design.",
   },
   {
     image:
@@ -238,6 +267,9 @@ const initialProducts: ProductType[] = [
     isLatest: true,
     isPopular: true,
     isFeatured: true,
+    countdown: null,
+    description:
+      "Dive into next-gen gaming with the PS5. Experience lightning-fast loading, haptic feedback, and stunning 4K visuals.",
   },
   {
     image:
@@ -255,6 +287,8 @@ const initialProducts: ProductType[] = [
     isLatest: false,
     isPopular: true,
     isFeatured: false,
+    description:
+      "Witness perfect blacks and infinite contrast with this LG OLED TV. Bring the cinematic experience to your living room.",
   },
   {
     image:
@@ -271,6 +305,9 @@ const initialProducts: ProductType[] = [
     isLatest: true,
     isPopular: true,
     isFeatured: false,
+    countdown: null,
+    description:
+      "Power and portability combined. The Dell XPS 13 features a stunning InfinityEdge display and robust performance.",
   },
   {
     image:
@@ -287,6 +324,9 @@ const initialProducts: ProductType[] = [
     isLatest: false,
     isPopular: true,
     isFeatured: true,
+    countdown: null,
+    description:
+      "Enter the world of gaming with the HP Pavilion, equipped with a powerful GPU and efficient cooling for smooth gameplay.",
   },
   {
     image:
@@ -303,6 +343,9 @@ const initialProducts: ProductType[] = [
     isLatest: true,
     isPopular: true,
     isFeatured: true,
+    countdown: null,
+    description:
+      "Capture breathtaking photos and cinematic 4K video with the Canon EOS R6. A camera for passionate creators.",
   },
   {
     image:
@@ -319,6 +362,9 @@ const initialProducts: ProductType[] = [
     isLatest: false,
     isPopular: true,
     isFeatured: false,
+    countdown: null,
+    description:
+      "Enjoy world-class noise cancellation and balanced audio with the legendary Bose QuietComfort 45 headphones.",
   },
   {
     image:
@@ -335,6 +381,9 @@ const initialProducts: ProductType[] = [
     isLatest: true,
     isPopular: true,
     isFeatured: true,
+    countdown: null,
+    description:
+      "The versatility of a laptop, the flexibility of a tablet. The Surface Pro 9 is your ultra-portable powerhouse.",
   },
   {
     image:
@@ -351,6 +400,9 @@ const initialProducts: ProductType[] = [
     isLatest: true,
     isPopular: false,
     isFeatured: true,
+    countdown: null,
+    description:
+      "Unleash your gaming potential with the ROG Phone 6, featuring a high-refresh-rate screen and powerful processor.",
   },
 ];
 

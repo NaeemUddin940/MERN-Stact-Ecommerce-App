@@ -24,6 +24,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useState } from "react";
+import ProductCardListView from "@/components/ProductCard/ProductCardListView";
 
 const availability = [
   {
@@ -70,6 +72,7 @@ const colors = [
 ];
 
 export default function Shop() {
+  const [itemView, setItemView] = useState("gird");
   const { products } = useProductContext();
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter(Boolean);
@@ -129,7 +132,7 @@ export default function Shop() {
             </BreadcrumbList>
           </Breadcrumb>
 
-          <div className="flex gap-4 items-center text-white">
+          <div className="flex gap-4 items-center text-foreground">
             <h1 className="text-lg flex font-semi text-dark-gray-2">
               There are 15 Products By Using Your Filter
               <span className="text-primary-500">phantom</span>
@@ -183,29 +186,24 @@ export default function Shop() {
               </Select>
 
               {/* View Toggle */}
-              <div className="flex rounded-md overflow-hidden border px-3 py-2 gap-3 border-light-gray-2">
-                <button
-                  className="cursor-pointer"
-                  // onClick={() => setViewMode("grid")}
-                  // className={`p-2 transition-colors ${
-                  //   viewMode === "grid"
-                  //     ? "bg-light-gray-3 text-dark-gray-2"
-                  //     : "bg-light-gray-5 text-mid-gray-5 hover:bg-light-gray-3"
-                  // }`}
-                >
+              <div className="flex rounded-md overflow-hidden border border-light-gray-2">
+                <Button
+                  variant="default"
+                  className={`cursor-pointer ${
+                    itemView === "grid" ? "bg-chart-1" : "bg-accent"
+                  }`}
+                  onClick={() => setItemView("grid")}>
                   <Grid3X3 size={20} />
-                </button>
-                <button
-                  className="cursor-pointer"
-                  // onClick={() => setViewMode("list")}
-                  // className={`p-2 transition-colors ${
-                  //   viewMode === "list"
-                  //     ? "bg-light-gray-3 text-dark-gray-2"
-                  //     : "bg-light-gray-5 text-mid-gray-5 hover:bg-light-gray-3"
-                  // }`}
-                >
+                </Button>
+
+                <Button
+                  variant="default"
+                  className={`cursor-pointer  ${
+                    itemView === "list" ? "bg-chart-1" : ""
+                  }`}
+                  onClick={() => setItemView("list")}>
                   <List size={20} />
-                </button>
+                </Button>
               </div>
             </div>
           </div>
@@ -276,11 +274,20 @@ export default function Shop() {
           </div>
           {/* Filtered Products */}
           <div className="lg:col-span-11 lg:row-span-6 lg:col-start-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              {products.map((product, i) => (
-                <ProductCard product={product} />
-              ))}
-            </div>
+            {itemView === "grid" ? (
+              <div
+                className={`grid md:grid md:grid-cols-3 lg:grid-cols-5 gap-4`}>
+                {products.map((product, i) => (
+                  <ProductCard key={i} product={product} />
+                ))}
+              </div>
+            ) : (
+              <div>
+                {products.map((p) => (
+                  <ProductCardListView product={p} />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

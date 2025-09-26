@@ -2,6 +2,7 @@ import { Expand, GitCompare, Heart, Share2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { FaRegClock, FaStar } from "react-icons/fa";
+import { Button } from "../ui/button";
 
 type Product = {
   image: string;
@@ -11,6 +12,7 @@ type Product = {
   name: string;
   rating: number;
   oldPrice: string;
+  description: string;
   newPrice: string;
   colors?: string[];
   countdown?: string;
@@ -28,7 +30,10 @@ const icons = [
   { id: "share", icon: Share2 },
 ];
 
-export default function ProductCard({ product, filter }: ProductCardProps) {
+export default function ProductCardListView({
+  product,
+  filter,
+}: ProductCardProps) {
   const handleEnter = (e: React.MouseEvent) => {
     const card = e.currentTarget;
 
@@ -80,12 +85,12 @@ export default function ProductCard({ product, filter }: ProductCardProps) {
 
   return (
     <div
-      className="flex group min-h-sm w-full"
+      className="flex group h-[350px] w-"
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}>
-      <div className="border-1 relative  border-gray-400 rounded product-card w-full overflow-hidden">
+      <div className="border-1 relative flex border-gray-400 rounded product-card w-full overflow-hidden">
         {/* Image Section */}
-        <div className="relative  overflow-hidden rounded">
+        <div className="relative overflow-hidden rounded">
           <img
             className="w-full h-full hover:scale-115 transition-all duration-700 object-cover"
             src={product.image}
@@ -112,36 +117,15 @@ export default function ProductCard({ product, filter }: ProductCardProps) {
               </button>
             ))}
           </div>
-
-          {/* Colors */}
-          {product.colors && (
-            <div className="absolute bottom-0 flex left-2 gap-2 mb-2">
-              {product.colors.map((color, index) => (
-                <div
-                  key={index}
-                  className="w-4 h-4 rounded-full border border-black cursor-pointer animate-left-item opacity-0"
-                  style={{ backgroundColor: color }}
-                />
-              ))}
-            </div>
-          )}
-          {product.countdown && filter === "countdown" && (
-            <div className="flex absolute bottom-0 left-2/12 group-hover:animate-fade-out animate-fade-in justify-center gap-2 items-center font-bold text-chart-1 text-xl my-2">
-              <div className="flex gap-2 items-center bg-gray-100 border-1 border-gray-400 rounded-lg px-3 py-1">
-                <FaRegClock className="text-red-500" />
-                <span>{product.countdown}</span>
-              </div>
-            </div>
-          )}
         </div>
 
         {/* Detailed Section */}
-        <div className="p-4 space-y-5 text-left bg-muted">
+        <div className="p-4 space-y-5 w-full text-left bg-muted">
           <Link to="/sdf">
-            <div className="text-gray-700 my-1 dark:text-gray-400 text-sm">
+            <div className="text-gray-700 my-1 dark:text-gray-400 text-lg">
               {product.brand}
             </div>
-            <h3 className="text-sm font-semibold text-card-foreground my-2">
+            <h3 className="text-2xl font-semibold text-card-foreground my-2">
               {product.name}
             </h3>
             <div className="flex items-center mb-2">
@@ -162,6 +146,30 @@ export default function ProductCard({ product, filter }: ProductCardProps) {
                 ${product.newPrice}
               </span>
             </div>
+            {/* Colors */}
+            {product.colors && (
+              <div className="flex items-center gap-2 my-2">
+                Colors:
+                {product.colors.map((color, index) => (
+                  <div
+                    key={index}
+                    className="w-4 h-4 rounded-full border border-black cursor-pointer"
+                    style={{ backgroundColor: color }}
+                  />
+                ))}
+              </div>
+            )}
+
+            <div className="text-lg">{product.description}</div>
+            <Button variant="modern" className="rounded-sm mt-5">Buy Now</Button>
+            {product.countdown && filter === "countdown" && (
+              <div className="flex justify-center gap-2 items-center font-bold text-chart-1 text-xl my-2">
+                <div className="flex gap-2 items-center bg-gray-100 border-1 border-gray-400 rounded-lg px-3 py-1">
+                  <FaRegClock className="text-red-500" />
+                  <span>{product.countdown}</span>
+                </div>
+              </div>
+            )}
           </Link>
         </div>
       </div>
