@@ -49,7 +49,7 @@ export default function MainHeader() {
             <div className="md:flex hidden">
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link className="hover:text-chart-4" to="/login">
+                  <Link className="hover:text-chart-4" to="/auth/login">
                     Login
                   </Link>
                 </TooltipTrigger>
@@ -58,7 +58,7 @@ export default function MainHeader() {
               <span className="mx-2">/</span>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link className="hover:text-chart-4" to="/register">
+                  <Link className="hover:text-chart-4" to="/auth/register">
                     Register
                   </Link>
                 </TooltipTrigger>
@@ -82,10 +82,10 @@ export default function MainHeader() {
                 </Tooltip>
                 <DropdownMenuContent className="data-[state=open]:animate-slide-in-bottom data-[state=closed]:animate-fade-out delay-200">
                   <DropdownMenuItem asChild>
-                    <Link to="/login">Login</Link>
+                    <Link to="/auth/login">Login</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/register">register</Link>
+                    <Link to="/auth/register">register</Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

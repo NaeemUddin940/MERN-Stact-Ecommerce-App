@@ -11,6 +11,7 @@ import "./HomeSlider.css";
 // import required modules
 import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
 import { Button } from "../../ui/button";
+import { Link } from "react-router-dom";
 
 const HomeSlides = [
   {
@@ -83,7 +84,7 @@ export default function HomeSlider() {
               </span>
             </p>
             <Button variant={"modern"} className="rounded-sm">
-              Shop Now
+              <Link to="/shop">Shop Now</Link>
             </Button>
           </div>
         </SwiperSlide>

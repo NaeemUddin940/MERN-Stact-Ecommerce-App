@@ -23,8 +23,8 @@ const featureData = [
 
 export default function ServicesSection() {
   return (
-    <div className="bg-background  py-5">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto w-full">
+    <div className="bg-background flex items-center justify-center py-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 container-sm md:container-md max-w-7xl mx-auto w-full">
         {featureData.map((feature, index) => (
           <div
             key={index}

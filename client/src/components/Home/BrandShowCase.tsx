@@ -2,7 +2,7 @@ import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
 
-export const brands = [
+const brands = [
   {
     brand: "Nike",
     image:
