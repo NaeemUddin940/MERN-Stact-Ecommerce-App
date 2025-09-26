@@ -12,7 +12,7 @@ const Checkbox = ({ title }) => {
               <polyline points="1.5 6 4.5 9 10.5 1" />
             </svg>
           </span>
-          <span>{title}</span>
+          <span className="font-medium">{title}</span>
         </label>
       </div>
     </StyledWrapper>
@@ -61,11 +61,11 @@ const StyledWrapper = styled.div`
     transition-delay: 0.1s;
     transform: translate3d(0, 0, 0);
   }
-  
+
   .checkbox-wrapper-46 .cbx span:last-child {
     padding-left: 8px;
   }
-  
+
   .checkbox-wrapper-46 .inp-cbx:checked + .cbx span:first-child svg {
     stroke-dashoffset: 0;
   }

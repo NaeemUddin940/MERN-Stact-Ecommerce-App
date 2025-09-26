@@ -87,7 +87,7 @@ export default function ProductCard({ product, filter }: ProductCardProps) {
         {/* Image Section */}
         <div className="relative overflow-hidden rounded">
           <img
-            className="w-full h-full hover:scale-115 transition-all duration-700 object-cover"
+            className="w-[230px] h-[250px] hover:scale-115 transition-all duration-700 object-cover"
             src={product.image}
             alt={product.name}
           />
