@@ -166,7 +166,7 @@ export default function Home() {
       </div>
 
       {/* Home Page 10 What Our Clients Say / Clients Reviews */}
-      <div className="container-sm md:container-md my-5">
+      <div className="container-sm md:container-md bg-secondary">
         <ClientReview />
         <ServicesSection />
       </div>

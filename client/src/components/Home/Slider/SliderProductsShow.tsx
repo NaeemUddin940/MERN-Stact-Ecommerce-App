@@ -49,10 +49,12 @@ export const SliderProductsShow: React.FC<SliderProductsShowProps> = ({
 
         {/* Navigation Buttons */}
         <div className="flex gap-2">
-          <div className="custom1-prev bg-ring hover:bg-chart-1 p-2 rounded-full cursor-pointer">
+          <div
+            className={`${filter}-prev bg-ring hover:bg-chart-1 p-2 rounded-full cursor-pointer`}>
             <ChevronLeft />
           </div>
-          <div className="custom1-next bg-ring hover:bg-chart-1 p-2 rounded-full cursor-pointer">
+          <div
+            className={`${filter}-next bg-ring hover:bg-chart-1 p-2 rounded-full cursor-pointer`}>
             <ChevronRight />
           </div>
         </div>
@@ -65,8 +67,8 @@ export const SliderProductsShow: React.FC<SliderProductsShowProps> = ({
           loop={true}
           spaceBetween={30}
           navigation={{
-            nextEl: ".custom1-next",
-            prevEl: ".custom1-prev",
+            nextEl: `.${filter}-next`,
+            prevEl: `.${filter}-prev`,
           }}
           breakpoints={{
             700: { slidesPerView: 3, spaceBetween: 30 },

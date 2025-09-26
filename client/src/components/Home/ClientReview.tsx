@@ -57,8 +57,8 @@ export default function ClientReview() {
       modules={[Navigation, Autoplay]}>
       {clientReviews.map((client, index) => (
         <SwiperSlide key={index}>
-          <div className="bg-secondary p-6 rounded-xl shadow-lg w-full max-w-lg font-sans">
-            <div className="flex items-center mb-2">
+          <div className="bg-secondary p-6 rounded-xl border shadow-lg my-3 w-full max-w-lg font-sans">
+            <div className="flex items-center mb-2 ">
               <img
                 src={client.image}
                 height={10}
@@ -70,7 +70,9 @@ export default function ClientReview() {
                 <h4 className="font-semibold .DmSans text-foreground text-lg">
                   {client.name}
                 </h4>
-                <p className="text-sm .DmSans text-muted-foreground">{client.email}</p>
+                <p className="text-sm .DmSans text-muted-foreground">
+                  {client.email}
+                </p>
               </div>
             </div>
             <p className="text-gray-500 .DmSans line-clamp-2 text-left leading-relaxed">

@@ -28,7 +28,7 @@ export default function ServicesSection() {
         <div
           key={index}
           className="flex group  flex-col items-center text-center p-4 bg-secondary rounded-lg shadow-xl border border-white transition-transform transform hover:scale-105">
-          <div className="w-12 h-12 flex items-center justify-center text-rose-800 mb-2">
+          <div className="w-12 h-12 flex items-center justify-center mb-2">
             <img
               className="group-hover:animate-slide-out-top delay-100 duration-500 h-10"
               src={feature.url}
