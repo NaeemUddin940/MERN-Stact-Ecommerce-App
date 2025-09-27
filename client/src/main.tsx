@@ -6,9 +6,11 @@ import { ProductProvider } from "./context/ProductContext";
 import { NavItemProvider } from "./context/NavItemContext";
 import { CategoryProvider } from "./context/CategoryContext";
 import { ThemeProvider } from "./components/ui/ThemeProvider";
+import { ToastContainer } from "react-toastify";
 
 createRoot(document.getElementById("root")!).render(
   <ProductProvider>
+    <ToastContainer />
     <NavItemProvider>
       <CategoryProvider>
         <BrowserRouter>

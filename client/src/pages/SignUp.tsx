@@ -51,11 +51,6 @@ export default function SignUp() {
               <div className="grid gap-2">
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
-                  <Link
-                    to="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline">
-                    Forgot your password?
-                  </Link>
                 </div>
                 <Input id="password" type="password" required />
               </div>
@@ -63,10 +58,10 @@ export default function SignUp() {
           </form>
         </CardContent>
         <CardFooter className="flex-col gap-2">
-          <Button type="submit" variant="modern" className="w-full">
+          <Button type="submit" variant="auth" className="w-full">
             Sign Up
           </Button>
-          <Button variant="secondary" className="w-full">
+          <Button variant="auth" className="w-full">
             Sign Up with Google
           </Button>
         </CardFooter>
