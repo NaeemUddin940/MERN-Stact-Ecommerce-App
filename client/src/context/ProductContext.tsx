@@ -7,6 +7,7 @@ import React, {
 
 // Define the product type
 interface ProductType {
+  id: string;
   image: string;
   discount: string;
   isNew: boolean;
@@ -25,6 +26,7 @@ interface ProductType {
 }
 export const initialProducts: ProductType[] = [
   {
+    id: "1",
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/71-home_default/mug-today-is-a-good-day.jpg",
     discount: "20% OFF",
@@ -44,6 +46,7 @@ export const initialProducts: ProductType[] = [
       "Experience responsive cushioning with the Nike Air Zoom. Perfect for daily runs and long distances.",
   },
   {
+    id: "2",
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/32-home_default/blouse.jpg",
     discount: "15% OFF",
@@ -63,6 +66,7 @@ export const initialProducts: ProductType[] = [
       "The Ultraboost 22 provides incredible energy return and comfort, designed for the ultimate running experience.",
   },
   {
+    id: "3",
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/38-home_default/printed-dress.jpg",
     discount: "30% OFF",
@@ -82,6 +86,7 @@ export const initialProducts: ProductType[] = [
       "A light and breezy floral dress, perfect for sunny days and outdoor gatherings. Made with sustainable cotton.",
   },
   {
+    id: "4",
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/43-home_default/printed-summer-dress.jpg",
     discount: "10% OFF",
@@ -101,6 +106,7 @@ export const initialProducts: ProductType[] = [
       "Your everyday essential. This soft cotton t-shirt offers a comfortable fit for any casual occasion.",
   },
   {
+    id: "5",
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/45-home_default/printed-summer-dress.jpg",
     discount: "25% OFF",
@@ -120,6 +126,7 @@ export const initialProducts: ProductType[] = [
       "Stay cool and comfortable during your workout with these lightweight, breathable running shorts from Puma.",
   },
   {
+    id: "6",
     image:
       "https://img.drz.lazcdn.com/static/bd/p/80edc3d4bc83d08d511df8ca893a4f68.jpg_720x720q80.jpg_.webp",
     discount: "18% OFF",
@@ -139,6 +146,7 @@ export const initialProducts: ProductType[] = [
       "A timeless classic. These Levi's slim fit jeans offer a modern silhouette with all-day comfort and style.",
   },
   {
+    id: "7",
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/53-home_default/printed-chiffon-dress.jpg",
     discount: "12% OFF",
@@ -158,6 +166,7 @@ export const initialProducts: ProductType[] = [
       "The perfect layer for your workout or cool-down. This Reebok hoodie combines soft fabric with a sporty design.",
   },
   {
+    id: "8",
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/59-home_default/printed-summer-dress.jpg",
     discount: "22% OFF",
@@ -177,6 +186,7 @@ export const initialProducts: ProductType[] = [
       "Push your limits with this performance-driven gym tank top, engineered to keep you dry and comfortable.",
   },
   {
+    id: "9",
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/63-home_default/printed-dress.jpg",
     discount: "35% OFF",
@@ -196,6 +206,7 @@ export const initialProducts: ProductType[] = [
       "Elevate your style with this exquisite Gucci handbag, a statement piece of luxury craftsmanship and timeless design.",
   },
   {
+    id: "10",
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/67-home_default/printed-dress.jpg",
     discount: "40% OFF",
@@ -215,6 +226,7 @@ export const initialProducts: ProductType[] = [
       "Protect your eyes in style with these chic Prada sunglasses, featuring a bold design and superior UV protection.",
   },
   {
+    id: "11",
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/71-home_default/mug-today-is-a-good-day.jpg",
     discount: "15% OFF",
@@ -234,6 +246,7 @@ export const initialProducts: ProductType[] = [
       "Immerse yourself in crystal-clear audio with intelligent Active Noise Canceling. Perfect for music and calls.",
   },
   {
+    id: "12",
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/32-home_default/blouse.jpg",
     discount: "10% OFF",
@@ -253,6 +266,7 @@ export const initialProducts: ProductType[] = [
       "Experience high-fidelity audio and industry-leading Active Noise Cancellation with a breathtaking design.",
   },
   {
+    id: "13",
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/38-home_default/printed-dress.jpg",
     discount: "20% OFF",
@@ -272,6 +286,7 @@ export const initialProducts: ProductType[] = [
       "Dive into next-gen gaming with the PS5. Experience lightning-fast loading, haptic feedback, and stunning 4K visuals.",
   },
   {
+    id: "14",
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/43-home_default/printed-summer-dress.jpg",
     discount: "5% OFF",
@@ -291,6 +306,7 @@ export const initialProducts: ProductType[] = [
       "Witness perfect blacks and infinite contrast with this LG OLED TV. Bring the cinematic experience to your living room.",
   },
   {
+    id: "15",
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/45-home_default/printed-summer-dress.jpg",
     discount: "18% OFF",
@@ -310,6 +326,7 @@ export const initialProducts: ProductType[] = [
       "Power and portability combined. The Dell XPS 13 features a stunning InfinityEdge display and robust performance.",
   },
   {
+    id: "16",
     image:
       "https://i5.walmartimages.com/seo/HP-Pavilion-15-6-FHD-Gaming-Laptop-Intel-Core-i5-10300H-8GB-RAM-NVIDIA-GeForce-GTX-1650-4GB-250GB-SSD-Windows-10-Home-Black-15-dk1056wm_8b269d16-6343-40c0-832f-e4d394ad8b75.9a1d5beb1ed0c4b7815d8657536428f9.jpeg",
     discount: "12% OFF",
@@ -329,6 +346,7 @@ export const initialProducts: ProductType[] = [
       "Enter the world of gaming with the HP Pavilion, equipped with a powerful GPU and efficient cooling for smooth gameplay.",
   },
   {
+    id: "17",
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/53-home_default/printed-chiffon-dress.jpg",
     discount: "25% OFF",
@@ -348,6 +366,7 @@ export const initialProducts: ProductType[] = [
       "Capture breathtaking photos and cinematic 4K video with the Canon EOS R6. A camera for passionate creators.",
   },
   {
+    id: "18",
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/59-home_default/printed-summer-dress.jpg",
     discount: "30% OFF",
@@ -367,6 +386,7 @@ export const initialProducts: ProductType[] = [
       "Enjoy world-class noise cancellation and balanced audio with the legendary Bose QuietComfort 45 headphones.",
   },
   {
+    id: "19",
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/63-home_default/printed-dress.jpg",
     discount: "20% OFF",
@@ -386,6 +406,7 @@ export const initialProducts: ProductType[] = [
       "The versatility of a laptop, the flexibility of a tablet. The Surface Pro 9 is your ultra-portable powerhouse.",
   },
   {
+    id: "20",
     image:
       "https://demos.codezeel.com/prestashop/PRS21/PRS210502/67-home_default/printed-dress.jpg",
     discount: "15% OFF",

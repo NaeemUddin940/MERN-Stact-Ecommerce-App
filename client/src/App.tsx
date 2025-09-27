@@ -21,7 +21,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/auth/login" element={<Login />} />
-        <Route path="/product-details" element={<ProductDetails />} />
+        <Route
+          path="/product-details/:id"
+          element={<ProductDetails />}
+        />
 
         {/* Fallback Route Setup */}
         <Route path="*" element={<NotFound />} />

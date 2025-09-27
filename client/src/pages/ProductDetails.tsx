@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   Star,
   Heart,
@@ -14,6 +14,18 @@ import {
   ChevronRight,
   MessageSquare,
 } from "lucide-react";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { Link, useLocation, useParams } from "react-router-dom";
+import capitalize from "@/utils/capitalize";
+import { Separator } from "@/components/ui/separator";
+import { useProductContext } from "@/context/ProductContext";
 
 // --- MOCK DATA TYPES ---
 interface ColorOption {
@@ -135,7 +147,9 @@ const RatingStars: React.FC<{ rating: number; reviewCount: number }> = ({
             <Star key={`empty-${i}`} className="w-4 h-4 text-gray-300" />
           ))}
       </div>
-      <span className="text-gray-600">({reviewCount} reviews)</span>
+      <span className="text-gray-500 dark:text-slate-400">
+        ({reviewCount} reviews)
+      </span>
     </div>
   );
 };
@@ -146,10 +160,14 @@ const PolicyModule: React.FC<{
   subtitle: string;
 }> = ({ icon, title, subtitle }) => (
   <div className="flex items-start p-4 border-b border-gray-100 last:border-b-0">
-    <div className="text-gray-500 pt-1 flex-shrink-0">{icon}</div>
+    <div className="text-gray-800 dark:text-slate-400 pt-1 flex-shrink-0">
+      {icon}
+    </div>
     <div className="ml-4">
-      <h3 className="font-semibold text-gray-800 text-sm">{title}</h3>
-      <p className="text-gray-500 text-xs">{subtitle}</p>
+      <h3 className="font-semibold text-gray-800 dark:text-slate-200 text-sm">
+        {title}
+      </h3>
+      <p className="text-gray-800 dark:text-slate-400 text-xs">{subtitle}</p>
     </div>
   </div>
 );
@@ -158,6 +176,11 @@ const PolicyModule: React.FC<{
 
 const ProductDetails: React.FC = () => {
   const product = mockProduct;
+  const { products } = useProductContext();
+  const { id } = useParams();
+
+  const productDetails = products.find((p) => (p.id = id));
+  // if (!product) return <p>Loading...</p>;
 
   const [selectedSize, setSelectedSize] = useState<string>(product.sizes[1]);
   const [selectedColor, setSelectedColor] = useState<ColorOption>(
@@ -189,20 +212,55 @@ const ProductDetails: React.FC = () => {
       : activeTab === "details"
       ? product.productDetailsContent
       : product.reviewsContent;
-
+  const location = useLocation();
+  const pathnames = location.pathname.split("/").filter(Boolean);
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 font-sans p-4 md:p-8">
+    <div className="min-h-screen bg-bcakground text-foreground font-sans p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Breadcrumbs/Header - Minimal */}
         <div className="mb-6 flex items-center justify-between">
           <button className="text-gray-500 hover:text-gray-700 flex items-center text-sm">
-            <ChevronLeft className="w-4 h-4 mr-1" />
-            Back to Products
+            <Breadcrumb>
+              <BreadcrumbList>
+                {/* Home link */}
+                <BreadcrumbItem>
+                  <BreadcrumbLink className="font-bold" asChild>
+                    <Link to="/">Home</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+
+                {pathnames.map((name, index) => {
+                  const path = "/" + pathnames.slice(0, index + 1).join("/");
+                  const isLast = index === pathnames.length - 1;
+
+                  return (
+                    <div key={path} className="flex items-center gap-3">
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        {isLast ? (
+                          <BreadcrumbPage className="font-bold">
+                            {productDetails.name} {/* last part e name show */}
+                          </BreadcrumbPage>
+                        ) : (
+                          <BreadcrumbLink className="text-lg font-bold" asChild>
+                            {/* Link path e id রাখবে, display হবে capitalized category/section */}
+                            <Link
+                              to={`/product/product-details/${productDetails.id}`}>
+                              {capitalize(name)}
+                            </Link>
+                          </BreadcrumbLink>
+                        )}
+                      </BreadcrumbItem>
+                    </div>
+                  );
+                })}
+              </BreadcrumbList>
+            </Breadcrumb>
           </button>
         </div>
 
         {/* Product Gallery & Info Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 bg-white rounded-xl shadow-lg p-4 md:p-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 border-slate-300 shadow-shadow border-2 rounded-xl shadow-lg p-4 md:p-8">
           {/* Left Column: Image Gallery */}
           <div className="flex flex-col md:flex-row gap-6">
             {/* Thumbnails (Sidebar) */}
@@ -232,8 +290,8 @@ const ProductDetails: React.FC = () => {
             {/* Main Image */}
             <div className="flex-grow aspect-square h-[500px] rounded-xl overflow-hidden shadow-md">
               <img
-                src={product.images[activeImageIndex]}
-                alt={product.name}
+                src={productDetails.image}
+                alt={productDetails.name}
                 className="w-full h-full object-cover transition-opacity duration-300"
                 onError={(e) =>
                   (e.currentTarget.src =
@@ -246,33 +304,34 @@ const ProductDetails: React.FC = () => {
           {/* Right Column: Details & Actions */}
           <div className="space-y-6">
             <div className="flex justify-between items-start">
-              <h1 className="text-3xl font-bold text-gray-900">
-                {product.name}
+              <h1 className="text-3xl font-bold text-foreground">
+                {productDetails.name}
               </h1>
-              <button className="p-2 text-gray-400 hover:text-red-500 transition-colors rounded-full border border-gray-200 hover:border-red-300">
+              <button className="p-2 text-gray-400 hover:text-chart-4 transition-colors rounded-full border border-gray-200 hover:border-chart-1">
                 <Heart className="w-5 h-5" />
               </button>
             </div>
 
             {/* Rating and SKU */}
-            <div className="flex flex-col space-y-2 border-b pb-4">
+            <div className="flex flex-col space-y-2 pb-4">
               <RatingStars
-                rating={product.rating}
+                rating={productDetails.rating}
                 reviewCount={product.reviewCount}
               />
               <p className="text-sm text-gray-500">
-                <span className="font-semibold text-gray-700">
-                  {product.brand}
+                <span className="font-semibold text-chart-3">
+                  {productDetails.brand}
                 </span>{" "}
                 | SKU: {product.sku}
               </p>
             </div>
 
+            <Separator />
             {/* Sizes */}
             <div>
               <span className="text-sm font-semibold mb-2 block">
                 Size:{" "}
-                <span className="font-normal text-gray-600">
+                <span className="font-normal text-gray-500">
                   {selectedSize}
                 </span>
               </span>
@@ -284,7 +343,7 @@ const ProductDetails: React.FC = () => {
                     className={`px-4 py-2 text-sm font-medium rounded-full border transition-colors ${
                       selectedSize === size
                         ? "bg-indigo-600 text-white border-indigo-600"
-                        : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                        : "bg-white text-gray-500 border-gray-300 hover:bg-gray-50"
                     }`}>
                     {size}
                   </button>
@@ -296,7 +355,7 @@ const ProductDetails: React.FC = () => {
             <div>
               <span className="text-sm font-semibold mb-2 block">
                 Color:{" "}
-                <span className="font-normal text-gray-600">
+                <span className="font-normal text-gray-500 dark:text-slate-400">
                   {selectedColor.name}
                 </span>
               </span>
@@ -320,19 +379,20 @@ const ProductDetails: React.FC = () => {
               </div>
             </div>
 
+            <Separator />
             {/* Price */}
-            <div className="flex items-end space-x-3 border-t pt-4">
+            <div className="flex items-end space-x-3">
               {formattedSalePrice ? (
                 <>
                   <span className="text-4xl font-extrabold text-red-600">
                     ${formattedSalePrice}
                   </span>
-                  <span className="text-xl font-medium text-gray-400 line-through">
+                  <span className="text-xl font-medium text-gray-500 dark:text-slate-400 line-through">
                     ${formattedPrice}
                   </span>
                 </>
               ) : (
-                <span className="text-4xl font-extrabold text-gray-900">
+                <span className="text-4xl font-extrabold text-secondary-foreground">
                   ${formattedPrice}
                 </span>
               )}
@@ -357,11 +417,11 @@ const ProductDetails: React.FC = () => {
             {/* Quantity and Cart Actions */}
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
               {/* Quantity Selector */}
-              <div className="flex items-center border border-gray-300 rounded-lg p-1">
+              <div className="flex items-center border border-slate-700 rounded-lg p-1">
                 <button
                   onClick={decrementQuantity}
                   disabled={quantity <= 1}
-                  className="p-2 text-gray-600 hover:text-indigo-600 disabled:opacity-50">
+                  className="p-2 text-gray-600 cursor-pointer hover:text-indigo-600 disabled:opacity-50">
                   <Minus className="w-4 h-4" />
                 </button>
                 <input
@@ -373,14 +433,14 @@ const ProductDetails: React.FC = () => {
                 <button
                   onClick={incrementQuantity}
                   disabled={quantity >= product.stock}
-                  className="p-2 text-gray-600 hover:text-indigo-600 disabled:opacity-50">
+                  className="p-2 text-gray-600 cursor-pointer hover:text-indigo-600 disabled:opacity-50">
                   <Plus className="w-4 h-4" />
                 </button>
               </div>
 
               {/* Action Buttons */}
               <button
-                className="flex-1 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition-colors flex items-center justify-center disabled:bg-indigo-300"
+                className="flex-1 px-6 py-3 bg-chart-1 text-white font-semibold rounded-lg shadow-md hover:bg-chart-4 transition-colors flex items-center justify-center disabled:bg-indigo-300"
                 disabled={quantity === 0 || quantity > product.stock}
                 onClick={() =>
                   console.log(`Added ${quantity} of ${product.name} to cart`)
@@ -390,7 +450,7 @@ const ProductDetails: React.FC = () => {
               </button>
 
               <button
-                className="px-6 py-3 border border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-colors flex items-center justify-center"
+                className="px-6 py-3 border border-chart-1 text-chart-1 font-semibold rounded-lg hover:bg-chart-1/9 transition-colors flex items-center justify-center"
                 onClick={() =>
                   console.log(`Added ${product.name} to wishlist`)
                 }>
@@ -403,7 +463,7 @@ const ProductDetails: React.FC = () => {
 
         {/* Description & Product Details Tabs */}
         <div className="flex w-full h-full items-center gap-5">
-          <div className="mt-12 w-8/12 bg-white rounded-xl shadow-lg">
+          <div className="mt-12 w-8/12 border-2 border-gray-300 shadow-shadow shadow-lg rounded-xl">
             {/* Tab Navigation */}
             <div className="flex border-b border-gray-200 p-4">
               <button
@@ -411,7 +471,7 @@ const ProductDetails: React.FC = () => {
                 className={`pb-3 px-6 text-lg font-semibold transition-colors border-b-2 ${
                   activeTab === "description"
                     ? "border-indigo-600 text-indigo-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700"
+                    : "border-transparent text-gray-500 hover:text-gray-300 cursor-pointer"
                 }`}>
                 Description
               </button>
@@ -420,7 +480,7 @@ const ProductDetails: React.FC = () => {
                 className={`pb-3 px-6 text-lg font-semibold transition-colors border-b-2 ${
                   activeTab === "details"
                     ? "border-indigo-600 text-indigo-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700"
+                    : "border-transparent text-gray-500 hover:text-gray-300 cursor-pointer"
                 }`}>
                 Product Details
               </button>
@@ -429,7 +489,7 @@ const ProductDetails: React.FC = () => {
                 className={`pb-3 px-6 text-lg font-semibold transition-colors border-b-2 ${
                   activeTab === "reviews"
                     ? "border-indigo-600 text-indigo-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700"
+                    : "border-transparent text-gray-500 hover:text-gray-300 cursor-pointer"
                 }`}>
                 Reviews
               </button>
@@ -439,17 +499,19 @@ const ProductDetails: React.FC = () => {
             <div className="p-6 md:p-8 space-y-6">
               {activeContent.map((item, index) => (
                 <div key={index} className="space-y-2">
-                  <h3 className="text-xl font-bold text-gray-800">
+                  <h3 className="text-xl font-bold text-gray-500 dark:text-slate-400">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">{item.text}</p>
+                  <p className="text-gray-600 dark:text-slate-500 leading-relaxed">
+                    {item.text}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Policy Modules */}
-          <div className="mt-6 border w-4/12 border-gray-200 h-full rounded-xl overflow-hidden shadow-sm">
+          <div className="w-4/12 border-2 border-gray-300 shadow-shadow shadow-lg h-full rounded-xl">
             <PolicyModule
               icon={<Shield className="w-5 h-5" />}
               title="Secure Payment"

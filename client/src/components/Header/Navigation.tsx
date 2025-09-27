@@ -15,7 +15,7 @@ import { usenavItemContext } from "@/context/NavItemContext";
 export default function Navigation() {
   const { navItem } = usenavItemContext();
   return (
-    <div className="lg:flex bg-muted hidden items-center justify-center shadow shadow-gray-300 py-1">
+    <div className="lg:flex bg-background border-t-2 border-b-2 hidden items-center justify-center shadow shadow-gray-300 py-1">
       <div className="container-sm md:container-md">
         <div className="flex items-center">
           {/* Shop By Category */}

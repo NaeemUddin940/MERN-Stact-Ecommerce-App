@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { FaRegClock, FaStar } from "react-icons/fa";
 
 type Product = {
+  id: string;
   image: string;
   discount: string;
   isNew: boolean;
@@ -77,7 +78,6 @@ export default function ProductCard({ product, filter }: ProductCardProps) {
       ease: "power2.out",
     });
   };
-
   return (
     <div
       className="flex group min-h-sm w-full"
@@ -137,7 +137,7 @@ export default function ProductCard({ product, filter }: ProductCardProps) {
 
         {/* Detailed Section */}
         <div className="p-4 space-y-5 text-left bg-muted">
-          <Link to="/product-details">
+          <Link to={`/product-details/${product.id}`}>
             <div className="text-gray-700 my-1 dark:text-gray-400 text-sm">
               {product.brand}
             </div>

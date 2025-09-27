@@ -72,7 +72,7 @@ const colors = [
 ];
 
 export default function Shop() {
-  const [itemView, setItemView] = useState("gird");
+  const [itemView, setItemView] = useState("grid");
   const { products } = useProductContext();
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter(Boolean);
@@ -199,7 +199,7 @@ export default function Shop() {
                 <Button
                   variant="default"
                   className={`cursor-pointer  ${
-                    itemView === "list" ? "bg-chart-1" : ""
+                    itemView === "list" ? "bg-chart-1" : "bg-accent"
                   }`}
                   onClick={() => setItemView("list")}>
                   <List size={20} />
