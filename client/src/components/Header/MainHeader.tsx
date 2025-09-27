@@ -14,6 +14,9 @@ import { Sidebar } from "../Sidebar/Sidebar";
 import Search from "../Search/Search";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { usenavItemContext } from "../../context/NavItemContext";
+import CartSidebar from "../Cart/CartSidebar";
+import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
+import { DialogDescription, DialogTitle } from "../ui/dialog";
 
 export default function MainHeader() {
   const { navItem } = usenavItemContext();
@@ -102,15 +105,32 @@ export default function MainHeader() {
               </TooltipTrigger>
               <TooltipContent side="bottom">Wishlist</TooltipContent>
             </Tooltip>
-            <Tooltip>
-              <TooltipTrigger className="relative group">
-                <ShoppingCart className="hover:text-chart-1 cursor-pointer" />
-                <div className="absolute top-0 -right-3 animate-bounce bg-chart-1 h-5 w-4 flex justify-center items-center rounded-full font-mono">
-                  0
-                </div>
-              </TooltipTrigger>
-              <TooltipContent side="bottom">Cart</TooltipContent>
-            </Tooltip>
+            <Drawer direction="right">
+              {/* Trigger with Tooltip */}
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <DrawerTrigger asChild>
+                    <div className="relative group cursor-pointer">
+                      <ShoppingCart className="hover:text-chart-1" />
+
+                      {/* Cart Badge */}
+                      <div className="absolute top-0 -right-3 animate-bounce bg-chart-1 h-5 w-4 flex justify-center items-center rounded-full font-mono text-xs text-white">
+                        0
+                      </div>
+                    </div>
+                  </DrawerTrigger>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">Cart</TooltipContent>
+              </Tooltip>
+
+              {/* Sidebar Content */}
+              <DrawerContent className="p-0 w-96">
+                <DialogTitle>your cart</DialogTitle>
+                <DialogDescription>cart sidebar</DialogDescription>
+                <CartSidebar />
+              </DrawerContent>
+            </Drawer>
+
             <Toggle />
           </div>
         </div>
