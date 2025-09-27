@@ -5,6 +5,7 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 interface ProductType {
+  id: string;
   image: string;
   discount: string;
   isNew: boolean;
@@ -15,9 +16,9 @@ interface ProductType {
   newPrice: string;
   colors: string[];
   category: string;
-  isLatest: boolean;
-  isPopular: boolean;
-  isFeatured: boolean;
+  isLatest?: boolean;
+  isPopular?: boolean;
+  isFeatured?: boolean;
   countdown?: string;
 }
 interface SliderProductsShowProps {
@@ -44,7 +45,7 @@ export const SliderProductsShow: React.FC<SliderProductsShowProps> = ({
   return (
     <div className="page-4 mb-5 relative overflow-hidden">
       {/* Header with title + navigation */}
-      <div className="flex bg-muted justify-between items-center shadow border rounded-sm mb-4 py-2 px-2">
+      <div className="flex bg-background justify-between border-slate-500 shadow-shadow shadow-lg/25 items-center  border rounded-sm mb-4 py-2 px-2">
         <h4 className="text-3xl font-bold">{title}</h4>
 
         {/* Navigation Buttons */}

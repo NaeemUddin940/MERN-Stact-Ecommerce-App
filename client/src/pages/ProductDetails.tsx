@@ -2,17 +2,14 @@ import React, { useState, useMemo, useEffect } from "react";
 import {
   Star,
   Heart,
-  Share2,
   Minus,
   Plus,
   ShoppingCart,
   Truck,
   Clock,
   Shield,
-  CheckCircle,
-  ChevronLeft,
-  ChevronRight,
-  MessageSquare,
+  ChevronUp,
+  ChevronDown,
 } from "lucide-react";
 import {
   Breadcrumb,
@@ -26,6 +23,8 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import capitalize from "@/utils/capitalize";
 import { Separator } from "@/components/ui/separator";
 import { useProductContext } from "@/context/ProductContext";
+import { SliderProductsShow } from "@/components/Home/Slider/SliderProductsShow";
+import ProductReview from "@/components/ProductCard/ProductReview";
 
 // --- MOCK DATA TYPES ---
 interface ColorOption {
@@ -34,7 +33,7 @@ interface ColorOption {
 }
 
 interface Product {
-  id: number;
+  id: string | number;
   name: string;
   sku: string;
   brand: string;
@@ -72,10 +71,11 @@ const mockProduct: Product = {
     { name: "Olive Green", hex: "#4b5563" },
   ],
   images: [
-    "https://demos.codezeel.com/prestashop/PRS21/PRS210502/123-home_default/hummingbird-notebook.jpg",
+    "https://placehold.co/500x500/e0e0e0/333?text=Watch+1",
     "https://placehold.co/500x500/e0e0e0/333?text=Watch+2",
     "https://placehold.co/500x500/d0d0d0/333?text=Watch+3",
     "https://placehold.co/500x500/c0c0c0/333?text=Watch+4",
+    "https://placehold.co/500x500/c0c0c0/333?text=Watch+5",
   ],
   descriptionContent: [
     {
@@ -179,7 +179,7 @@ const ProductDetails: React.FC = () => {
   const { products } = useProductContext();
   const { id } = useParams();
 
-  const productDetails = products.find((p) => (p.id = id));
+  const productDetails = products.find((p) => p.id === id);
   // if (!product) return <p>Loading...</p>;
 
   const [selectedSize, setSelectedSize] = useState<string>(product.sizes[1]);
@@ -196,6 +196,7 @@ const ProductDetails: React.FC = () => {
     () => product.price.toFixed(2),
     [product.price]
   );
+  
   const formattedSalePrice = useMemo(
     () => product.salePrice?.toFixed(2),
     [product.salePrice]
@@ -214,11 +215,12 @@ const ProductDetails: React.FC = () => {
       : product.reviewsContent;
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter(Boolean);
+
   return (
-    <div className="min-h-screen bg-bcakground text-foreground font-sans p-4 md:p-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-bcakground text-foreground  font-sans">
+      <div className="container-sm md:container-md mx-auto">
         {/* Breadcrumbs/Header - Minimal */}
-        <div className="mb-6 flex items-center justify-between">
+        <div className="my-4 flex items-center justify-between">
           <button className="text-gray-500 hover:text-gray-700 flex items-center text-sm">
             <Breadcrumb>
               <BreadcrumbList>
@@ -260,49 +262,51 @@ const ProductDetails: React.FC = () => {
         </div>
 
         {/* Product Gallery & Info Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 border-slate-300 shadow-shadow border-2 rounded-xl shadow-lg p-4 md:p-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 border-slate-300 shadow-shadow border-2 shadow-lg rounded-xl  p-4 md:p-8">
           {/* Left Column: Image Gallery */}
           <div className="flex flex-col md:flex-row gap-6">
             {/* Thumbnails (Sidebar) */}
             <div className="flex md:flex-col space-x-3 md:space-x-0 md:space-y-3 overflow-x-auto md:overflow-visible pb-2 md:pb-0 flex-shrink-0">
+              <div className="bg-chart-1 hover:bg-chart-4 cursor-pointer flex items-center justify-center py-1">
+                <ChevronUp />
+              </div>
               {product.images.map((img, index) => (
                 <div
                   key={index}
                   className={`w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 cursor-pointer transition-all ${
                     index === activeImageIndex
-                      ? "border-indigo-500 ring-2 ring-indigo-500/50"
-                      : "border-gray-200 hover:border-indigo-300"
+                      ? "border-chart-4 ring-1 ring-chart-1"
+                      : "border-gray-200 hover:border-chart-1"
                   }`}
                   onClick={() => setActiveImageIndex(index)}>
                   <img
                     src={img}
                     alt={`Thumbnail ${index + 1}`}
                     className="w-full h-full object-cover"
-                    onError={(e) =>
-                      (e.currentTarget.src =
-                        "https://placehold.co/80x80?text=Img")
-                    }
                   />
                 </div>
               ))}
+              <div className="bg-chart-1 hover:bg-chart-1 cursor-pointer flex items-center justify-center py-1">
+                <ChevronDown />
+              </div>
             </div>
 
             {/* Main Image */}
-            <div className="flex-grow aspect-square h-[500px] rounded-xl overflow-hidden shadow-md">
+            <div className="flex-grow aspect-square h-[530px] rounded-xl overflow-hidden shadow-md">
               <img
                 src={productDetails.image}
                 alt={productDetails.name}
                 className="w-full h-full object-cover transition-opacity duration-300"
-                onError={(e) =>
-                  (e.currentTarget.src =
-                    "https://demos.codezeel.com/prestashop/PRS21/PRS210502/123-home_default/hummingbird-notebook.jpg")
-                }
+                // onError={(e) =>
+                //   (e.currentTarget.src =
+                //     "https://demos.codezeel.com/prestashop/PRS21/PRS210502/123-home_default/hummingbird-notebook.jpg")
+                // }
               />
             </div>
           </div>
 
           {/* Right Column: Details & Actions */}
-          <div className="space-y-6">
+          <div className="space-y-5">
             <div className="flex justify-between items-start">
               <h1 className="text-3xl font-bold text-foreground">
                 {productDetails.name}
@@ -313,19 +317,19 @@ const ProductDetails: React.FC = () => {
             </div>
 
             {/* Rating and SKU */}
-            <div className="flex flex-col space-y-2 pb-4">
+            <div className="space-y-2">
               <RatingStars
                 rating={productDetails.rating}
                 reviewCount={product.reviewCount}
               />
-              <p className="text-sm text-gray-500">
+              <div className="text-sm text-gray-500">
                 <span className="font-semibold text-chart-3">
                   {productDetails.brand}
                 </span>{" "}
                 | SKU: {product.sku}
-              </p>
+              </div>
             </div>
-
+            <div>{product.shortDescription}</div>
             <Separator />
             {/* Sizes */}
             <div>
@@ -462,8 +466,8 @@ const ProductDetails: React.FC = () => {
         </div>
 
         {/* Description & Product Details Tabs */}
-        <div className="flex w-full h-full items-center gap-5">
-          <div className="mt-12 w-8/12 border-2 border-gray-300 shadow-shadow shadow-lg rounded-xl">
+        <div className="grid mt-12 grid-cols-1 lg:grid-cols-12 w-full h-full items-center gap-5">
+          <div className=" border-2 lg:col-span-8 border-gray-300 shadow-shadow shadow-lg rounded-xl">
             {/* Tab Navigation */}
             <div className="flex border-b border-gray-200 p-4">
               <button
@@ -497,21 +501,37 @@ const ProductDetails: React.FC = () => {
 
             {/* Tab Content */}
             <div className="p-6 md:p-8 space-y-6">
-              {activeContent.map((item, index) => (
-                <div key={index} className="space-y-2">
-                  <h3 className="text-xl font-bold text-gray-500 dark:text-slate-400">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-slate-500 leading-relaxed">
-                    {item.text}
+              {activeTab === "description" ? (
+                <div>
+                  <h5>jksjkdfj</h5>
+                  <p>
+                    jksjkdfj Lorem, ipsum dolor sit amet consectetur adipisicing
+                    elit. Harum, molestiae!
                   </p>
                 </div>
-              ))}
+              ) : activeTab === "details" ? (
+                <div>
+                  <h5>details</h5>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Iste, impedit.
+                  </p>
+                </div>
+              ) : (
+                <div className="">
+                  <ProductReview
+                    title="Amazing Watch!"
+                    text="This watch is really stylish and comfortable. I love it!"
+                    reviewer="John Doe"
+                    rating={5}
+                  />
+                </div>
+              )}
             </div>
           </div>
 
           {/* Policy Modules */}
-          <div className="w-4/12 border-2 border-gray-300 shadow-shadow shadow-lg h-full rounded-xl">
+          <div className=" border-2 lg:col-span-4 border-gray-300 shadow-shadow shadow-lg h-full rounded-xl">
             <PolicyModule
               icon={<Shield className="w-5 h-5" />}
               title="Secure Payment"
@@ -528,6 +548,18 @@ const ProductDetails: React.FC = () => {
               subtitle="30-day return window from the date of purchase. Easy online returns."
             />
           </div>
+        </div>
+        <div className="my-5">
+          <SliderProductsShow
+            title="You Might Like Also"
+            products={products}
+            filter="all"
+          />
+          <SliderProductsShow
+            title="10 More Products in the Same Category"
+            products={products}
+            filter="all"
+          />
         </div>
       </div>
     </div>
