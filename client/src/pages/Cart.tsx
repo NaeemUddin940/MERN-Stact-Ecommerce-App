@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Plus, Minus, Trash2 } from "lucide-react";
 import CartSidebar from "@/components/Cart/CartSidebar";
+import { Link } from "react-router-dom";
 
 const Cart: React.FC = () => {
   // Static cart items
@@ -143,9 +144,11 @@ const Cart: React.FC = () => {
               />
             </div>
 
-            <button className="w-full bg-indigo-600 text-white py-2 rounded-lg font-semibold hover:bg-indigo-700 transition-colors mb-2">
-              Proceed to Checkout
-            </button>
+            <Link to="/checkout">
+              <button className="w-full bg-indigo-600 text-white py-2 rounded-lg font-semibold hover:bg-indigo-700 transition-colors mb-2">
+                Proceed to Checkout
+              </button>
+            </Link>
             <button className="w-full text-indigo-600 border border-indigo-600 py-2 rounded-lg font-semibold hover:bg-indigo-50 transition-colors">
               Continue Shopping
             </button>

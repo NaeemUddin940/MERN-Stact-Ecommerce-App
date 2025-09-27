@@ -5,7 +5,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 export default function Search() {
   return (
     <div className="flex gap-2 items-center justify-center">
-      <div className="w-full bg-input border-1 px-3 py-2 border-chart-4 rounded-full flex items-center h-full animate-bounce-fade-in delay-100">
+      <div className="w-full bg-secondary/30 border-1 px-3 py-2 border-chart-4 rounded-full flex items-center h-full animate-bounce-fade-in delay-100">
         <input
           type="text"
           className="w-full ml-2 h-full focus:outline-none "

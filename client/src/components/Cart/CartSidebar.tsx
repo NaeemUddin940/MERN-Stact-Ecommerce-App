@@ -133,9 +133,11 @@ const CartSidebar: React.FC = () => {
               </button>
             </DrawerClose>
           </Link>
-          <button className="w-full cursor-pointer bg-indigo-600 text-white py-2 rounded-lg font-semibold hover:bg-indigo-700 transition-colors ">
-            Proceed to Checkout
-          </button>
+          <Link to="/checkout">
+            <button className="w-full cursor-pointer bg-indigo-600 text-white py-2 rounded-lg font-semibold hover:bg-indigo-700 transition-colors ">
+              Proceed to Checkout
+            </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import GoogleLoginButton from "@/components/ui/GoogleLoginButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link, useNavigate } from "react-router-dom";
@@ -68,13 +69,11 @@ export default function Login() {
           </form>
         </CardContent>
 
-        <CardFooter className="flex-col gap-2">
+        <CardFooter className="flex-col gap-2 w-full">
           <Button type="submit" variant="modern" className="w-full">
             Login
           </Button>
-          <Button variant="secondary" className="w-full">
-            Login with Google
-          </Button>
+          <GoogleLoginButton />
         </CardFooter>
       </Card>
     </div>

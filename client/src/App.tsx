@@ -14,6 +14,8 @@ import SignUp from "./pages/SignUp";
 import Cart from "./pages/Cart";
 import ForgotPassword from "./pages/ForgotPassword";
 import { VerifyOTP } from "./pages/VerifyOtp";
+import CheckoutPage from "./pages/Checkout";
+import MyAccount from "./pages/MyAccount";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/verify-otp" element={<VerifyOTP />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/my-account" element={<MyAccount />} />
         <Route path="/product-details/:id" element={<ProductDetails />} />
 
         {/* Fallback Route Setup */}

@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import GoogleLoginButton from "@/components/ui/GoogleLoginButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
@@ -61,9 +62,7 @@ export default function SignUp() {
           <Button type="submit" variant="auth" className="w-full">
             Sign Up
           </Button>
-          <Button variant="auth" className="w-full">
-            Sign Up with Google
-          </Button>
+          <GoogleLoginButton />
         </CardFooter>
       </Card>
     </div>

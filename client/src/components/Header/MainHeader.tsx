@@ -10,16 +10,22 @@ import {
 } from "../ui/dropdown-menu";
 import { Toggle } from "../ui/Toggle";
 import { Sidebar } from "../Sidebar/Sidebar";
-
+import { IoBagCheckSharp } from "react-icons/io5";
 import Search from "../Search/Search";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { usenavItemContext } from "../../context/NavItemContext";
 import CartSidebar from "../Cart/CartSidebar";
 import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
 import { DialogDescription, DialogTitle } from "../ui/dialog";
+import { useState } from "react";
+import { FaRegUser } from "react-icons/fa";
+import { IoMdHeartEmpty } from "react-icons/io";
+import { IoLogOutOutline } from "react-icons/io5";
 
 export default function MainHeader() {
   const { navItem } = usenavItemContext();
+
+  const [isLogin, setIsLogin] = useState(true);
   return (
     <header>
       <section className="flex bg-background border-b-1 border-ring justify-center items-center">
@@ -51,21 +57,62 @@ export default function MainHeader() {
             {/* Login / Register For large Device */}
             <div className="md:flex hidden">
               <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link className="hover:text-chart-4" to="/auth/login">
-                    Login
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent side="bottom">Login</TooltipContent>
-              </Tooltip>
-              <span className="mx-2">/</span>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link className="hover:text-chart-4" to="/auth/sign-up">
-                    Register
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent side="bottom">Register</TooltipContent>
+                {!isLogin ? (
+                  <>
+                    <TooltipTrigger asChild>
+                      <Link className="hover:text-chart-4" to="/auth/login">
+                        Login
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom">Login</TooltipContent>
+                    <span className="mx-2">/</span>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Link className="hover:text-chart-4" to="/auth/sign-up">
+                          Register
+                        </Link>
+                      </TooltipTrigger>
+                      <TooltipContent side="bottom">Register</TooltipContent>
+                    </Tooltip>
+                  </>
+                ) : (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>
+                      <div className="flex items-center  cursor-pointer bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-lg justify-center gap-4">
+                        <img
+                          className="h-10 w-10 rounded-full"
+                          src="https://scontent.fdac7-1.fna.fbcdn.net/v/t39.30808-6/550811430_797952962841067_3611979962480220725_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHVebcLht2NKYvewDi6ZBEpo2tFYx_5cLKja0VjH_lwsoX9EGbNek9olPF1gisUKyClVjCetXcgmCwOUCYX-W5n&_nc_ohc=JQN98cSKkLcQ7kNvwHaeuEm&_nc_oc=AdlfMoiuTouNjUZchG8UeGnj_yYoBMgsfzgLqEjvCBzKkHttxGiFUMYvrhGW-oEwmjU&_nc_zt=23&_nc_ht=scontent.fdac7-1.fna&_nc_gid=wJS_8H29SAOQmZHW3GVwaA&oh=00_AfZ_8vnBL1lpBxDEWHJPJzh9VXqjL7iL3HcoAUzvC9hzJQ&oe=68DD817D"
+                          alt=""
+                        />
+                        <div className="flex text-sm flex-col justify-center items-start">
+                          <h5 className="uppercase">MD. NAEEM UDDIN</h5>
+                          <p>mdnaeemuddin14@gmail.com</p>
+                        </div>
+                      </div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem>
+                        <Link to="/my-account" className="flex gap-2">
+                          <FaRegUser />
+                          My Account
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        {" "}
+                        <IoBagCheckSharp />
+                        Orders
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <IoMdHeartEmpty />
+                        My Lists
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setIsLogin(false)}>
+                        <IoLogOutOutline />
+                        Log Out
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                )}
               </Tooltip>
             </div>
 
