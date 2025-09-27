@@ -12,24 +12,33 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function SignUp() {
   return (
     <div className="flex  items-center justify-center my-10">
       <Card className="w-full max-w-sm border-slate-300 shadow-shadow border-2 shadow-md">
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
+          <CardTitle>Register to your account</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Enter your Name, email, Password below to Create your account
           </CardDescription>
           <CardAction>
             <Button variant="link">
-              <Link to="/auth/sign-up">Sign Up</Link>
+              <Link to="/auth/login">Login</Link>
             </Button>
           </CardAction>
         </CardHeader>
         <CardContent>
           <form>
             <div className="flex flex-col gap-6">
+              <div className="grid gap-2">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  type="name"
+                  placeholder="Enter Your Name"
+                  required
+                />
+              </div>
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -55,10 +64,10 @@ export default function Login() {
         </CardContent>
         <CardFooter className="flex-col gap-2">
           <Button type="submit" variant="modern" className="w-full">
-            Login
+            Sign Up
           </Button>
           <Button variant="secondary" className="w-full">
-            Login with Google
+            Sign Up with Google
           </Button>
         </CardFooter>
       </Card>

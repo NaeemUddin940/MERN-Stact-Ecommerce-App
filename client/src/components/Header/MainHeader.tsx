@@ -58,7 +58,7 @@ export default function MainHeader() {
               <span className="mx-2">/</span>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link className="hover:text-chart-4" to="/auth/register">
+                  <Link className="hover:text-chart-4" to="/auth/sign-up">
                     Register
                   </Link>
                 </TooltipTrigger>
