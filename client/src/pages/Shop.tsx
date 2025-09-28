@@ -10,7 +10,7 @@ import {
 import capitalize from "../utils/capitalize";
 import { Button } from "@/components/ui/button";
 import { Separator } from "../components/ui/separator";
-import FilterCheckbox from "@/components/Shop/FilterCheckbox";
+import FilterCheckbox from "@/components/Shop/FilterBarCheck";
 import { useProductContext } from "@/context/ProductContext";
 import ProductCard from "../components/ProductCard/ProductCard";
 import { Grid3X3, List } from "lucide-react";

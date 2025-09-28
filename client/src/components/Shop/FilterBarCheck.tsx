@@ -1,4 +1,4 @@
-import Checkbox from "../ui/checkbox";
+import Checkbox from "@/components/Shop/Checkbox";
 
 type filterProps = {
   title: string;
