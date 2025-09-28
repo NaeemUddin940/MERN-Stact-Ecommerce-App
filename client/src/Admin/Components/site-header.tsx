@@ -1,8 +1,16 @@
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { SidebarTrigger } from "@/components/ui/sidebar"
-import { Toggle } from "./ui/Toggle"
-
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Toggle } from "../../components/ui/Toggle";
+import { NavUser } from "./nav-user";
+import NotificationBell from "./NotificationBell";
+const data = {
+  user: {
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "/avatars/shadcn.jpg",
+  },
+};
 export function SiteHeader() {
   return (
     <header className="flex py-2 h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
@@ -13,10 +21,12 @@ export function SiteHeader() {
           className="mx-2 data-[orientation=vertical]:h-4"
         />
         <h1 className="text-base font-medium">Admin Panel</h1>
-        <div className="ml-auto flex items-center gap-2">
-          <Toggle/>
+        <div className="ml-auto flex items-center gap-5">
+          <NotificationBell/>
+          <NavUser user={data.user} />
+          <Toggle />
         </div>
       </div>
     </header>
-  )
+  );
 }
