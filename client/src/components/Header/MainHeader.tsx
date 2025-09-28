@@ -60,7 +60,7 @@ export default function MainHeader() {
                 {!isLogin ? (
                   <>
                     <TooltipTrigger asChild>
-                      <Link className="hover:text-chart-4" to="/auth/login">
+                      <Link className="hover:text-chart-4" to="/user/login">
                         Login
                       </Link>
                     </TooltipTrigger>
@@ -68,7 +68,7 @@ export default function MainHeader() {
                     <span className="mx-2">/</span>
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <Link className="hover:text-chart-4" to="/auth/sign-up">
+                        <Link className="hover:text-chart-4" to="/user/sign-up">
                           Register
                         </Link>
                       </TooltipTrigger>
