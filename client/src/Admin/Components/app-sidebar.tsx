@@ -1,6 +1,8 @@
 import * as React from "react";
+import { Collapse } from "react-collapse";
 import {
   ChevronDown,
+  ChevronUp,
   Home,
   Image,
   LayoutDashboard,
@@ -30,6 +32,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { Separator } from "@/components/ui/separator";
 const items = [
   {
     title: "Dashboard",
@@ -40,9 +43,9 @@ const items = [
     title: "Home Slides",
     url: "#",
     icon: Image,
-    items: [
+    subItems: [
       { title: "Add Home Banner Slides", url: "#", icon: Home },
-      { title: "Add Home Banner Slides", url: "#", icon: Home },
+      { title: "Home Banner List", url: "#", icon: Home },
     ],
   },
   {
@@ -54,11 +57,21 @@ const items = [
     title: "Products",
     url: "#",
     icon: ShoppingBasket,
+    subItems: [
+      { title: "Product List", url: "#" },
+      { title: "Product Upload", url: "#" },
+    ],
   },
   {
     title: "Category",
     url: "#",
     icon: BiCategory,
+    subItems: [
+      { title: "Category List", url: "#" },
+      { title: "Add a Category", url: "#" },
+      { title: "Sub Category List", url: "#" },
+      { title: "Add a Sub Category", url: "#" },
+    ],
   },
   {
     title: "Orders",
@@ -73,6 +86,14 @@ const items = [
 ];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const [subMenuIndex, setSubMenuIndex] = React.useState(null);
+  function isOpenSubMenu(index: number) {
+    if (subMenuIndex === index) {
+      setSubMenuIndex(null);
+    } else {
+      setSubMenuIndex(index);
+    }
+  }
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -91,36 +112,47 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarGroupLabel>Admin Panel</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title} className="hover:shadow-lg">
-                  {item.items ? (
-                    <Collapsible key={item.title}>
-                      <CollapsibleTrigger asChild>
-                        <SidebarMenuButton>
-                          <span>
-                            <item.icon size={22} />
-                          </span>
-                          <span className="text-[16px] flex items-center gap-15">
-                            {item.title} <ChevronDown />
-                          </span>
-                        </SidebarMenuButton>
-                      </CollapsibleTrigger>
+              {items.map((item, i) => (
+                <SidebarMenuItem key={i} className="hover:shadow-lg ">
+                  {item.subItems ? (
+                    <div>
+                      <SidebarMenuButton
+                        className="cursor-pointer flex hover:bg-chart-1 items-center justify-between"
+                        onClick={() =>
+                          setSubMenuIndex(
+                            subMenuIndex === item.title ? null : item.title
+                          )
+                        }>
+                        <div className="flex items-center gap-2">
+                          <item.icon size={22} />
+                          <span className="text-[16px]">{item.title}</span>
+                        </div>
+                        <span
+                          className={`transition-transform ${
+                            subMenuIndex === item.title ? "rotate-180" : ""
+                          }`}>
+                          <ChevronDown />
+                        </span>
+                      </SidebarMenuButton>
 
-                      <CollapsibleContent className="flex flex-col gap-2">
-                        {item.items.map((subItem) => (
-                          <Link
+                      <div className="ml-7 border-l pl-3">
+                        {item.subItems.map((subItem) => (
+                          <Collapse
                             key={subItem.title}
-                            to={subItem.url}
-                            className="flex items-center gap-2 pl-9 py-2 hover:bg-gray-200">
-                            <span className="text-[14px] border-l-2 pl-1">
-                              {subItem.title}
-                            </span>
-                          </Link>
+                            isOpened={subMenuIndex === item.title}>
+                            <Link
+                              to={subItem.url}
+                              className="flex items-center gap-2 py-2 hover:text-blue-500">
+                              <span className="text-[14px]">
+                                {subItem.title}
+                              </span>
+                            </Link>
+                          </Collapse>
                         ))}
-                      </CollapsibleContent>
-                    </Collapsible>
+                      </div>
+                    </div>
                   ) : (
-                    <SidebarMenuButton asChild className="hover:bg-chart-1 ">
+                    <SidebarMenuButton asChild className="hover:bg-chart-1">
                       <Link to={item.url}>
                         <span>
                           <item.icon size={22} />
@@ -129,11 +161,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       </Link>
                     </SidebarMenuButton>
                   )}
-
-                  {/* {item.items &&
-                    item.items.map((item) => (
-                      <SidebarMenuButton>{item.title}</SidebarMenuButton>
-                    ))} */}
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>

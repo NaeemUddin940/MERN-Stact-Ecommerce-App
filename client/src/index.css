@@ -46,6 +46,9 @@ body {
 .container-md {
   width: 90%;
 }
+.ReactCollapse--collapse {
+  transition: height 500ms;
+}
 
 /*======================
     404 page
