@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "text-foreground rounded-sm active:bg-destructive py-2 cursor-pointer",
+          "bg-accent text-foreground rounded-sm active:bg-destructive py-2 cursor-pointer",
         auth: "bg-gray-200 dark:text-black text-foreground rounded-sm active:bg-destructive py-2 cursor-pointer",
         modern: "bg-chart-1 text-black active:bg-destructive hover:bg-chart-4",
         destructive:
