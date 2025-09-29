@@ -11,7 +11,7 @@ import { useState } from "react";
 import { Collapse } from "react-collapse";
 import React from "react";
 
-export default function MyLists() {
+export default function RecentOrders() {
   const [openRow, setOpenRow] = useState<number | null>(null);
 
   const orders = [
@@ -51,8 +51,8 @@ export default function MyLists() {
 
   return (
     <div className="w-full">
-      <h2 className="text-2xl font-bold mb-4">My Lists</h2>
-      <div className="w-[1150px] overflow-x-auto border border-gray-200 rounded-sm">
+      <h2 className="text-2xl font-bold mb-4">Recent Orders</h2>
+      <div className="w-full overflow-x-auto border border-gray-200 rounded-sm">
         <Table className="min-w-[1000px] border-collapse border border-gray-200">
           {/* Sticky Header */}
           <TableHeader className="bg-gray-50 sticky top-0 z-10">
@@ -78,15 +78,17 @@ export default function MyLists() {
                 {/* Main Row */}
                 <TableRow className="border-b border-gray-200">
                   <TableCell
-                    className="border border-gray-200 text-center cursor-pointer"
+                    className="border bg-gray-200 border-gray-200 text-center cursor-pointer"
                     onClick={() =>
                       setOpenRow(openRow === index ? null : index)
                     }>
-                    {openRow === index ? (
-                      <ChevronUp className="mx-auto" />
-                    ) : (
-                      <ChevronDown className="mx-auto" />
-                    )}
+                    <div className="bg-gray-300 rounded-full h-9 hover:bg-chart-1 flex items-center justify-center w-9">
+                      {openRow === index ? (
+                        <ChevronUp className="mx-auto" />
+                      ) : (
+                        <ChevronDown className="mx-auto" />
+                      )}
+                    </div>
                   </TableCell>
                   <TableCell className="border border-gray-200">
                     {order.userId}
@@ -124,39 +126,50 @@ export default function MyLists() {
                       <div className="bg-gray-50 p-4">
                         <h3 className="font-semibold mb-2">Order Details:</h3>
                         <Table>
-                          <div className="flex items-center gap-10 py-2">
-                            <TableCell className="border border-gray-200">
-                              ORDER ID: 183HSDHakjsd12938qdj
-                            </TableCell>
-                            <TableCell className="border border-gray-200">
-                              PAYMENT ID: 12hd7JHhsuJ73h{" "}
-                            </TableCell>
-                            <TableCell className="border border-gray-200">
-                              PINCODE: 12hd7JHhsuJ73h{" "}
-                            </TableCell>
-                          </div>
-                          <div className="flex items-center gap-10 py-2 border-t border-b">
-                            <TableCell className="border border-gray-200">
-                              TITLE: Summer t-shirt
-                            </TableCell>
-                            <TableCell className="border border-gray-200">
-                              QUANTITY : 12
-                            </TableCell>
-                            <TableCell className="border border-gray-200">
-                              TOTAL PRICE : $1323.00
-                            </TableCell>
-                          </div>
-                          <div className="flex items-center gap-10">
-                            <TableCell className="border border-gray-200">
-                              PURCHASE DATA : 12/9/2025
-                            </TableCell>
-                            <TableCell className="border border-gray-200">
-                              PHONE NUMBER :01311078039
-                            </TableCell>
-                            <TableCell className="border border-gray-200">
-                              Status : Pending
-                            </TableCell>
-                          </div>
+                          <TableHeader>
+                            <TableRow>
+                              <TableHead className="border border-gray-200">
+                                PRODUCT ID
+                              </TableHead>
+                              <TableHead className="border border-gray-200">
+                                PRODUCT TITLE
+                              </TableHead>
+                              <TableHead className="border border-gray-200">
+                                IMAGE
+                              </TableHead>
+                              <TableHead className="border border-gray-200">
+                                QUANTITY
+                              </TableHead>
+                              <TableHead className="border border-gray-200">
+                                PRICE
+                              </TableHead>
+                              <TableHead className="border border-gray-200">
+                                SUB-TOTAL
+                              </TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            <TableRow>
+                              <TableCell className="border border-gray-200">
+                                xfcsdfgasdfq234FASFE
+                              </TableCell>
+                              <TableCell className="border border-gray-200">
+                                Watch
+                              </TableCell>
+                              <TableCell className="border border-gray-200">
+                                <img src="" alt="" />
+                              </TableCell>
+                              <TableCell className="border border-gray-200">
+                                12
+                              </TableCell>
+                              <TableCell className="border border-gray-200">
+                                120
+                              </TableCell>
+                              <TableCell className="border border-gray-200">
+                                1200
+                              </TableCell>
+                            </TableRow>
+                          </TableBody>
                         </Table>
                       </div>
                     </Collapse>

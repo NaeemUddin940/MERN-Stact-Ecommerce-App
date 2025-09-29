@@ -87,13 +87,7 @@ const items = [
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const [subMenuIndex, setSubMenuIndex] = React.useState(null);
-  function isOpenSubMenu(index: number) {
-    if (subMenuIndex === index) {
-      setSubMenuIndex(null);
-    } else {
-      setSubMenuIndex(index);
-    }
-  }
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
