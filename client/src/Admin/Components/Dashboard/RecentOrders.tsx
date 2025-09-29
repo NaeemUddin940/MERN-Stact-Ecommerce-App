@@ -27,8 +27,24 @@ export default function RecentOrders() {
       date: "12/9/25",
       total: "$1222.00",
       details: [
-        { product: "Watch", qty: 1, price: "$500.00" },
-        { product: "Shoes", qty: 2, price: "$722.00" },
+        {
+          productId: "xfcsdfgasdfq234FASFE",
+          product: "Watch",
+          qty: 1,
+          price: 500,
+          subtotal: 500,
+          image:
+            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=100",
+        },
+        {
+          productId: "sdf234sdfsdf234",
+          product: "Shoes",
+          qty: 2,
+          price: 361,
+          subtotal: 722,
+          image:
+            "https://images.unsplash.com/photo-1542293787938-c9e299b880b1?w=100",
+        },
       ],
     },
     {
@@ -43,32 +59,48 @@ export default function RecentOrders() {
       date: "12/8/25",
       total: "$800.00",
       details: [
-        { product: "Bag", qty: 1, price: "$400.00" },
-        { product: "Shoes", qty: 1, price: "$400.00" },
+        {
+          productId: "dfgasd2323sdf",
+          product: "Bag",
+          qty: 1,
+          price: 400,
+          subtotal: 400,
+          image:
+            "https://images.unsplash.com/photo-1547949003-9792a18a2601?w=100",
+        },
+        {
+          productId: "asdf23423dfg",
+          product: "Shoes",
+          qty: 1,
+          price: 400,
+          subtotal: 400,
+          image:
+            "https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?w=100",
+        },
       ],
     },
   ];
 
   return (
-    <div className="w-full">
+    <div className="w-full border-2 rounded-sm shadow-lg border-accent p-5">
       <h2 className="text-2xl font-bold mb-4">Recent Orders</h2>
-      <div className="w-full overflow-x-auto border border-gray-200 rounded-sm">
-        <Table className="min-w-[1000px] border-collapse border border-gray-200">
+      <div className="w-full overflow-x-auto border border-border rounded-md shadow-sm">
+        <Table className="min-w-[1000px] border-collapse border border-border">
           {/* Sticky Header */}
-          <TableHeader className="bg-gray-50 sticky top-0 z-10">
-            <TableRow className="border-b border-gray-200">
-              <TableHead className="border border-gray-200 w-[50px] text-center">
+          <TableHeader className="bg-muted sticky top-0 z-10">
+            <TableRow className="border border-border">
+              <TableHead className="border border-border w-[50px] text-center">
                 #
               </TableHead>
-              <TableHead className="border border-gray-200">USER ID</TableHead>
-              <TableHead className="border border-gray-200">PINCODE</TableHead>
-              <TableHead className="border border-gray-200">NAME</TableHead>
-              <TableHead className="border border-gray-200">EMAIL</TableHead>
-              <TableHead className="border border-gray-200">PHONE</TableHead>
-              <TableHead className="border border-gray-200">ADDRESS</TableHead>
-              <TableHead className="border border-gray-200">STATUS</TableHead>
-              <TableHead className="border border-gray-200">DATE</TableHead>
-              <TableHead className="border border-gray-200">TOTAL</TableHead>
+              <TableHead className="border border-border">USER ID</TableHead>
+              <TableHead className="border border-border">PINCODE</TableHead>
+              <TableHead className="border border-border">NAME</TableHead>
+              <TableHead className="border border-border">EMAIL</TableHead>
+              <TableHead className="border border-border">PHONE</TableHead>
+              <TableHead className="border border-border">ADDRESS</TableHead>
+              <TableHead className="border border-border">STATUS</TableHead>
+              <TableHead className="border border-border">DATE</TableHead>
+              <TableHead className="border border-border">TOTAL</TableHead>
             </TableRow>
           </TableHeader>
 
@@ -76,99 +108,105 @@ export default function RecentOrders() {
             {orders.map((order, index) => (
               <React.Fragment key={order.id}>
                 {/* Main Row */}
-                <TableRow className="border-b border-gray-200">
+                <TableRow className="border border-border">
                   <TableCell
-                    className="border bg-gray-200 border-gray-200 text-center cursor-pointer"
+                    className="border border-border bg-background text-center cursor-pointer"
                     onClick={() =>
                       setOpenRow(openRow === index ? null : index)
                     }>
-                    <div className="bg-gray-300 rounded-full h-9 hover:bg-chart-1 flex items-center justify-center w-9">
+                    <div className="bg-accent rounded-full h-8 w-8 hover:bg-accent/70 flex items-center justify-center mx-auto">
                       {openRow === index ? (
-                        <ChevronUp className="mx-auto" />
+                        <ChevronUp className="h-4 w-4" />
                       ) : (
-                        <ChevronDown className="mx-auto" />
+                        <ChevronDown className="h-4 w-4" />
                       )}
                     </div>
                   </TableCell>
-                  <TableCell className="border border-gray-200">
+                  <TableCell className="border border-border">
                     {order.userId}
                   </TableCell>
-                  <TableCell className="border border-gray-200">
+                  <TableCell className="border border-border">
                     {order.pincode}
                   </TableCell>
-                  <TableCell className="border border-gray-200">
+                  <TableCell className="border border-border">
                     {order.name}
                   </TableCell>
-                  <TableCell className="border border-gray-200">
+                  <TableCell className="border border-border">
                     {order.email}
                   </TableCell>
-                  <TableCell className="border border-gray-200">
+                  <TableCell className="border border-border">
                     {order.phone}
                   </TableCell>
-                  <TableCell className="border border-gray-200">
+                  <TableCell className="border border-border">
                     {order.address}
                   </TableCell>
-                  <TableCell className="border border-gray-200">
+                  <TableCell className="border border-border">
                     {order.status}
                   </TableCell>
-                  <TableCell className="border border-gray-200">
+                  <TableCell className="border border-border">
                     {order.date}
                   </TableCell>
-                  <TableCell className="border border-gray-200">
+                  <TableCell className="border border-border font-semibold">
                     {order.total}
                   </TableCell>
                 </TableRow>
 
                 {/* Collapsible Row */}
                 <TableRow>
-                  <TableCell colSpan={10} className="p-0 border-none">
+                  <TableCell colSpan={10} className="p-0 border border-border">
                     <Collapse isOpened={openRow === index}>
-                      <div className="bg-gray-50 p-4">
-                        <h3 className="font-semibold mb-2">Order Details:</h3>
-                        <Table>
+                      <div className="bg-muted/30 p-4">
+                        <h3 className="font-semibold mb-2">Order Details</h3>
+                        <Table className="border border-border">
                           <TableHeader>
                             <TableRow>
-                              <TableHead className="border border-gray-200">
+                              <TableHead className="border border-border">
                                 PRODUCT ID
                               </TableHead>
-                              <TableHead className="border border-gray-200">
+                              <TableHead className="border border-border">
                                 PRODUCT TITLE
                               </TableHead>
-                              <TableHead className="border border-gray-200">
+                              <TableHead className="border border-border">
                                 IMAGE
                               </TableHead>
-                              <TableHead className="border border-gray-200">
+                              <TableHead className="border border-border">
                                 QUANTITY
                               </TableHead>
-                              <TableHead className="border border-gray-200">
+                              <TableHead className="border border-border">
                                 PRICE
                               </TableHead>
-                              <TableHead className="border border-gray-200">
+                              <TableHead className="border border-border">
                                 SUB-TOTAL
                               </TableHead>
                             </TableRow>
                           </TableHeader>
                           <TableBody>
-                            <TableRow>
-                              <TableCell className="border border-gray-200">
-                                xfcsdfgasdfq234FASFE
-                              </TableCell>
-                              <TableCell className="border border-gray-200">
-                                Watch
-                              </TableCell>
-                              <TableCell className="border border-gray-200">
-                                <img src="" alt="" />
-                              </TableCell>
-                              <TableCell className="border border-gray-200">
-                                12
-                              </TableCell>
-                              <TableCell className="border border-gray-200">
-                                120
-                              </TableCell>
-                              <TableCell className="border border-gray-200">
-                                1200
-                              </TableCell>
-                            </TableRow>
+                            {order.details.map((item, i) => (
+                              <TableRow key={i}>
+                                <TableCell className="border border-border">
+                                  {item.productId}
+                                </TableCell>
+                                <TableCell className="border border-border">
+                                  {item.product}
+                                </TableCell>
+                                <TableCell className="border border-border">
+                                  <img
+                                    src={item.image}
+                                    alt={item.product}
+                                    className="h-10 w-10 rounded-md object-cover"
+                                  />
+                                </TableCell>
+                                <TableCell className="border border-border">
+                                  {item.qty}
+                                </TableCell>
+                                <TableCell className="border border-border">
+                                  ${item.price}
+                                </TableCell>
+                                <TableCell className="border border-border font-semibold">
+                                  ${item.subtotal}
+                                </TableCell>
+                              </TableRow>
+                            ))}
                           </TableBody>
                         </Table>
                       </div>

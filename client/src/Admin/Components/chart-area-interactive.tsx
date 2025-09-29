@@ -27,8 +27,9 @@ import {
 } from "@/components/ui/select";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
-export const description = "An interactive area chart";
+export const description = "An interactive area chart with animations";
 
+// ---------------------- SAMPLE DATA ----------------------
 const chartData = [
   { date: "2024-04-01", desktop: 222, mobile: 150 },
   { date: "2024-04-02", desktop: 97, mobile: 180 },
@@ -123,18 +124,10 @@ const chartData = [
   { date: "2024-06-30", desktop: 446, mobile: 400 },
 ];
 
+// ---------------------- CONFIG ----------------------
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  desktop: {
-    label: "Desktop",
-    color: "var(--primary)",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "var(--primary)",
-  },
+  desktop: { label: "Desktop", color: "#4f46e5" }, // indigo
+  mobile: { label: "Mobile", color: "#10b981" }, // emerald
 } satisfies ChartConfig;
 
 export function ChartAreaInteractive() {
@@ -147,94 +140,91 @@ export function ChartAreaInteractive() {
     }
   }, [isMobile]);
 
-  const filteredData = chartData.filter((item) => {
-    const date = new Date(item.date);
+  // Filter data dynamically
+  const filteredData = React.useMemo(() => {
     const referenceDate = new Date("2024-06-30");
     let daysToSubtract = 90;
-    if (timeRange === "30d") {
-      daysToSubtract = 30;
-    } else if (timeRange === "7d") {
-      daysToSubtract = 7;
-    }
+    if (timeRange === "30d") daysToSubtract = 30;
+    if (timeRange === "7d") daysToSubtract = 7;
+
     const startDate = new Date(referenceDate);
     startDate.setDate(startDate.getDate() - daysToSubtract);
-    return date >= startDate;
-  });
+
+    return chartData.filter((item) => new Date(item.date) >= startDate);
+  }, [timeRange]);
 
   return (
-    <Card className="@container/card">
+    <Card className="@container/card shadow-lg">
       <CardHeader>
         <CardTitle>Total Visitors</CardTitle>
         <CardDescription>
           <span className="hidden @[540px]/card:block">
-            Total for the last 3 months
+            Compare Desktop vs Mobile visitors
           </span>
-          <span className="@[540px]/card:hidden">Last 3 months</span>
+          <span className="@[540px]/card:hidden">Last period</span>
         </CardDescription>
         <CardAction>
+          {/* Toggle for Desktop */}
           <ToggleGroup
             type="single"
             value={timeRange}
             onValueChange={setTimeRange}
             variant="outline"
-            className="hidden *:data-[slot=toggle-group-item]:!px-4 @[767px]/card:flex">
-            <ToggleGroupItem value="90d">Last 3 months</ToggleGroupItem>
-            <ToggleGroupItem value="30d">Last 30 days</ToggleGroupItem>
-            <ToggleGroupItem value="7d">Last 7 days</ToggleGroupItem>
+            className="hidden @[767px]/card:flex">
+            <ToggleGroupItem value="90d">3 Months</ToggleGroupItem>
+            <ToggleGroupItem value="30d">30 Days</ToggleGroupItem>
+            <ToggleGroupItem value="7d">7 days</ToggleGroupItem>
           </ToggleGroup>
+
+          {/* Mobile Select */}
           <Select value={timeRange} onValueChange={setTimeRange}>
-            <SelectTrigger
-              className="flex w-40 **:data-[slot=select-value]:block **:data-[slot=select-value]:truncate @[767px]/card:hidden"
-              size="sm"
-              aria-label="Select a value">
-              <SelectValue placeholder="Last 3 months" />
+            <SelectTrigger className="w-32 @[767px]/card:hidden">
+              <SelectValue placeholder="90d" />
             </SelectTrigger>
-            <SelectContent className="rounded-xl">
-              <SelectItem value="90d" className="rounded-lg">
-                Last 3 months
-              </SelectItem>
-              <SelectItem value="30d" className="rounded-lg">
-                Last 30 days
-              </SelectItem>
-              <SelectItem value="7d" className="rounded-lg">
-                Last 7 days
-              </SelectItem>
+            <SelectContent>
+              <SelectItem value="90d">Last 3 months</SelectItem>
+              <SelectItem value="30d">Last 30 days</SelectItem>
+              <SelectItem value="7d">Last 7 days</SelectItem>
             </SelectContent>
           </Select>
         </CardAction>
       </CardHeader>
+
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
         <ChartContainer
           config={chartConfig}
           className="aspect-auto h-[250px] w-full">
-          <AreaChart data={filteredData}>
+          <AreaChart
+            data={filteredData}
+            margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
             <defs>
               <linearGradient id="fillDesktop" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor="var(--color-desktop)"
-                  stopOpacity={1.0}
+                  stopColor={chartConfig.desktop.color}
+                  stopOpacity={0.8}
                 />
                 <stop
                   offset="95%"
-                  stopColor="var(--color-desktop)"
-                  stopOpacity={0.1}
+                  stopColor={chartConfig.desktop.color}
+                  stopOpacity={0}
                 />
               </linearGradient>
               <linearGradient id="fillMobile" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor="var(--color-mobile)"
+                  stopColor={chartConfig.mobile.color}
                   stopOpacity={0.8}
                 />
                 <stop
                   offset="95%"
-                  stopColor="var(--color-mobile)"
-                  stopOpacity={0.1}
+                  stopColor={chartConfig.mobile.color}
+                  stopOpacity={0}
                 />
               </linearGradient>
             </defs>
-            <CartesianGrid vertical={false} />
+
+            <CartesianGrid vertical={false} strokeDasharray="3 3" />
             <XAxis
               dataKey="date"
               tickLine={false}
@@ -249,33 +239,40 @@ export function ChartAreaInteractive() {
                 });
               }}
             />
+
             <ChartTooltip
-              cursor={false}
+              cursor={{ stroke: "#9ca3af", strokeDasharray: "3 3" }}
               content={
                 <ChartTooltipContent
-                  labelFormatter={(value) => {
-                    return new Date(value).toLocaleDateString("en-US", {
+                  labelFormatter={(value) =>
+                    new Date(value).toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",
-                    });
-                  }}
+                    })
+                  }
                   indicator="dot"
                 />
               }
             />
+
+            {/* Animated Areas */}
             <Area
-              dataKey="mobile"
-              type="natural"
-              fill="url(#fillMobile)"
-              stroke="var(--color-mobile)"
-              stackId="a"
+              type="monotone"
+              dataKey="desktop"
+              stroke={chartConfig.desktop.color}
+              fill="url(#fillDesktop)"
+              strokeWidth={2}
+              isAnimationActive
+              animationDuration={800}
             />
             <Area
-              dataKey="desktop"
-              type="natural"
-              fill="url(#fillDesktop)"
-              stroke="var(--color-desktop)"
-              stackId="a"
+              type="monotone"
+              dataKey="mobile"
+              stroke={chartConfig.mobile.color}
+              fill="url(#fillMobile)"
+              strokeWidth={2}
+              isAnimationActive
+              animationDuration={800}
             />
           </AreaChart>
         </ChartContainer>

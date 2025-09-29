@@ -6,6 +6,7 @@ import DashboardWelcome from "../Components/Dashboard/DashboardWelcome";
 import { Gift, PieChart, Warehouse } from "lucide-react";
 import { StatsCard } from "../Components/Dashboard/StatisticsCard";
 import RecentOrders from "../Components/Dashboard/RecentOrders";
+import ProductsList from "../Components/Dashboard/ProductsList";
 const stats = [
   {
     title: "New Orders",
@@ -54,10 +55,10 @@ export default function Dashboard() {
                 </motion.div>
               ))}
             </div>
+            <ProductsList />
             <RecentOrders />
-            <div className="px-4 lg:px-6">
-              <ChartAreaInteractive />
-            </div>
+            <ChartAreaInteractive />
+
             <DataTable data={data} />
           </div>
         </div>

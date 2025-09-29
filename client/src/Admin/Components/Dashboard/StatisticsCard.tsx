@@ -23,7 +23,7 @@ export function StatsCard({
   positive = true,
 }: StatsCardProps) {
   return (
-    <div className="flex flex-col justify-between rounded-xl border bg-white p-5 shadow-sm w-full">
+    <div className="flex flex-col justify-between rounded-xl border-1 border-foreground bg-background p-5 shadow-sm w-full">
       {/* Top */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">

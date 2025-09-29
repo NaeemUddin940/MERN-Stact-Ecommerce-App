@@ -23,11 +23,11 @@ export default function DashboardWelcome() {
 
       <div className="flex flex-col md:flex-row mx-6 items-center justify-between">
         <div className="flex flex-col py-5 items-start text-center md:text-left space-y-4">
-          <h1 className="text-2xl md:text-3xl font-bold">
+          <h1 className="text-2xl text-black md:text-3xl font-bold">
             Good Morning,{" "}
-            <span className="text-primary">MD. NAEEM UDDIN 👋</span>
+            <span>MD. NAEEM UDDIN 👋</span>
           </h1>
-          <p className="text-muted-foreground text-base max-w-md">
+          <p className="text-black text-base max-w-md">
             Here’s what’s happening on your store today. See the statistics at
             once.
           </p>
