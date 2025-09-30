@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { PiRocketLaunchFill } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import { Sidebar } from "../Sidebar/Sidebar";
@@ -14,12 +15,58 @@ import { usenavItemContext } from "@/context/NavItemContext";
 
 export default function Navigation() {
   const { navItem } = usenavItemContext();
+  const [showNav, setShowNav] = useState(true);
+  const [fixedNav, setFixedNav] = useState(false);
+  const [scrollTimer, setScrollTimer] = useState<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScroll = window.scrollY;
+
+      // Scroll down → hide nav
+      if (currentScroll > lastScrollY && currentScroll > 100) {
+        setShowNav(false);
+        setFixedNav(true); // make navbar fixed after scrolling down
+      } else {
+        // Scroll up → show nav
+        setShowNav(true);
+      }
+
+      // Scroll to very top → nav becomes relative again
+      if (currentScroll <= 0) {
+        setFixedNav(false);
+      }
+
+      lastScrollY = currentScroll;
+
+      // Scroll stop timer
+      if (scrollTimer) clearTimeout(scrollTimer);
+
+      const timer = setTimeout(() => {
+        setShowNav(true);
+      }, 2000);
+
+      setScrollTimer(timer);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimer) clearTimeout(scrollTimer);
+    };
+  }, [scrollTimer]);
+
   return (
-    <div className="lg:flex bg-background border-t-2 border-b-2 hidden items-center justify-center shadow shadow-gray-300 py-1">
+    <div
+      className={`lg:flex bg-background border-t-2 border-b-2 hidden items-center justify-center shadow shadow-gray-300 py-1 transition-transform duration-500
+        ${fixedNav ? "fixed top-0 w-full z-50" : "relative"}
+        ${showNav ? "translate-y-0" : "-translate-y-full"}
+      `}>
       <div className="container-sm md:container-md">
         <div className="flex items-center">
-          {/* Shop By Category */}
-
           <Sidebar navItem={navItem} />
           <Separator orientation="vertical" className="mr-5" />
 

@@ -102,13 +102,12 @@ export default function HomeSlider() {
               key={`paragraph-${activeIndex}`}
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}>
-              <h5 className="text-[14px] md:text-[23px] my-2 xl:text-xl font-medium text-black">
-                Starting At Only{" "}
-                <span className="text-[18px] text-chart-1 font-bold">
-                  {slide.price}
-                </span>
-              </h5>
+              transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
+              className="text-[14px] md:text-[23px] my-2 xl:text-xl font-medium text-black">
+              Starting At Only{" "}
+              <span className="text-[18px] text-chart-1 font-bold">
+                {slide.price}
+              </span>
             </motion.p>
             <motion.div
               key={`button-${activeIndex}`}
