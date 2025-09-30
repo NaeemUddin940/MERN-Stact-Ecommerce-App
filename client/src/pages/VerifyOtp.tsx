@@ -7,7 +7,7 @@ import {
 import shield from "/shield.png";
 import { toast } from "react-toastify";
 
-export function VerifyOTP() {
+export default function VerifyOTP() {
   function sendOTP() {
     toast.success("OTP Send");
   }

@@ -18,7 +18,7 @@ import Dashboard from "./Admin/pages/Dashboard/Dashboard";
 import UsersProfile from "./pages/UsersProfile";
 import HomeSlides from "@/Admin/pages/HomeSlides";
 import ProductsList from "./Admin/pages/Products/ProductsList";
-import { VerifyOTP } from "./pages/VerifyOTP";
+import VerifyOTP from "./pages/VerifyOTP";
 import AdminLogin from "./Admin/pages/Auth/AdminLogin";
 import AdminSignUp from "./Admin/pages/Auth/AdminSignUp";
 
