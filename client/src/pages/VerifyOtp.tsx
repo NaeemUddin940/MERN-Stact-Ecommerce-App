@@ -6,15 +6,8 @@ import {
 } from "@/components/ui/input-otp";
 import { toast } from "react-toastify";
 
-export default function VerifyOTP() {
-  function sendOTP() {
-    toast.success("OTP Send");
-  }
-
-  function OTPVerify() {
-    toast.success("OTP Verify Successfull.");
-  }
-
+export default function VerifyOTP({sendOTP, OTPVerify}) {
+ 
   return (
     <div className="flex mt-5 items-center justify-center">
       <div className="bg-background flex items-center justify-center border-1 border-slate-700 p-5 rounded-2xl shadow-shadow shadow-lg">
