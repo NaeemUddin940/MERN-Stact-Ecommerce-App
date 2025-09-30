@@ -1,5 +1,5 @@
-import { ChartAreaInteractive } from "@/Admin/Components/chart-area-interactive";
-import { DataTable } from "@/Admin/Components/data-table";
+import { ChartAreaInteractive } from "@/Admin/Components/ui/chart-area-interactive";
+import { DataTable } from "@/Admin/Components/ui/data-table";
 import data from "../../../app/dashboard/data.json";
 import { motion } from "framer-motion";
 import DashboardWelcome from "../../Components/Dashboard/DashboardWelcome";

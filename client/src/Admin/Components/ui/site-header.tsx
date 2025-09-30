@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { Toggle } from "../../components/ui/Toggle";
+import { Toggle } from "../../../components/ui/Toggle";
 import { NavUser } from "./nav-user";
 import NotificationBell from "./NotificationBell";
 import { useState } from "react";

@@ -30,7 +30,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import AddProduct from "./Products/AddProducts";
+import AddProduct from "../Products/AddProducts";
 
 const items = [
   {
@@ -39,12 +39,12 @@ const items = [
     icon: LayoutDashboard,
   },
   {
-    title: "Home Slides",
+    title: "Home Slidesr",
     url: "/admin/home-slides",
     icon: Image,
     subItems: [
-      { title: "Add Home Banner Slides", url: "/admin/home-slides/add" },
-      { title: "Home Banner List", url: "/admin/home-slides/list" },
+      { title: "Home Sliders List", url: "/admin/home-slider-lists" },
+      { title: "Add Home Sliders", url: "/admin/add-home-sliders" },
     ],
   },
   {

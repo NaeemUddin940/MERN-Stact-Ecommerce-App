@@ -15,12 +15,13 @@ import AdminRoutes from "./Admin/Routes/AdminRoutes";
 import AdminAccount from "./Admin/pages/Auth/AdminAccount";
 import Dashboard from "./Admin/pages/Dashboard/Dashboard";
 import UsersProfile from "./pages/UsersProfile";
-import HomeSlides from "@/Admin/pages/HomeSlides";
+import HomeSlides from "@/Admin/pages/AddHomeSliders/AddHomeSliders";
 import ProductsList from "./Admin/pages/Products/ProductsList";
-
 import AdminLogin from "./Admin/pages/Auth/AdminLogin";
 import AdminSignUp from "./Admin/pages/Auth/AdminSignUp";
 import { VerifyOtp } from "./pages/VerifyOtp";
+import HomeSliderLists from "./Admin/pages/HomeSliderLists/HomeSliderLists";
+import AddHomeSliders from "@/Admin/pages/AddHomeSliders/AddHomeSliders";
 
 function App() {
   return (
@@ -51,10 +52,11 @@ function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="home-slides" element={<HomeSlides />} />
         <Route path="products/product-list" element={<ProductsList />} />
+        <Route path="add-home-sliders" element={<AddHomeSliders />} />
+        <Route path="home-slider-lists" element={<HomeSliderLists />} />
       </Route>
       <Route path="/admin/login" element={<AdminLogin />} />
       <Route path="/admin/sign-up" element={<AdminSignUp />} />
-      {/* <Route path="/admin/verify-otp" element={<AdminVerifyOTP />} /> */}
 
       {/* Fallback Route Setup */}
       <Route path="*" element={<NotFound />} />
