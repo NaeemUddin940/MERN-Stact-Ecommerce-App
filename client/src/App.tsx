@@ -8,7 +8,7 @@ import ProductDetails from "./pages/ProductDetails";
 import SignUp from "./pages/SignUp";
 import Cart from "./pages/Cart";
 import ForgotPassword from "./pages/ForgotPassword";
-import { VerifyOTP } from "@/pages/VerifyOtp";
+
 import CheckoutPage from "./pages/Checkout";
 import PublicLayouts from "./Layouts/PublicLayouts";
 import AdminLayouts from "./Layouts/AdminLayouts";
@@ -20,6 +20,7 @@ import HomeSlides from "@/Admin/pages/HomeSlides";
 import AdminLogin from "./Admin/pages/AdminLogin";
 import AdminSignUp from "./Admin/pages/AdminSignUp";
 import AdminVerifyOTP from "./Admin/pages/VerifyOTP";
+import { VerifyOTP } from "./pages/VerifyOTP";
 
 function App() {
   return (
@@ -53,7 +54,7 @@ function App() {
       </Route>
       <Route path="/admin/login" element={<AdminLogin />} />
       <Route path="/admin/sign-up" element={<AdminSignUp />} />
-      <Route path="/admin/verify-otp" element={<AdminVerifyOTP />} />
+      {/* <Route path="/admin/verify-otp" element={<AdminVerifyOTP />} /> */}
 
       {/* Fallback Route Setup */}
       <Route path="*" element={<NotFound />} />
