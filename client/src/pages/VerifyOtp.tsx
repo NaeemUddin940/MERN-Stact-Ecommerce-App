@@ -4,7 +4,6 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import shield from "/shield.png";
 import { toast } from "react-toastify";
 
 export default function VerifyOTP() {
@@ -20,7 +19,7 @@ export default function VerifyOTP() {
       <div className="bg-background flex items-center justify-center border-1 border-slate-700 p-5 rounded-2xl shadow-shadow shadow-lg">
         <div>
           <div className="flex flex-col space-y-3 mb-3 items-center justify-center">
-            <img className="h-40 w-40" src={shield} alt="" />
+            <img className="h-40 w-40" src="/PollenPop.png" alt="" />
 
             <h3 className="text-xl font-bold">Verify OTP</h3>
             <p>
