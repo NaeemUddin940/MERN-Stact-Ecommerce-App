@@ -18,7 +18,7 @@ import Dashboard from "./Admin/pages/Dashboard/Dashboard";
 import UsersProfile from "./pages/UsersProfile";
 import HomeSlides from "@/Admin/pages/HomeSlides";
 import ProductsList from "./Admin/pages/Products/ProductsList";
-import VerifyOTP from "./pages/VerifyOTP";
+// import VerifyOTP from "./pages/VerifyOTP";
 import AdminLogin from "./Admin/pages/Auth/AdminLogin";
 import AdminSignUp from "./Admin/pages/Auth/AdminSignUp";
 
@@ -32,7 +32,7 @@ function App() {
         <Route path="/user/sign-up" element={<SignUp />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/verify-otp" element={<VerifyOTP />} />
+        {/* <Route path="/verify-otp" element={<VerifyOTP />} /> */}
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/my-account" element={<UsersProfile />} />
         <Route path="/product-details/:id" element={<ProductDetails />} />
