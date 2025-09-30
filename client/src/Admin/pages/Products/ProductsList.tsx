@@ -104,6 +104,17 @@ export default function ProductsList() {
     setProducts([...products, newProduct]);
   };
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredProducts.length / rowsPerPage);
+  const startIndex = (currentPage - 1) * rowsPerPage;
+  const currentRows = filteredProducts.slice(
+    startIndex,
+    startIndex + rowsPerPage
+  );
+
   const handleExportProducts = () => {
     const csvContent =
       "data:text/csv;charset=utf-8," +
@@ -213,6 +224,7 @@ export default function ProductsList() {
 
       {/* Table */}
       <div className="w-full overflow-x-auto rounded-md border bg-background text-foreground shadow-sm">
+        {/* Table */}
         <Table className="min-w-[700px] text-xs sm:text-sm">
           <TableHeader>
             <TableRow className="bg-muted">
@@ -228,7 +240,7 @@ export default function ProductsList() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filteredProducts.map((product) => (
+            {currentRows.map((product) => (
               <TableRow key={product.id} className="hover:bg-muted/50">
                 <TableCell>
                   <img
@@ -258,7 +270,7 @@ export default function ProductsList() {
                     </span>
                   </div>
                 </TableCell>
-                {/* Actions Button */}
+                {/* Actions */}
                 <TableCell className="space-x-2">
                   <Button size="sm" variant="ghost">
                     <Eye className="h-4 w-4" />
@@ -277,6 +289,52 @@ export default function ProductsList() {
             ))}
           </TableBody>
         </Table>
+
+        {/* Pagination + Rows per page */}
+        <div className="flex items-center justify-between px-4 py-3">
+          {/* Rows per page */}
+          <div className="flex items-center space-x-2 text-sm">
+            <span>Rows per page:</span>
+            <Select
+              value={rowsPerPage.toString()}
+              onValueChange={(val) => {
+                setRowsPerPage(Number(val));
+                setCurrentPage(1);
+              }}>
+              <SelectTrigger className="w-[80px] border rounded px-2 py-1 text-sm">
+                <SelectValue placeholder="Rows" />
+              </SelectTrigger>
+              <SelectContent>
+                {[5, 10, 20, 50].map((num) => (
+                  <SelectItem key={num} value={num.toString()}>
+                    {num}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Pagination buttons */}
+          <div className="flex items-center space-x-2">
+            <Button
+              size="sm"
+              variant="outline"
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((p) => p - 1)}>
+              Previous
+            </Button>
+            <span className="text-sm">
+              Page {currentPage} of {totalPages}
+            </span>
+            <Button
+              size="sm"
+              variant="outline"
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage((p) => p + 1)}>
+              Next
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );
