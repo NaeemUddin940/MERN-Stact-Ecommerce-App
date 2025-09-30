@@ -19,7 +19,7 @@ import UsersProfile from "./pages/UsersProfile";
 import HomeSlides from "@/Admin/pages/HomeSlides";
 import AdminLogin from "./Admin/pages/Auth/AdminLogin";
 import AdminSignUp from "./Admin/pages/Auth/AdminSignUp";
-import AdminVerifyOTP from "./Admin/pages/VerifyOTP";
+// import AdminVerifyOTP from "./Admin/pages/VerifyOTP";
 import ProductsList from "./Admin/pages/Products/ProductsList";
 
 function App() {
@@ -54,7 +54,7 @@ function App() {
       </Route>
       <Route path="/admin/login" element={<AdminLogin />} />
       <Route path="/admin/sign-up" element={<AdminSignUp />} />
-      <Route path="/admin/verify-otp" element={<AdminVerifyOTP />} />
+      {/* <Route path="/admin/verify-otp" element={<AdminVerifyOTP />} /> */}
 
       {/* Fallback Route Setup */}
       <Route path="*" element={<NotFound />} />
