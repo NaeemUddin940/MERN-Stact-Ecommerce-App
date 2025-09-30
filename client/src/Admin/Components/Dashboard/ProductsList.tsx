@@ -21,6 +21,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Link } from "react-router-dom";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import AddProduct from "@/Admin/Components/Products/AddProducts";
 
 const products = [
   {
@@ -140,10 +148,18 @@ export default function ProductsList() {
             <Download className="h-4 w-4" />
             Export Products
           </Button>
-          <Button className="flex items-center gap-2">
-            <Plus className="h-4 w-4" />
-            Add Product
-          </Button>
+          <Sheet>
+            <SheetTitle className="sr-only">Add Products Form</SheetTitle>
+            <SheetTrigger asChild>
+              <Button className="flex items-center gap-2">
+                <Plus className="h-4 w-4" />
+                Add Product
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="bottom" className="fixed top-0">
+              <AddProduct />
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
 

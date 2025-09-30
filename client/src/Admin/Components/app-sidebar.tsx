@@ -2,12 +2,9 @@ import * as React from "react";
 import { Collapse } from "react-collapse";
 import {
   ChevronDown,
-  ChevronUp,
-  Home,
   Image,
   LayoutDashboard,
   LogOut,
-  Settings,
   ShoppingBasket,
   Users,
 } from "lucide-react";
@@ -27,6 +24,13 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { Link, NavLink } from "react-router-dom";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import AddProduct from "./Products/AddProducts";
 
 const items = [
   {
@@ -54,7 +58,7 @@ const items = [
     icon: ShoppingBasket,
     subItems: [
       { title: "Product List", url: "/admin/products/product-list" },
-      { title: "Product Upload", url: "/admin/products/product-upload" },
+      { title: "Add Product", url: "/admin/products/add-product" },
     ],
   },
   {
@@ -129,13 +133,29 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                           <Collapse
                             key={subItem.title}
                             isOpened={subMenuIndex === item.title}>
-                            <Link
-                              to={subItem.url}
-                              className="flex items-center gap-2 py-2 hover:text-blue-500">
-                              <span className="text-[14px]">
-                                {subItem.title}
-                              </span>
-                            </Link>
+                            {subItem.title === "Add Product" ? (
+                              <Sheet>
+                                <SheetTitle className="sr-only">
+                                  Add Products Form
+                                </SheetTitle>
+                                <SheetTrigger className="cursor-pointer mb-2 hover:text-blue-500">
+                                  Add Product
+                                </SheetTrigger>
+                                <SheetContent
+                                  side="bottom"
+                                  className="fixed top-0">
+                                  <AddProduct />
+                                </SheetContent>
+                              </Sheet>
+                            ) : (
+                              <Link
+                                to={subItem.url}
+                                className="flex items-center gap-2 py-2 hover:text-blue-500">
+                                <span className="text-[14px]">
+                                  {subItem.title}
+                                </span>
+                              </Link>
+                            )}
                           </Collapse>
                         ))}
                       </div>

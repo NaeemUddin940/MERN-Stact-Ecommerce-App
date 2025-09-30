@@ -8,18 +8,20 @@ import ProductDetails from "./pages/ProductDetails";
 import SignUp from "./pages/SignUp";
 import Cart from "./pages/Cart";
 import ForgotPassword from "./pages/ForgotPassword";
-import { VerifyOTP } from "@/pages/VerifyOtp";
+import { VerifyOTP } from "@/pages/VerifyOTP";
 import CheckoutPage from "./pages/Checkout";
 import PublicLayouts from "./Layouts/PublicLayouts";
 import AdminLayouts from "./Layouts/AdminLayouts";
 import AdminRoutes from "./Admin/Routes/AdminRoutes";
-import AdminAccount from "./Admin/pages/AdminAccount";
-import Dashboard from "./Admin/pages/Dashboard";
+import AdminAccount from "./Admin/pages/Auth/AdminAccount";
+import Dashboard from "./Admin/pages/Dashboard/Dashboard";
 import UsersProfile from "./pages/UsersProfile";
 import HomeSlides from "@/Admin/pages/HomeSlides";
-import AdminLogin from "./Admin/pages/AdminLogin";
-import AdminSignUp from "./Admin/pages/AdminSignUp";
+import AdminLogin from "./Admin/pages/Auth/AdminLogin";
+import AdminSignUp from "./Admin/pages/Auth/AdminSignUp";
 import AdminVerifyOTP from "./Admin/pages/VerifyOTP";
+import ProductsList from "./Admin/pages/Products/ProductsList";
+import AddProductPage from "./Admin/Components/Products/AddProducts";
 
 function App() {
   return (
@@ -46,10 +48,10 @@ function App() {
           </AdminRoutes>
         }>
         <Route index element={<Navigate to="dashboard" replace />} />
-
         <Route path="admin-account" element={<AdminAccount />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="home-slides" element={<HomeSlides />} />
+        <Route path="products/product-list" element={<ProductsList />} />
       </Route>
       <Route path="/admin/login" element={<AdminLogin />} />
       <Route path="/admin/sign-up" element={<AdminSignUp />} />

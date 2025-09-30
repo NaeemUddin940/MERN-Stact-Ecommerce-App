@@ -65,6 +65,10 @@ body {
   background-position: center;
 }
 
+.addP::-webkit-scrollbar {
+  display: none;
+}
+
 /* Default scrollbar width */
 ::-webkit-scrollbar {
   width: 8px; /* vertical scrollbar */
@@ -159,7 +163,7 @@ body {
   --accent-foreground: oklch(0.205 0 0);
   --destructive: #910bff;
   --border: #b7b6b6;
-  --input: #e5e5e5;
+  --input: #696969;
   --ring: #dedcdc;
   --chart-1: #f75858;
   --chart-2: oklch(0.6 0.118 184.704);
@@ -194,8 +198,8 @@ body {
   --accent: oklch(35.618% 0.00004 271.152);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: #0e1317;
-  --input: #252525;
+  --border: #939394;
+  --input: #605f5f;
   --ring: #363636;
   --chart-1: #a035f8;
   --chart-2: oklch(0.696 0.17 162.48);
