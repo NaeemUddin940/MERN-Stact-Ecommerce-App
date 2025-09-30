@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom";
 import MyLists from "@/components/UserProfileDetails/MyLists";
 import MyOrders from "@/components/UserProfileDetails/MyOrders";
 import MyProfile from "@/components/UserProfileDetails/MyProfile";
-export default function MyAccount() {
+
+
+export default function UsersProfile() {
   const [activeTab, setActiveTab] = useState("myProfile");
 
   const history = useNavigate();

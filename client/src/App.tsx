@@ -1,26 +1,25 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
-// import MainHeader from "./components/Header/MainHeader";
-// import Navigation from "./components/Header/Navigation";
-// import Footer from "./components/Footer/Footer";
-// import TopNavbar from "./components/Header/TopNavbar";
-// import ServicesSection from "./components/Home/ServicesSection";
 import Shop from "./pages/Shop";
 import Login from "./pages/Login";
 import ProductDetails from "./pages/ProductDetails";
 import SignUp from "./pages/SignUp";
 import Cart from "./pages/Cart";
 import ForgotPassword from "./pages/ForgotPassword";
-import { VerifyOTP } from "./pages/VerifyOtp";
+import { VerifyOTP } from "@/pages/VerifyOtp";
 import CheckoutPage from "./pages/Checkout";
-import MyAccount from "./pages/MyAccount";
 import PublicLayouts from "./Layouts/PublicLayouts";
 import AdminLayouts from "./Layouts/AdminLayouts";
 import AdminRoutes from "./Admin/Routes/AdminRoutes";
 import AdminAccount from "./Admin/pages/AdminAccount";
 import Dashboard from "./Admin/pages/Dashboard";
+import UsersProfile from "./pages/UsersProfile";
+import HomeSlides from "@/Admin/pages/HomeSlides";
+import AdminLogin from "./Admin/pages/AdminLogin";
+import AdminSignUp from "./Admin/pages/AdminSignUp";
+import AdminVerifyOTP from "./Admin/pages/VerifyOTP";
 
 function App() {
   return (
@@ -34,7 +33,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/verify-otp" element={<VerifyOTP />} />
         <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/my-account" element={<MyAccount />} />
+        <Route path="/my-account" element={<UsersProfile />} />
         <Route path="/product-details/:id" element={<ProductDetails />} />
       </Route>
 
@@ -46,9 +45,15 @@ function App() {
             <AdminLayouts />
           </AdminRoutes>
         }>
+        <Route index element={<Navigate to="dashboard" replace />} />
+
         <Route path="admin-account" element={<AdminAccount />} />
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="home-slides" element={<HomeSlides />} />
       </Route>
+      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route path="/admin/sign-up" element={<AdminSignUp />} />
+      <Route path="/admin/verify-otp" element={<AdminVerifyOTP />} />
 
       {/* Fallback Route Setup */}
       <Route path="*" element={<NotFound />} />

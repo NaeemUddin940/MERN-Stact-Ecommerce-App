@@ -26,61 +26,56 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { Link } from "react-router-dom";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { Separator } from "@/components/ui/separator";
+import { Link, NavLink } from "react-router-dom";
+
 const items = [
   {
     title: "Dashboard",
-    url: "dashboard",
+    url: "/admin/dashboard",
     icon: LayoutDashboard,
   },
   {
     title: "Home Slides",
-    url: "#",
+    url: "/admin/home-slides",
     icon: Image,
     subItems: [
-      { title: "Add Home Banner Slides", url: "#", icon: Home },
-      { title: "Home Banner List", url: "#", icon: Home },
+      { title: "Add Home Banner Slides", url: "/admin/home-slides/add" },
+      { title: "Home Banner List", url: "/admin/home-slides/list" },
     ],
   },
   {
     title: "Users",
-    url: "#",
+    url: "/admin/users",
     icon: Users,
   },
   {
     title: "Products",
-    url: "#",
+    url: "/admin/products",
     icon: ShoppingBasket,
     subItems: [
-      { title: "Product List", url: "#" },
-      { title: "Product Upload", url: "#" },
+      { title: "Product List", url: "/admin/products/product-list" },
+      { title: "Product Upload", url: "/admin/products/product-upload" },
     ],
   },
   {
     title: "Category",
-    url: "#",
+    url: "/admin/category",
     icon: BiCategory,
     subItems: [
-      { title: "Category List", url: "#" },
-      { title: "Add a Category", url: "#" },
-      { title: "Sub Category List", url: "#" },
-      { title: "Add a Sub Category", url: "#" },
+      { title: "Category List", url: "/admin/category/category-list" },
+      { title: "Add a Category", url: "/admin/category/add-category" },
+      { title: "Sub Category List", url: "/admin/category/sub-category-list" },
+      { title: "Add a Sub Category", url: "/admin/category/add-sub-category" },
     ],
   },
   {
     title: "Orders",
-    url: "#",
+    url: "/admin/orders",
     icon: IoBagCheckOutline,
   },
   {
     title: "Logout",
-    url: "#",
+    url: "/log-out",
     icon: LogOut,
   },
 ];
@@ -147,12 +142,21 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     </div>
                   ) : (
                     <SidebarMenuButton asChild className="hover:bg-chart-1">
-                      <Link to={item.url}>
+                      <NavLink
+                        to={item.url}
+                        end
+                        className={({ isActive }) =>
+                          `text-sm px-2 py-1 rounded-md transition-colors ${
+                            isActive
+                              ? "text-violet-600 font-semibold"
+                              : "hover:text-blue-500"
+                          }`
+                        }>
                         <span>
                           <item.icon size={22} />
                         </span>
                         <span className="text-[16px]">{item.title}</span>
-                      </Link>
+                      </NavLink>
                     </SidebarMenuButton>
                   )}
                 </SidebarMenuItem>

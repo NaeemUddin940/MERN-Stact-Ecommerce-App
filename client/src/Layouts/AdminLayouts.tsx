@@ -1,7 +1,7 @@
 import { AppSidebar } from "@/Admin/Components/app-sidebar";
 import { SiteHeader } from "@/Admin/Components/site-header";
 import { Sidebar, SidebarProvider } from "@/components/ui/sidebar";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 export default function AdminLayouts() {
   return (
