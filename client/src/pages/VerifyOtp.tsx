@@ -4,19 +4,23 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import shield from "/shield.png";
+import { toast } from "react-toastify";
 
-interface VerifyOTPProps {
-  sendOTP: () => void;
-  OTPVerify: () => void;
-}
+export function VerifyOtp() {
+  function sendOTP() {
+    toast.success("OTP Send");
+  }
 
-export default function VerifyOTP({ sendOTP, OTPVerify }: VerifyOTPProps) {
+  function OTPVerify() {
+    toast.success("OTP Verify Successfull.");
+  }
   return (
     <div className="flex mt-5 items-center justify-center">
       <div className="bg-background flex items-center justify-center border-1 border-slate-700 p-5 rounded-2xl shadow-shadow shadow-lg">
         <div>
           <div className="flex flex-col space-y-3 mb-3 items-center justify-center">
-            <img className="h-40 w-40" src="/shield.png" alt="Shield" />
+            <img className="h-40 w-40" src={shield} alt="" />
 
             <h3 className="text-xl font-bold">Verify OTP</h3>
             <p>

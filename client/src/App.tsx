@@ -7,7 +7,6 @@ import Login from "./pages/Login";
 import ProductDetails from "./pages/ProductDetails";
 import SignUp from "./pages/SignUp";
 import Cart from "./pages/Cart";
-import VerifyOTP from "./pages/VerifyOTP";
 import ForgotPassword from "./pages/ForgotPassword";
 import CheckoutPage from "./pages/Checkout";
 import PublicLayouts from "./Layouts/PublicLayouts";
@@ -18,19 +17,12 @@ import Dashboard from "./Admin/pages/Dashboard/Dashboard";
 import UsersProfile from "./pages/UsersProfile";
 import HomeSlides from "@/Admin/pages/HomeSlides";
 import ProductsList from "./Admin/pages/Products/ProductsList";
+
 import AdminLogin from "./Admin/pages/Auth/AdminLogin";
 import AdminSignUp from "./Admin/pages/Auth/AdminSignUp";
-import { toast } from "react-toastify";
+import { VerifyOtp } from "./pages/VerifyOtp";
 
 function App() {
-  function sendOTP() {
-    toast.success("OTP Send");
-  }
-
-  function OTPVerify() {
-    toast.success("OTP Verify Successfull.");
-  }
-
   return (
     <Routes>
       <Route element={<PublicLayouts />}>
@@ -40,10 +32,7 @@ function App() {
         <Route path="/user/sign-up" element={<SignUp />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route
-          path="/verify-otp"
-          element={<VerifyOTP sendOTP={sendOTP} OTPVerify={OTPVerify} />}
-        />
+        <Route path="/verify-otp" element={<VerifyOtp />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/my-account" element={<UsersProfile />} />
         <Route path="/product-details/:id" element={<ProductDetails />} />
