@@ -1,7 +1,14 @@
 // components/DashboardWelcome.tsx
 import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { motion } from "framer-motion";
-import { ShoppingBag } from "lucide-react";
+import { Plus } from "lucide-react";
+import AddProduct from "../Products/AddProducts";
 
 export default function DashboardWelcome() {
   return (
@@ -24,19 +31,24 @@ export default function DashboardWelcome() {
       <div className="flex flex-col md:flex-row mx-6 items-center justify-between">
         <div className="flex flex-col py-5 items-start text-center md:text-left space-y-4">
           <h1 className="text-2xl text-black md:text-3xl font-bold">
-            Good Morning,{" "}
-            <span>MD. NAEEM UDDIN 👋</span>
+            Good Morning, <span>MD. NAEEM UDDIN 👋</span>
           </h1>
           <p className="text-black text-base max-w-md">
             Here’s what’s happening on your store today. See the statistics at
             once.
           </p>
-          <Button
-            variant="modern"
-            className="flex rounded-sm items-center mt-5 gap-2">
-            <ShoppingBag className="w-5 h-5" />
-            Add Product
-          </Button>
+          <Sheet>
+            <SheetTitle className="sr-only">Add Products Form</SheetTitle>
+            <SheetTrigger asChild>
+              <Button className="flex items-center gap-2">
+                <Plus className="h-4 w-4" />
+                Add Product
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="bottom" className="fixed top-0">
+              <AddProduct />
+            </SheetContent>
+          </Sheet>
         </div>
 
         {/* Right Section (Image/Illustration) */}

@@ -1,12 +1,12 @@
 import { ChartAreaInteractive } from "@/Admin/Components/chart-area-interactive";
 import { DataTable } from "@/Admin/Components/data-table";
-import data from "../../app/dashboard/data.json";
+import data from "../../../app/dashboard/data.json";
 import { motion } from "framer-motion";
-import DashboardWelcome from "../Components/Dashboard/DashboardWelcome";
+import DashboardWelcome from "../../Components/Dashboard/DashboardWelcome";
 import { Gift, PieChart, Warehouse } from "lucide-react";
-import { StatsCard } from "../Components/Dashboard/StatisticsCard";
-import RecentOrders from "../Components/Dashboard/RecentOrders";
-import ProductsList from "../Components/Dashboard/ProductsList";
+import { StatsCard } from "../../Components/Dashboard/StatisticsCard";
+import RecentOrders from "../../Components/Dashboard/RecentOrders";
+import ProductsList from "../../Components/Dashboard/ProductsList";
 const stats = [
   {
     title: "New Orders",
@@ -58,7 +58,6 @@ export default function Dashboard() {
             <ProductsList />
             <RecentOrders />
             <ChartAreaInteractive />
-
             <DataTable data={data} />
           </div>
         </div>
