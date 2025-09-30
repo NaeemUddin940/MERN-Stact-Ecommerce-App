@@ -8,7 +8,7 @@ import ProductDetails from "./pages/ProductDetails";
 import SignUp from "./pages/SignUp";
 import Cart from "./pages/Cart";
 import ForgotPassword from "./pages/ForgotPassword";
-import { VerifyOTP } from "@/pages/VerifyOTP";
+import { VerifyOTP } from "../src/pages/VerifyOTP";
 import CheckoutPage from "./pages/Checkout";
 import PublicLayouts from "./Layouts/PublicLayouts";
 import AdminLayouts from "./Layouts/AdminLayouts";
@@ -21,7 +21,6 @@ import AdminLogin from "./Admin/pages/Auth/AdminLogin";
 import AdminSignUp from "./Admin/pages/Auth/AdminSignUp";
 import AdminVerifyOTP from "./Admin/pages/VerifyOTP";
 import ProductsList from "./Admin/pages/Products/ProductsList";
-import AddProductPage from "./Admin/Components/Products/AddProducts";
 
 function App() {
   return (

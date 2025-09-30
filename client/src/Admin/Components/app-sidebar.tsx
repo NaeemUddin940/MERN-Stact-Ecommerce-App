@@ -91,13 +91,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <SidebarMenu>
-          <SidebarMenuButton
-            tooltip="Visit Website"
-            className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 h-10 duration-200 ease-linear flex items-center ">
-            <Link to="/" className="flex items-center gap-5">
+          <Link to="/" className="flex items-center gap-5 cursor-pointer">
+            <SidebarMenuButton
+              tooltip="Visit Website"
+              className="bg-primary text-primary-foreground cursor-pointer hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 h-10 duration-200 ease-linear flex items-center ">
               <img src={logo} className="w-5" alt="PollenPop" /> Visite Website
-            </Link>
-          </SidebarMenuButton>
+            </SidebarMenuButton>
+          </Link>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
