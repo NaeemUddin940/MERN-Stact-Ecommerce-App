@@ -290,12 +290,6 @@ export default function AddProduct() {
               precision={0.5}
             />
           </Stack>
-          {/* <Input
-            type="number"
-            value={rating}
-            onChange={(e) => setRating(Number(e.target.value))}
-            placeholder="Rating (1-5)"
-          /> */}
         </div>
       </div>
 
