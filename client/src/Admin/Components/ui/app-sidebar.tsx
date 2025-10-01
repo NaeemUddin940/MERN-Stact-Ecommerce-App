@@ -66,7 +66,7 @@ const items = [
     url: "/admin/category",
     icon: BiCategory,
     subItems: [
-      { title: "Category Lists", url: "/admin/category/category-lists" },
+      { title: "Category Lists", url: "/admin/category/all-category-lists" },
       { title: "Add Category", url: "/admin/category/add-category" },
       { title: "Add Sub Category", url: "/admin/category/add-sub-category" },
       {

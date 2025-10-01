@@ -25,7 +25,7 @@ import AddHomeSliders from "@/Admin/pages/AddHomeSliders/AddHomeSliders";
 import AddCategory from "./Admin/pages/AddCategory/AddCategory";
 import AddSubCategory from "./Admin/pages/AddSubCategory/AddSubCategory";
 import AddChildCategory from "./Admin/pages/AddChildCategory/AddChildCategory";
-import CategoryList from "./Admin/pages/CategoryList/CategoryList";
+import CategoryList from "./Admin/pages/AllCategoryList/AllCategoryList";
 
 function App() {
   return (
@@ -55,7 +55,7 @@ function App() {
         <Route path="admin-account" element={<AdminAccount />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="home-slides" element={<HomeSlides />} />
-        <Route path="category/category-lists" element={<CategoryList />} />
+        <Route path="category/all-category-lists" element={<CategoryList />} />
         <Route path="category/add-category" element={<AddCategory />} />
         <Route path="category/add-sub-category" element={<AddSubCategory />} />
         <Route

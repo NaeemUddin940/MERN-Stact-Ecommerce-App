@@ -161,7 +161,7 @@ body {
   --muted-foreground: #737373;
   --accent: #eeeeee;
   --accent-foreground: oklch(0.205 0 0);
-  --destructive: #910bff;
+  --destructive: #f83636;
   --border: #b7b6b6;
   --input: #696969;
   --ring: #dedcdc;
@@ -197,7 +197,7 @@ body {
   --muted-foreground: #d8d8d8;
   --accent: oklch(35.618% 0.00004 271.152);
   --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
+  --destructive: oklch(66.198% 0.2246 25.107);
   --border: #939394;
   --input: #605f5f;
   --ring: #363636;

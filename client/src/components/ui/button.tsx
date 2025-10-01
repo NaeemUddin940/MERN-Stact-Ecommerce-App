@@ -14,7 +14,7 @@ const buttonVariants = cva(
         auth: "bg-gray-200 dark:text-black text-foreground rounded-sm active:bg-destructive py-2 cursor-pointer",
         modern: "bg-chart-1 text-black active:bg-destructive hover:bg-chart-4",
         destructive:
-          "bg-destructive text-white hover:bg-destructive/90 cursor-pointer focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+          "bg-destructive text-white hover:bg-destructive/80 cursor-pointer focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 ",
         outline:
           "border bg-background shadow-xs hover:bg-accent cursor-pointer hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
         secondary:

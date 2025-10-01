@@ -13,7 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Pen, Trash2, Plus, Image } from "lucide-react";
+import { Pen, Trash2, Plus, Image, Upload, UploadCloud } from "lucide-react";
 
 interface Category {
   id: number;
@@ -159,7 +159,7 @@ export default function AddCategory() {
           </h5>
           {/* Add / Update Button */}
           <Button onClick={handleSubmit} className="w-full">
-            <Plus className="mr-2 h-5 w-5" />
+            <UploadCloud className="mr-2 h-5 w-5" />
             {editId ? "Update Category" : "Add Category"}
           </Button>
         </div>
@@ -172,10 +172,18 @@ export default function AddCategory() {
         <Table className="border border-collapse w-full">
           <TableHeader className="bg-muted/50">
             <TableRow>
-              <TableHead className="text-center border">Image</TableHead>
-              <TableHead className="text-center border">Name</TableHead>
-              <TableHead className="text-center border">Color</TableHead>
-              <TableHead className="text-center border">Action</TableHead>
+              <TableHead className="text-center border">
+                Category Image
+              </TableHead>
+              <TableHead className="text-center border">
+                Category Name
+              </TableHead>
+              <TableHead className="text-center border">
+                Category Color
+              </TableHead>
+              <TableHead className="text-center border w-[200px]">
+                Action
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -192,7 +200,7 @@ export default function AddCategory() {
                     <img
                       src={cat.image}
                       alt={cat.name}
-                      className="h-16 w-24 object-cover rounded-md border"
+                      className="h-[100px] w-[100px] object-cover mx-auto rounded-md"
                     />
                   </TableCell>
                   <TableCell className="border text-center">
@@ -202,17 +210,20 @@ export default function AddCategory() {
                     {cat.color}
                   </TableCell>
                   <TableCell className="border text-center">
-                    <div className="flex items-center justify-center gap-3">
-                      <button
+                    <div className="flex items-center w-full justify-center gap-3">
+                      <Button
+                        variant="outline"
                         onClick={() => handleEdit(cat)}
-                        className="p-2 rounded-md hover:bg-accent">
-                        <Pen size={18} className="text-blue-600" />
-                      </button>
-                      <button
+                        className="p-2 rounded-md ">
+                        <Pen size={18} />
+                        Edit
+                      </Button>
+                      <Button
+                        variant="destructive"
                         onClick={() => handleDelete(cat.id)}
-                        className="p-2 rounded-md hover:bg-accent">
-                        <Trash2 size={18} className="text-red-600" />
-                      </button>
+                        className="p-2 rounded-md">
+                        <Trash2 size={18} /> Delete
+                      </Button>
                     </div>
                   </TableCell>
                 </TableRow>
