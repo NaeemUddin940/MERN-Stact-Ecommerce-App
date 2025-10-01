@@ -87,7 +87,7 @@ export default function RecentOrders() {
 
         {/* Outer wrapper for horizontal scroll */}
         <div className="w-full overflow-x-auto">
-          <Table className="min-w-[1000px] border-collapse border border-border">
+          <Table className="min-w-[1000px] border-collapse border border-border mb-3">
             {/* Table Header */}
             <TableHeader className="bg-muted sticky top-0 z-10">
               <TableRow>

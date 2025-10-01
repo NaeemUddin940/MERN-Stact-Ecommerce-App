@@ -85,7 +85,7 @@ export default function RecentOrders() {
     <div className="w-full border-2 rounded-sm shadow-lg border-accent p-5">
       <h2 className="text-2xl font-bold mb-4">Recent Orders</h2>
       <div className="w-full overflow-x-auto border border-border rounded-md shadow-sm">
-        <Table className="min-w-[1000px] border-collapse border border-border">
+        <Table className="min-w-[1000px] border-collapse border border-border mb-3">
           {/* Sticky Header */}
           <TableHeader className="bg-muted sticky top-0 z-10">
             <TableRow className="border border-border">
