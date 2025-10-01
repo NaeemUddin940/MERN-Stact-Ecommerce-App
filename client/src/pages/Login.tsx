@@ -24,16 +24,33 @@ export default function Login() {
   }
 
   return (
-    <div className="flex items-center justify-center my-10">
-      <Card className="w-full max-w-sm border-slate-300 shadow-shadow border-2 shadow-md">
+    <div
+      style={{
+        backgroundImage: `
+        linear-gradient(180deg, 
+          rgba(245,245,220,1) 0%, 
+          rgba(255,223,186,0.8) 25%, 
+          rgba(255,182,193,0.6) 50%, 
+          rgba(147,112,219,0.7) 75%, 
+          rgba(72,61,139,0.9) 100%
+        ),
+        radial-gradient(circle at 30% 20%, rgba(255,255,224,0.4) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(72,61,139,0.6) 0%, transparent 70%),
+        radial-gradient(circle at 50% 60%, rgba(147,112,219,0.3) 0%, transparent 60%)
+      `,
+      }}
+      className="flex items-center  justify-center h-screen">
+      <Card className="w-full max-w-sm text-black border-slate-300 shadow-shadow border-2 shadow-md">
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-lg">Login to your account</CardTitle>
+          <CardDescription className="text-black">
             Enter your email below to login to your Account
           </CardDescription>
           <CardAction>
             <Button variant="link">
-              <Link to="/auth/sign-up">Sign Up</Link>
+              <Link to="/user/sign-up" className="text-black">
+                Sign Up
+              </Link>
             </Button>
           </CardAction>
         </CardHeader>
@@ -70,7 +87,7 @@ export default function Login() {
         </CardContent>
 
         <CardFooter className="flex-col gap-2 w-full">
-          <Button type="submit" variant="modern" className="w-full">
+          <Button type="submit" variant="modern" className="w-full rounded-md">
             Login
           </Button>
           <GoogleLoginButton />

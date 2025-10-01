@@ -15,16 +15,33 @@ import { Link } from "react-router-dom";
 
 export default function SignUp() {
   return (
-    <div className="flex  items-center justify-center my-10">
-      <Card className="w-full max-w-sm border-slate-300 shadow-shadow border-2 shadow-md">
+    <div
+      style={{
+        backgroundImage: `
+        linear-gradient(180deg, 
+          rgba(245,245,220,1) 0%, 
+          rgba(255,223,186,0.8) 25%, 
+          rgba(255,182,193,0.6) 50%, 
+          rgba(147,112,219,0.7) 75%, 
+          rgba(72,61,139,0.9) 100%
+        ),
+        radial-gradient(circle at 30% 20%, rgba(255,255,224,0.4) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(72,61,139,0.6) 0%, transparent 70%),
+        radial-gradient(circle at 50% 60%, rgba(147,112,219,0.3) 0%, transparent 60%)
+      `,
+      }}
+      className="flex  items-center justify-center h-screen ">
+      <Card className="w-full max-w-sm border-slate-300 text-black shadow-shadow border-2 shadow-md">
         <CardHeader>
           <CardTitle>Register to your account</CardTitle>
-          <CardDescription>
+          <CardDescription className="text-black">
             Enter your Name, email, Password below to Create your account
           </CardDescription>
           <CardAction>
             <Button variant="link">
-              <Link to="/auth/login">Login</Link>
+              <Link to="/user/login" className="text-black">
+                Login
+              </Link>
             </Button>
           </CardAction>
         </CardHeader>
@@ -59,7 +76,7 @@ export default function SignUp() {
           </form>
         </CardContent>
         <CardFooter className="flex-col gap-2">
-          <Button type="submit" variant="auth" className="w-full">
+          <Button type="submit" variant="modern" className="w-full rounded-md">
             Sign Up
           </Button>
           <GoogleLoginButton />

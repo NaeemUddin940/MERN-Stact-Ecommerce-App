@@ -35,15 +35,15 @@ function App() {
       <Route element={<PublicLayouts />}>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/user/login" element={<Login />} />
-        <Route path="/user/sign-up" element={<SignUp />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/verify-otp" element={<VerifyOtp />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/my-account" element={<UsersProfile />} />
         <Route path="/product-details/:id" element={<ProductDetails />} />
       </Route>
+      <Route path="/verify-otp" element={<VerifyOtp />} />
+      <Route path="/user/login" element={<Login />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/user/sign-up" element={<SignUp />} />
 
       {/* Admin ROutes Define Here */}
       <Route
