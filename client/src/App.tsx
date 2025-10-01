@@ -22,6 +22,10 @@ import AdminSignUp from "./Admin/pages/Auth/AdminSignUp";
 import { VerifyOtp } from "./pages/VerifyOtp";
 import HomeSliderLists from "./Admin/pages/HomeSliderLists/HomeSliderLists";
 import AddHomeSliders from "@/Admin/pages/AddHomeSliders/AddHomeSliders";
+import AddCategory from "./Admin/pages/AddCategory/AddCategory";
+import AddSubCategory from "./Admin/pages/AddSubCategory/AddSubCategory";
+import AddChildCategory from "./Admin/pages/AddChildCategory/AddChildCategory";
+import CategoryList from "./Admin/pages/CategoryList/CategoryList";
 
 function App() {
   return (
@@ -51,6 +55,13 @@ function App() {
         <Route path="admin-account" element={<AdminAccount />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="home-slides" element={<HomeSlides />} />
+        <Route path="category/category-lists" element={<CategoryList />} />
+        <Route path="category/add-category" element={<AddCategory />} />
+        <Route path="category/add-sub-category" element={<AddSubCategory />} />
+        <Route
+          path="category/add-child-category"
+          element={<AddChildCategory />}
+        />
         <Route path="products/product-list" element={<ProductsList />} />
         <Route path="add-home-sliders" element={<AddHomeSliders />} />
         <Route path="home-slider-lists" element={<HomeSliderLists />} />

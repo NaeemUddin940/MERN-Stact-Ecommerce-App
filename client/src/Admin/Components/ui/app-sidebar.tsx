@@ -66,10 +66,13 @@ const items = [
     url: "/admin/category",
     icon: BiCategory,
     subItems: [
-      { title: "Category List", url: "/admin/category/category-list" },
-      { title: "Add a Category", url: "/admin/category/add-category" },
-      { title: "Sub Category List", url: "/admin/category/sub-category-list" },
-      { title: "Add a Sub Category", url: "/admin/category/add-sub-category" },
+      { title: "Category Lists", url: "/admin/category/category-lists" },
+      { title: "Add Category", url: "/admin/category/add-category" },
+      { title: "Add Sub Category", url: "/admin/category/add-sub-category" },
+      {
+        title: "Add Child Category",
+        url: "/admin/category/add-child-category",
+      },
     ],
   },
   {

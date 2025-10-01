@@ -82,13 +82,15 @@ export default function AddHomeSliders() {
           </div>
         </div>
         <div className="col-span-8 row-span-6 col-start-1 row-start-3 bg-blue-100">
-          {/* Image upload */}
+          {/* Home Sliders upload */}
           <div className="flex items-center gap-2 h-[440px]">
             <div className="p-3 rounded-md overflow-hidden border border-dashed border-input h-full w-full bg-card cursor-pointer hover:bg-accent flex items-center justify-center flex-col relative">
               {images.length === 0 ? (
                 <>
                   <Image size={70} />
-                  <h4 className="text-5xl pointer-events-none">Image Upload</h4>
+                  <h4 className="text-5xl pointer-events-none mt-8">
+                    Home Sliders Upload
+                  </h4>
                 </>
               ) : (
                 <div className="flex flex-wrap gap-2">
@@ -113,6 +115,7 @@ export default function AddHomeSliders() {
           </div>
         </div>
 
+        {/* Small Banner Info 01 */}
         <div className="col-span-4 col-start-9 row-start-1">
           <div className="flex items-center justify-between gap-3 mb-2">
             <Label htmlFor="title">Title</Label>
@@ -130,7 +133,9 @@ export default function AddHomeSliders() {
               {images.length === 0 ? (
                 <>
                   <Image size={70} />
-                  <h4 className="text-5xl pointer-events-none">Image Upload</h4>
+                  <h4 className="text-2xl mt-5 pointer-events-none">
+                    First Small Banner Upload
+                  </h4>
                 </>
               ) : (
                 <div className="flex flex-wrap gap-2">
@@ -154,6 +159,8 @@ export default function AddHomeSliders() {
             </div>
           </div>
         </div>
+
+        {/* Small Banner Info 02 */}
         <div className="col-span-4 col-start-9 row-start-5">
           <div className="flex items-center justify-between gap-3 mb-2">
             <Label htmlFor="title">Title</Label>
@@ -170,7 +177,9 @@ export default function AddHomeSliders() {
               {images.length === 0 ? (
                 <>
                   <Image size={70} />
-                  <h4 className="text-5xl pointer-events-none">Image Upload</h4>
+                  <h4 className="text-2xl mt-5 pointer-events-none">
+                    Second Small Banner Upload
+                  </h4>
                 </>
               ) : (
                 <div className="flex flex-wrap gap-2">
@@ -197,8 +206,8 @@ export default function AddHomeSliders() {
       </div>
 
       <Separator />
-      {/* Image Preview Section */}
 
+      {/* Image Preview Section */}
       <div className="grid grid-cols-12 grid-rows-3 gap-4">
         <div className="col-span-8 row-span-3">
           <Table className="border border-collapse w-full">
@@ -239,6 +248,7 @@ export default function AddHomeSliders() {
             </TableBody>
           </Table>
         </div>
+
         <div className="col-span-4 row-span-3 col-start-9">
           <Table className="border border-collapse w-full">
             {/* Table Header */}
