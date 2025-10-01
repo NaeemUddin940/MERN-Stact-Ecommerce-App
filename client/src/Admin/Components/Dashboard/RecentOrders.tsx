@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Table,
   TableBody,
@@ -9,7 +10,6 @@ import {
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import { Collapse } from "react-collapse";
-import React from "react";
 
 export default function RecentOrders() {
   const [openRow, setOpenRow] = useState<number | null>(null);

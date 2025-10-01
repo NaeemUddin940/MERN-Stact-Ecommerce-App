@@ -27,6 +27,7 @@ import AddSubCategory from "./Admin/pages/AddSubCategory/AddSubCategory";
 import AddChildCategory from "./Admin/pages/AddChildCategory/AddChildCategory";
 import CategoryList from "./Admin/pages/AllCategoryList/AllCategoryList";
 import Users from "./Admin/pages/Users/Users";
+import Orders from "./Admin/pages/Orders/Orders";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
         <Route path="category/all-category-lists" element={<CategoryList />} />
         <Route path="category/add-category" element={<AddCategory />} />
         <Route path="category/add-sub-category" element={<AddSubCategory />} />
+        <Route path="orders" element={<Orders />} />
         <Route
           path="category/add-child-category"
           element={<AddChildCategory />}
