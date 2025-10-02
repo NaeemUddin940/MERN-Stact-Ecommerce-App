@@ -5,6 +5,7 @@ import {
   registerUserController,
   verifyEmailController,
 } from "../controllers/user.controller.js";
+import { authenticated } from "../middlewares/authenticated.js";
 
 const userRoute = Router();
 
@@ -14,6 +15,10 @@ userRoute.post("/verifyEmail", verifyEmailController);
 
 userRoute.post("/login", loginUserController);
 
-userRoute.get("/logout", logoutUserController);
+userRoute.get("/profile", authenticated, (req, res) => {
+  res.send("Hello");
+});
+
+userRoute.get("/logout", authenticated, logoutUserController);
 
 export default userRoute;
