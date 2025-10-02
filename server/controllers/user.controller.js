@@ -352,6 +352,11 @@ export async function userAvatarRemoveController(req, res) {
       await cloudinary.uploader.destroy(imageName);
     }
 
+    // Delete Image from Databse
+    await userModel.findByIdAndUpdate(req.user.id, {
+      avatar: "",
+    });
+
     // And Finally Trow the Success Message
     return res.status(200).json({
       message: "Image Successfylly Deleted",
