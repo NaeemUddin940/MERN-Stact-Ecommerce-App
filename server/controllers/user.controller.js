@@ -165,10 +165,11 @@ export async function loginUserController(req, res) {
       });
     }
 
-    // If user status is not active then contact us toa ctive your account
-    if (user.status !== "Active") {
+    // If user email is not verified then he/she cannot login
+    if (user.verify_email !== true) {
       return res.status(400).json({
-        message: "Please Contact to Our Contact Team.",
+        message:
+          "Your Email is not verify yet. Please verify it and then try to login.",
         error: true,
         success: false,
       });
