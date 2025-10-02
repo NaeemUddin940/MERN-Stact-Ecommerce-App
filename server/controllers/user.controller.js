@@ -371,3 +371,82 @@ export async function userAvatarRemoveController(req, res) {
     });
   }
 }
+
+// This is user Details Update Controller
+export async function userDetailsUpdateControlers(req, res) {
+  try {
+    // Get authenticated user id
+    const userId = req.user.id;
+
+    // Get user updated input from frontend body
+    const { name, email, password, mobile } = req.body;
+
+    // user is exist or not find it by id
+    const existUser = await userModel.findById(userId);
+
+    // If user not exist then trow this error message
+    if (!existUser) {
+      return res.status(404).json({
+        message: "User Not Found. Please Login First.",
+        success: false,
+        error: true,
+      });
+    }
+
+    // if User found then and change email and chnage email not same as before then send otp
+    let verifyOtp = "";
+
+    // Generate random 6 digit otp
+    if (email !== existUser.email) {
+      verifyOtp = Math.floor(100000 + Math.random() * 900000).toString();
+    }
+
+    let hashePassword = "";
+
+    // Hashed Password by using bcryptjs
+    if (password) {
+      const salt = await bcryptjs.genSalt(10);
+      hashePassword = await bcryptjs.hash(password, salt);
+    } else {
+      hashePassword = existUser.password;
+    }
+
+    // Update user
+    await userModel.findByIdAndUpdate(
+      userId,
+      {
+        name,
+        mobile,
+        email,
+        verify_email: email !== existUser.email ? true : false,
+        password: hashePassword,
+        otp: verifyOtp !== "" ? verifyOtp : null,
+        otpExpires: verifyOtp !== "" ? Date.now() + 300000 : "",
+      },
+      { new: true }
+    );
+
+    // If user change email not matched in registered email then send email confirmation again
+    if (email !== existUser.email) {
+      await sendEmail({
+        sendTo: email,
+        subject: "Verify Yout OTP",
+        text: "",
+        html: verifyEmailTemplate(name, verifyOtp),
+      });
+    }
+
+    //
+    return res.status(200).json({
+      message: "Successfully update user and verify otp sent to your email.",
+      error: false,
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message || "Failed to Update user.",
+      error: true,
+      success: false,
+    });
+  }
+}

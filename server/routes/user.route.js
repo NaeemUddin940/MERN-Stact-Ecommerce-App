@@ -5,6 +5,7 @@ import {
   registerUserController,
   userAvatarRemoveController,
   userAvatarUploadController,
+  userDetailsUpdateControlers,
   verifyEmailController,
 } from "../controllers/user.controller.js";
 import { authenticated } from "../middlewares/authenticated.js";
@@ -28,4 +29,11 @@ userRoute.put(
 );
 
 userRoute.delete("/delete-avatar", authenticated, userAvatarRemoveController);
+
+userRoute.put(
+  "/update-user-details",
+  authenticated,
+  userDetailsUpdateControlers
+);
+
 export default userRoute;
