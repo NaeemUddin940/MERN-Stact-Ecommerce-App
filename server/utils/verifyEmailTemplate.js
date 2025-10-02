@@ -13,7 +13,7 @@ export default function verifyEmailTemplate(username, otp) {
           <td align="center">
             <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
               <tr>
-                <td style="padding:24px;text-align:center;background:#2563eb;color:#ffffff;font-size:20px;font-weight:bold;">
+                <td style="padding:24px;text-align:center;background:#000000;color:#ffffff;font-size:20px;font-weight:bold;">
                   OTP Verification
                 </td>
               </tr>
@@ -22,7 +22,7 @@ export default function verifyEmailTemplate(username, otp) {
                   <p>Hi <strong>${username}</strong>,</p>
                   <p>Your One Time Passcode (OTP) is:</p>
                   <p style="text-align:center;margin:24px 0;">
-                    <span style="display:inline-block;background:#2563eb;color:#ffffff;font-size:22px;font-weight:bold;letter-spacing:4px;padding:14px 28px;border-radius:6px;">
+                    <span style="display:inline-block;background:#000000;color:#ffffff;font-size:22px;font-weight:bold;letter-spacing:4px;padding:14px 28px;border-radius:6px;">
                       ${otp}
                     </span>
                   </p>
