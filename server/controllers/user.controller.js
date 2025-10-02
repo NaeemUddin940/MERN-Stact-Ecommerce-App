@@ -182,7 +182,7 @@ export async function loginUserController(req, res) {
     const cookiesOption = {
       httpOnly: true,
       secure: true,
-      sameSite: "none",
+      sameSite: "None",
     };
 
     res.cookie("accessToken", accessToken, cookiesOption);
@@ -200,6 +200,38 @@ export async function loginUserController(req, res) {
   } catch (error) {
     return res.status(500).json({
       message: error.message || "Failed to Login",
+      error: true,
+      success: false,
+    });
+  }
+}
+
+// This is user Logout Controller
+export async function logoutUserController(req, res) {
+  try {
+    const userid = req.userId;
+
+    const cookiesOption = {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+    };
+
+    res.clearCookie("accessToken", cookiesOption);
+    res.clearCookie("refreshToken", cookiesOption);
+
+    await userModel.findByIdAndUpdate(userid, {
+      refresh_token: "",
+    });
+
+    return res.status(200).json({
+      message: "Log Out Successfull.",
+      success: true,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message || "Failed to Log Out",
       error: true,
       success: false,
     });
