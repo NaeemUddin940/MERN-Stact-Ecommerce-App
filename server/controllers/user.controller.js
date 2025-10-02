@@ -6,6 +6,7 @@ import sendEmail from "../config/sendEmail.js";
 import generateAccessToken from "../utils/generateAccessToken.js";
 import generateRefreshToken from "../utils/generateRefreshToken.js";
 import { v2 as cloudinary } from "cloudinary";
+import fs from "fs";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CONFIG_CLOUDE_NAME,
@@ -261,7 +262,6 @@ export async function logoutUserController(req, res) {
   }
 }
 
-
 // This is User avatar Upload Controller
 export async function userAvatarUploadController(req, res) {
   try {
@@ -332,5 +332,37 @@ export async function userAvatarUploadController(req, res) {
   }
 }
 
+//This is User avatar Remove Controller
+export async function userAvatarRemoveController(req, res) {
+  try {
+    // Get Image url From user query parameter
+    const imageUrl = req.query.img;
 
+    // Make an Array of this image url by split("/")
+    const urlArr = imageUrl.split("/");
 
+    // Take the Last element of the Array
+    const image = urlArr[urlArr.length - 1];
+
+    // And Finally get a name of image without extention like (.jpg, .png, .jpeg)
+    const imageName = image.split(".")[0];
+
+    // In Cloudinary Remove image
+    if (imageName) {
+      await cloudinary.uploader.destroy(imageName);
+    }
+
+    // And Finally Trow the Success Message
+    return res.status(200).json({
+      message: "Image Successfylly Deleted",
+      error: false,
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message || "Failed to Delete Image",
+      success: false,
+      error: true,
+    });
+  }
+}

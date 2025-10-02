@@ -3,6 +3,7 @@ import {
   loginUserController,
   logoutUserController,
   registerUserController,
+  userAvatarRemoveController,
   userAvatarUploadController,
   verifyEmailController,
 } from "../controllers/user.controller.js";
@@ -26,4 +27,5 @@ userRoute.put(
   userAvatarUploadController
 );
 
+userRoute.delete("/delete-avatar", authenticated, userAvatarRemoveController);
 export default userRoute;
