@@ -3,7 +3,10 @@ import verifyEmailTemplate from "../utils/verifyEmailTemplate.js";
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 import sendEmail from "../config/sendEmail.js";
+import generateAccessToken from "../utils/generateAccessToken.js";
+import generateRefreshToken from "../utils/generateRefreshToken.js";
 
+// This is user Register Controller
 export async function registerUserController(req, res) {
   try {
     let user;
@@ -62,7 +65,7 @@ export async function registerUserController(req, res) {
         email: user.email,
         id: user._id,
       },
-      process.env.JSON_WEB_TOKEN_SECRET_KEY
+      process.env.JWT_SECRET_KEY
     );
 
     return res.status(200).json({
@@ -73,13 +76,14 @@ export async function registerUserController(req, res) {
     });
   } catch (error) {
     return res.status(500).json({
-      message: error.message || error,
+      message: error.message || "Failed to Register a user",
       error: true,
       success: false,
     });
   }
 }
 
+// This is user Email Verify Controller
 export async function verifyEmailController(req, res) {
   try {
     const { email, otp } = req.body;
@@ -128,7 +132,74 @@ export async function verifyEmailController(req, res) {
     }
   } catch (error) {
     return res.status(500).json({
-      message: "Email Varification Failed.",
+      message: error.message || "Email Varification Failed.",
+      error: true,
+      success: false,
+    });
+  }
+}
+
+// This is user Login Controller
+export async function loginUserController(req, res) {
+  try {
+    const { email, password } = req.body;
+
+    // Found The user is he/she have on database or not
+    const user = await userModel.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not Found with This Email",
+        success: false,
+        error: true,
+      });
+    }
+
+    if (user.status !== "Active") {
+      return res.status(400).json({
+        message: "Please Contact to Our Contact Team.",
+        error: true,
+        success: false,
+      });
+    }
+    const isPassMatch = await bcryptjs.compare(password, user.password);
+
+    if (!isPassMatch) {
+      return res.status(400).json({
+        message: "Your Password is Wrong, Please try again!",
+        success: false,
+        error: true,
+      });
+    }
+
+    const accessToken = await generateAccessToken(user._id);
+    const refreshToken = await generateRefreshToken(user._id);
+
+    await userModel.findByIdAndUpdate(user?._id, {
+      last_login_date: new Date(),
+    });
+
+    const cookiesOption = {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    };
+
+    res.cookie("accessToken", accessToken, cookiesOption);
+    res.cookie("refreshToken", refreshToken, cookiesOption);
+
+    return res.status(200).json({
+      message: "Login Successfull",
+      error: false,
+      success: true,
+      data: {
+        accessToken,
+        refreshToken,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message || "Failed to Login",
       error: true,
       success: false,
     });
