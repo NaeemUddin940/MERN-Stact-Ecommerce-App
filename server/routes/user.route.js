@@ -15,10 +15,6 @@ userRoute.post("/verifyEmail", verifyEmailController);
 
 userRoute.post("/login", loginUserController);
 
-userRoute.get("/profile", authenticated, (req, res) => {
-  res.send("Hello");
-});
-
 userRoute.get("/logout", authenticated, logoutUserController);
 
 export default userRoute;

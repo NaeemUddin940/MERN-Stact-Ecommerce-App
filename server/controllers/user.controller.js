@@ -147,6 +147,7 @@ export async function loginUserController(req, res) {
     // Found The user is he/she have on database or not
     const user = await userModel.findOne({ email });
 
+    // If user not Found then throw this error User not Found
     if (!user) {
       return res.status(404).json({
         message: "User not Found with This Email",
@@ -155,6 +156,7 @@ export async function loginUserController(req, res) {
       });
     }
 
+    // If user status is not active then contact us toa ctive your account
     if (user.status !== "Active") {
       return res.status(400).json({
         message: "Please Contact to Our Contact Team.",
@@ -162,8 +164,11 @@ export async function loginUserController(req, res) {
         success: false,
       });
     }
+
+    // Match or Check password to verify user
     const isPassMatch = await bcryptjs.compare(password, user.password);
 
+    // isn't match user enterd password to registered from database password then throw this error your password is wrong, please try again.
     if (!isPassMatch) {
       return res.status(400).json({
         message: "Your Password is Wrong, Please try again!",
@@ -172,22 +177,27 @@ export async function loginUserController(req, res) {
       });
     }
 
+    // if user verifivied then generate access and refresh token
     const accessToken = await generateAccessToken(user._id);
     const refreshToken = await generateRefreshToken(user._id);
 
+    // After Login a user update his/her last login date
     await userModel.findByIdAndUpdate(user?._id, {
       last_login_date: new Date(),
     });
 
+    // This is the cookie options
     const cookiesOption = {
       httpOnly: true,
       secure: true,
       sameSite: "None",
     };
 
+    // accessToken and refreshToken set as a cookie
     res.cookie("accessToken", accessToken, cookiesOption);
     res.cookie("refreshToken", refreshToken, cookiesOption);
 
+    // and Finally if all done then verified message will be Login Successfull
     return res.status(200).json({
       message: "Login Successfull",
       error: false,
@@ -209,21 +219,26 @@ export async function loginUserController(req, res) {
 // This is user Logout Controller
 export async function logoutUserController(req, res) {
   try {
+    // Get useId from authenticated user by using authenticated middlewares
     const userid = req.userId;
 
+    // This is cookieOptions
     const cookiesOption = {
       httpOnly: true,
       secure: true,
       sameSite: "None",
     };
 
+    // And Clear cookies after logout successfull
     res.clearCookie("accessToken", cookiesOption);
     res.clearCookie("refreshToken", cookiesOption);
 
+    // And also update or we can say remove refresh token from databse
     await userModel.findByIdAndUpdate(userid, {
       refresh_token: "",
     });
 
+    // If all is well then Log out Successfull throw this message
     return res.status(200).json({
       message: "Log Out Successfull.",
       success: true,
