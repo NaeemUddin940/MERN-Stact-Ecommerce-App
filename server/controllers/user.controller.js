@@ -262,4 +262,75 @@ export async function logoutUserController(req, res) {
 }
 
 
+// This is User avatar Upload Controller
+export async function userAvatarUploadController(req, res) {
+  try {
+    // Get useId from authenticated user by using authenticated middlewares
+    const userId = req.user.id;
+
+    // If user not Found then throw this error User not Found
+    const user = await userModel.findById({ _id: userId });
+    if (!user) {
+      return res.status(404).json({
+        message: "User Not Found! Please Login First.",
+        error: true,
+        success: false,
+      });
+    }
+
+    // Get Image url From user object or databse
+    const imageUrl = user.avatar;
+
+    // Make an Array of this image url by split("/")
+    const urlArr = imageUrl.split("/");
+
+    // Take the Last element of the Array
+    const image = urlArr[urlArr.length - 1];
+
+    // And Finally get a name of image without extention like (.jpg, .png, .jpeg)
+    const imageName = image.split(".")[0];
+
+    // In Cloudinary already have image then Remove or replace it by new uploaded image
+    if (imageName) {
+      await cloudinary.uploader.destroy(imageName);
+    }
+
+    // Cloudinary upload options
+    const options = {
+      use_filename: true,
+      uniques_filename: true,
+      overwrite: false,
+    };
+
+    // take a empty stirng where save the image url from cloudinary which i have to save in databse
+    let avatar = "";
+
+    await cloudinary.uploader.upload(req.file.path, options, (err, result) => {
+      // Get the secure image url from cloudinary
+      avatar = result.secure_url;
+
+      // Delete image from uploads folder
+      fs.unlinkSync(`uploads/${req.file.filename}`);
+    });
+
+    // And finally Save image url in database
+    user.avatar = avatar;
+    await user.save();
+
+    // If successfully have all of this then throw this message Fill Successfully Uploaded
+    return res.status(200).json({
+      message: "File Successfully Uploaded",
+      _id: userId,
+      avatar: avatar,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message || "Failed to Upload Image",
+      error: true,
+      success: false,
+    });
+  }
+}
+
+
 
