@@ -569,10 +569,10 @@ export async function verifyForgotPasswordOTPController(req, res) {
 
 export async function resetPasswordController(req, res) {
   try {
-    // Get email, newPassword and confirm password
-    const { email, newPassword, confirmPassword } = req.body;
+    // Get email, password and confirm password
+    const { email, password, confirmPassword } = req.body;
 
-    if (!email || !newPassword || !confirmPassword) {
+    if (!email || !password || !confirmPassword) {
       return res.status(400).json({
         message:
           "Please Provide your valid Email, New Password and Confirm Password.",
@@ -585,7 +585,7 @@ export async function resetPasswordController(req, res) {
     const user = await userModel.findOne({ email });
 
     // Check new Password and confirm password is match or not
-    if (newPassword !== confirmPassword) {
+    if (password !== confirmPassword) {
       return res.status(401).json({
         message: "New Password and Confirm Password is not Matched.",
         success: false,
@@ -595,7 +595,7 @@ export async function resetPasswordController(req, res) {
 
     // HashedPassword
     const salt = await bcryptjs.genSalt(10);
-    const hashPassword = await bcryptjs.hash(newPassword, salt);
+    const hashPassword = await bcryptjs.hash(password, salt);
 
     // Set into databse new hashed password
     await userModel.findOneAndUpdate(user._id, {
@@ -610,6 +610,59 @@ export async function resetPasswordController(req, res) {
   } catch (error) {
     return res.status(500).json({
       message: error.message || "Failed to Change Password.",
+      error: true,
+      success: false,
+    });
+  }
+}
+
+export async function refreshTokenController(req, res) {
+  try {
+    const refreshToken =
+      req.cookies.refreshToken || res?.headers?.authorization.split(" ")[1]; // Bearer token
+
+    if (!refreshToken) {
+      return res.status(400).json({
+        mwssage: "Invalid Resfresh Token.",
+        error: true,
+        success: false,
+      });
+    }
+
+    const verifyToken = jwt.verify(
+      refreshToken,
+      process.env.JWT_SECRET_KEY_REFRESH_TOKEN
+    );
+
+    if (!verifyToken) {
+      return res.status(401).json({
+        mwssage: "Token is expired.",
+        error: true,
+        success: false,
+      });
+    }
+
+    const userId = verifyToken?._id;
+    const newAccessToken = await generateAccessToken(userId);
+    const cookieOptions = {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+    };
+
+    res.cookie("accessToken", newAccessToken, cookieOptions);
+
+    return res.status(200).json({
+      message: "New Access Token Generated.",
+      error: false,
+      success: true,
+      data: {
+        accessToken: newAccessToken,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.error || "Refresh Token in valid.",
       error: true,
       success: false,
     });
