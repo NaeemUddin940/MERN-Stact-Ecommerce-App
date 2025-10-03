@@ -567,6 +567,7 @@ export async function verifyForgotPasswordOTPController(req, res) {
   }
 }
 
+//  This is user Reset Password Controller
 export async function resetPasswordController(req, res) {
   try {
     // Get email, password and confirm password
@@ -616,6 +617,7 @@ export async function resetPasswordController(req, res) {
   }
 }
 
+// This is user refresToken Controller
 export async function refreshTokenController(req, res) {
   try {
     const refreshToken =
@@ -665,6 +667,31 @@ export async function refreshTokenController(req, res) {
       message: error.error || "Refresh Token in valid.",
       error: true,
       success: false,
+    });
+  }
+}
+
+// This is user details controller to get user details
+export async function userDetails(req, res) {
+  try {
+    const userid = req.user.id;
+    console.log(userid);
+
+    const user = await userModel
+      .findById(userid)
+      .select("-password -refresh_token");
+
+    return res.status(200).json({
+      message: "User Details",
+      success: true,
+      error: false,
+      data: user,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Something is wrong.",
+      success: false,
+      error: true,
     });
   }
 }

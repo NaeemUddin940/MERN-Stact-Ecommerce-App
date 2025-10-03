@@ -7,6 +7,7 @@ import {
   resetPasswordController,
   userAvatarRemoveController,
   userAvatarUploadController,
+  userDetails,
   userDetailsUpdateControlers,
   userForgotPasswordController,
   verifyEmailController,
@@ -48,6 +49,7 @@ userRoute.post(
 );
 
 userRoute.put("/change-password", resetPasswordController);
-userRoute.post("refresh-token", refreshTokenController);
+userRoute.post("/refresh-token", refreshTokenController);
+userRoute.get("/user-details", authenticated, userDetails)
 
 export default userRoute;
