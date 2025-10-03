@@ -566,3 +566,52 @@ export async function verifyForgotPasswordOTPController(req, res) {
     });
   }
 }
+
+export async function resetPasswordController(req, res) {
+  try {
+    // Get email, newPassword and confirm password
+    const { email, newPassword, confirmPassword } = req.body;
+
+    if (!email || !newPassword || !confirmPassword) {
+      return res.status(400).json({
+        message:
+          "Please Provide your valid Email, New Password and Confirm Password.",
+        error: true,
+        succes: false,
+      });
+    }
+
+    // Check with this email user have or not
+    const user = await userModel.findOne({ email });
+
+    // Check new Password and confirm password is match or not
+    if (newPassword !== confirmPassword) {
+      return res.status(401).json({
+        message: "New Password and Confirm Password is not Matched.",
+        success: false,
+        error: true,
+      });
+    }
+
+    // HashedPassword
+    const salt = await bcryptjs.genSalt(10);
+    const hashPassword = await bcryptjs.hash(newPassword, salt);
+
+    // Set into databse new hashed password
+    await userModel.findOneAndUpdate(user._id, {
+      password: hashPassword,
+    });
+
+    return res.status(200).json({
+      mesage: "Password Update Successfull.",
+      success: true,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message || "Failed to Change Password.",
+      error: true,
+      success: false,
+    });
+  }
+}

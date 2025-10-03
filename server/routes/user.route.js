@@ -3,6 +3,7 @@ import {
   loginUserController,
   logoutUserController,
   registerUserController,
+  resetPasswordController,
   userAvatarRemoveController,
   userAvatarUploadController,
   userDetailsUpdateControlers,
@@ -44,5 +45,7 @@ userRoute.post(
   "/verify-forgot-password-otp",
   verifyForgotPasswordOTPController
 );
+
+userRoute.put("/change-password", resetPasswordController);
 
 export default userRoute;
