@@ -7,6 +7,8 @@ import generateAccessToken from "../utils/generateAccessToken.js";
 import generateRefreshToken from "../utils/generateRefreshToken.js";
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
+import generateOTP from "../utils/generateOTP.js";
+import verifyForgotPasswordEmailTemplate from "../utils/verifyforgotPasswordEmailTemplate.js";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CONFIG_CLOUDE_NAME,
@@ -446,6 +448,60 @@ export async function userDetailsUpdateControlers(req, res) {
   } catch (error) {
     return res.status(500).json({
       message: error.message || "Failed to Update user.",
+      error: true,
+      success: false,
+    });
+  }
+}
+
+// This is User forgot password Controller
+export async function userForgotPasswordController(req, res) {
+  try {
+    // Get Email From Frontend
+    const { email } = req.body;
+
+    // Check with this email in database user have or not
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      return res.status(404).json({
+        message: "Your Email is not valid. Please Provide your valide Email.",
+        error: true,
+        success: false,
+      });
+    }
+
+    // generate OTP
+    const verifyOTP = generateOTP();
+    user.otp = verifyOTP;
+    user.otpExpires = Date.now() + 300000;
+
+
+    // Send Email
+    await sendEmail({
+      sendTo: email,
+      subject: `Reset your password — your OTP is ${verifyOTP}`,
+      text: "",
+      html: verifyForgotPasswordEmailTemplate(
+        user.name,
+        user.otpExpires,
+        verifyOTP,
+        process.env.SUPPORT_EMAIL,
+        process.env.COMPANY_NAME
+      ),
+    });
+
+    // Save it on databse
+    await user.save();
+
+    return res.status(200).json({
+      message: "We have Sent a Email, Please Check Your Email",
+      success: true,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message:
+        error.message || "Failed to Forgot Password, Please contact our Team.",
       error: true,
       success: false,
     });

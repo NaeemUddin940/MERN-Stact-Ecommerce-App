@@ -6,6 +6,7 @@ import {
   userAvatarRemoveController,
   userAvatarUploadController,
   userDetailsUpdateControlers,
+  userForgotPasswordController,
   verifyEmailController,
 } from "../controllers/user.controller.js";
 import { authenticated } from "../middlewares/authenticated.js";
@@ -35,5 +36,7 @@ userRoute.put(
   authenticated,
   userDetailsUpdateControlers
 );
+
+userRoute.post("/forgot-password", userForgotPasswordController);
 
 export default userRoute;
