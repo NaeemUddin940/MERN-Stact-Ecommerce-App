@@ -8,6 +8,7 @@ import {
   userDetailsUpdateControlers,
   userForgotPasswordController,
   verifyEmailController,
+  verifyForgotPasswordOTPController,
 } from "../controllers/user.controller.js";
 import { authenticated } from "../middlewares/authenticated.js";
 import upload from "../middlewares/multer.js";
@@ -38,5 +39,10 @@ userRoute.put(
 );
 
 userRoute.post("/forgot-password", userForgotPasswordController);
+
+userRoute.post(
+  "/verify-forgot-password-otp",
+  verifyForgotPasswordOTPController
+);
 
 export default userRoute;

@@ -475,7 +475,6 @@ export async function userForgotPasswordController(req, res) {
     user.otp = verifyOTP;
     user.otpExpires = Date.now() + 300000;
 
-
     // Send Email
     await sendEmail({
       sendTo: email,
@@ -504,6 +503,66 @@ export async function userForgotPasswordController(req, res) {
         error.message || "Failed to Forgot Password, Please contact our Team.",
       error: true,
       success: false,
+    });
+  }
+}
+
+//  This is user Forgot Password OTP Verify Controller
+export async function verifyForgotPasswordOTPController(req, res) {
+  try {
+    // get email and otp from input field
+    const { email, otp } = req.body;
+
+    // Check email and otp
+    if (!email || !otp) {
+      return res.status(400).json({
+        message: "Provide Required field as email & otp",
+        error: true,
+        success: false,
+      });
+    }
+
+    // Check with this email users found or not
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      return res.status(404).json({
+        message: "Email is not Available",
+        error: true,
+        succes: false,
+      });
+    }
+
+    // otp Expires
+    const currentDate = new Date.toISOString();
+    if (user.otpExpires < currentDate) {
+      return res.status(400).json({
+        message: "OTP is Expired",
+        succes: false,
+        error: true,
+      });
+    }
+
+    // Check otp is valid or not
+    if (otp !== user.otp) {
+      return res.status(400).json({
+        message: "Invalid OTP.",
+        success: false,
+        error: true,
+      });
+    }
+
+    (user.otp = ""), (user.otpExpires = "");
+    await user.save();
+
+    // Finally verified otp
+    return res.status(200).json({
+      message: "OTP Verified Successfull.",
+      error: false,
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message || "Failed to verify yout OTP.",
     });
   }
 }
