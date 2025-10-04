@@ -7,6 +7,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import connectDB from "./config/connectDB.js";
 import userRoute from "./routes/user.route.js";
+import categoryRoute from "./routes/category.route.js";
 const app = express();
 
 const port = process.env.PORT || 8080;
@@ -33,7 +34,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/user", userRoute);
-
+app.use("/api/user/admin", categoryRoute);
 // Server is Running
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
