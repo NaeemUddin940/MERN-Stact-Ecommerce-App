@@ -89,7 +89,7 @@ export const createSubCategory = async (req, res) => {
   }
 };
 
-//✅ Step 02 : Sub Category Create Controller
+//✅ Step 03 : Sub Category Create Controller
 export const createChildCategory = async (req, res) => {
   try {
     // 1. Extract data from req.body, req.params, or req.query
@@ -126,6 +126,57 @@ export const createChildCategory = async (req, res) => {
       error: true,
       message:
         error.message || "Internal Server Error to Create Child Category!",
+    });
+  }
+};
+
+// ✅ Step 04 : Import করা model গুলোর ওপর ভিত্তি করে সব Main Category, SubCategory এবং Child Category একসাথে এনে nested আকারে পাঠানোর function
+export const getAllCategories = async (req, res) => {
+  try {
+    // 🔹 Step 1: সব Main Category খুঁজে বের করা (lean() ব্যবহার করলে mongoose document না, plain JS object ফেরত দেয়)
+    const categories = await mainCategory.find().lean();
+
+    // 🔹 Step 2: প্রতিটি Main Category-এর জন্য SubCategory গুলো খুঁজে বের করা
+    const result = await Promise.all(
+      categories.map(async (cat) => {
+        // 🟢 SubCategory গুলো বের করা যেগুলোর mainCategoryId বর্তমান cat._id এর সমান
+        const subCats = await subCategory
+          .find({ mainCategoryId: cat._id })
+          .lean();
+
+        // 🔹 Step 3: প্রতিটি SubCategory-এর জন্য Child Category গুলো বের করা
+        const subWithChild = await Promise.all(
+          subCats.map(async (sub) => {
+            // 🟡 Child Category খুঁজে বের করা যেগুলোর subCategoryId বর্তমান sub._id এর সমান
+            const childCats = await childCategory
+              .find({
+                subCategoryId: sub._id,
+              })
+              .lean();
+
+            // 🧩 SubCategory object এর সাথে তার Child Category গুলো merge করে ফেরত দিচ্ছি
+            return { ...sub, childCategories: childCats };
+          })
+        );
+
+        // 🧩 Main Category object এর সাথে তার SubCategory ও SubCategory এর মধ্যে Child Category গুলো merge করছি
+        return { ...cat, subCategories: subWithChild };
+      })
+    );
+
+    // ✅ সবকিছু সফলভাবে হলে success response পাঠানো হচ্ছে
+    return res.status(200).json({
+      success: true,
+      error: false,
+      message: "Successfull to Get All Category.",
+      data: result,
+    });
+  } catch (error) {
+    // ❌ কোনো error হলে catch এ এসে error message পাঠানো হচ্ছে
+    return res.status(500).json({
+      success: false,
+      error: true,
+      message: error.message || "Internal Server Error to Get All Category.",
     });
   }
 };
