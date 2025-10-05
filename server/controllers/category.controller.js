@@ -1,6 +1,7 @@
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 import mainCategory from "../models/mainCategory.model.js";
+import subCategory from "../models/subCategory.model.js";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CONFIG_CLOUDE_NAME,
@@ -49,6 +50,34 @@ export const createMainCategories = async (req, res) => {
       error: true,
       message:
         error.message || "Internal Server Error to Create Main Category!",
+    });
+  }
+};
+
+//✅ Step 02 : Sub Category Create Controller
+export const createSubCategory = async (req, res) => {
+  try {
+    //  Extract data from req.body, req.params, or req.query
+    const { name, mainCategoryId } = req.body;
+
+    // Find Category By ID if not found trow error
+    const category = await mainCategory.findById(mainCategoryId);
+    if (!category)
+      return res.status(404).json({ message: "Main category not found" });
+
+    // Create Sub Category
+    const subCategories = await subCategory.create({
+      name,
+      slug: name.toLowerCase().replace(/\s+/g, "-"),
+      mainCategoryId,
+    });
+    res.status(201).json({ success: true, data: subCategories });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({
+      success: false,
+      error: true,
+      message: error.message || "Internal Server Error to Create Sub-Category!",
     });
   }
 };
