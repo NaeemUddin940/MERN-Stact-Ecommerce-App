@@ -172,3 +172,75 @@ export const getAllCategories = async (req, res) => {
     });
   }
 };
+
+// ✅ Step 05 : Get Main Category Count
+export const getMainCategoryCount = async (req, res) => {
+  try {
+    // Find All Main Category
+    const category = await mainCategory.find();
+
+    // 3. Send success response
+    res.status(200).json({
+      success: true,
+      error: false,
+      mainCategoryCount: category.length || 0,
+      message: "Successfull to Get Main Category Count",
+    });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({
+      success: false,
+      error: true,
+      message:
+        error.message || "Internal Server Error to Get Main Category Count!",
+    });
+  }
+};
+
+// ✅ Step 06 : Get Sub Category Count
+export const getSubCategoryCount = async (req, res) => {
+  try {
+    // Find All Sub Category
+    const category = await subCategory.find();
+
+    // 3. Send success response
+    res.status(200).json({
+      success: true,
+      error: false,
+      subCategoryCount: category.length || 0,
+      message: "Successfull to Get Sub Category Count",
+    });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({
+      success: false,
+      error: true,
+      message:
+        error.message || "Internal Server Error to Get Sub Category Count!",
+    });
+  }
+};
+
+// ✅ Step 07 : Get Child Category Count
+export const getChildCategoryCount = async (req, res) => {
+  try {
+    // Find All Child Category
+    const category = await childCategory.find();
+
+    // 3. Send success response
+    res.status(200).json({
+      success: true,
+      error: false,
+      childCategoryCount: category.length || 0,
+      message: "Successfull to Get Child Category Count",
+    });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({
+      success: false,
+      error: true,
+      message:
+        error.message || "Internal Server Error to Get Child Category Count!",
+    });
+  }
+};
