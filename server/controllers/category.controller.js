@@ -421,30 +421,33 @@ export const updateMainCategory = async (req, res) => {
       });
     }
 
-    // 2️⃣ পুরনো image public_id বের করো
-    const oldImageUrl = mainCategories.image;
-    if (oldImageUrl) {
-      const urlArr = oldImageUrl.split("/");
-      const image = urlArr[urlArr.length - 1];
-      const imageName = image.split(".")[0];
+    let categoryImage = "";
+    if (req.file) {
+      // 2️⃣ পুরনো image public_id বের করো
+      const oldImageUrl = mainCategories.image;
+      if (oldImageUrl) {
+        const urlArr = oldImageUrl.split("/");
+        const image = urlArr[urlArr.length - 1];
+        const imageName = image.split(".")[0];
 
-      // Cloudinary থেকে পুরনো image delete করো
-      await cloudinary.uploader.destroy(imageName);
+        // Cloudinary থেকে পুরনো image delete করো
+        await cloudinary.uploader.destroy(imageName);
+      }
+
+      // 3️⃣ Cloudinary upload options
+      const options = {
+        use_filename: true,
+        unique_filename: false,
+        overwrite: true,
+      };
+
+      // 4️⃣ নতুন image upload
+      const result = await cloudinary.uploader.upload(req.file.path, options);
+      categoryImage = result.secure_url;
+
+      // লোকাল থেকে image delete করো
+      fs.unlinkSync(`uploads/${req.file.filename}`);
     }
-
-    // 3️⃣ Cloudinary upload options
-    const options = {
-      use_filename: true,
-      unique_filename: false,
-      overwrite: true,
-    };
-
-    // 4️⃣ নতুন image upload
-    const result = await cloudinary.uploader.upload(req.file.path, options);
-    const categoryImage = result.secure_url;
-
-    // লোকাল থেকে image delete করো
-    fs.unlinkSync(`uploads/${req.file.filename}`);
 
     // 5️⃣ MongoDB update করো
     const updatedCategory = await mainCategory.findOneAndUpdate(
@@ -452,7 +455,7 @@ export const updateMainCategory = async (req, res) => {
       {
         name: name,
         slug: name.toLowerCase().replace(/\s+/g, "-"),
-        image: categoryImage,
+        image: categoryImage || mainCategories.image,
       },
       { new: true }
     );
