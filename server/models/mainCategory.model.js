@@ -11,24 +11,15 @@ const categorySchema = new mongoose.Schema(
       type: String,
       trim: true,
       unique: true,
+      default:"",
     },
     image: {
       type: String,
       default: null,
     },
-    parentId: {
-      type: mongoose.Schema.ObjectId,
-      ref: "category",
-      default: null,
-    },
-    level: {
-      type: Number,
-      enum: [1, 2, 3],
-      default: 1,
-    },
   },
   { timestamps: true }
 );
 
-const categoryModel = mongoose.model("category", categorySchema);
-export default categoryModel;
+const mainCategory = mongoose.model("category", categorySchema);
+export default mainCategory;

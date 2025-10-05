@@ -35,6 +35,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/user", userRoute);
 app.use("/api/user/admin", categoryRoute);
+
 // Server is Running
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
