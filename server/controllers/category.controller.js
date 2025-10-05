@@ -12,10 +12,27 @@ cloudinary.config({
 });
 
 //✅ Step 01 : Main Category Create And Upload Category Image Controller
-export const createMainCategories = async (req, res) => {
+export const createMainCategory = async (req, res) => {
   try {
     //  Extract data from req.body, req.params, or req.query
     const { name } = req.body;
+
+    const mainCategories = await mainCategory.find();
+    for (let i = 0; i < mainCategories.length; i++) {
+      if (mainCategories[i].name === name) {
+        return res.status(400).json({
+          message: `This ${name} Category Already have in Databse.`,
+          error: true,
+          success: false,
+        });
+      }
+    }
+
+    if (mainCategories.slug === name.toLowerCase().replace(/\s+/g, "-")) {
+      return res.status(400).json({
+        message: "Main Category Already Exist With This Name.",
+      });
+    }
 
     // Cloudinary Image upload options
     const options = {
@@ -43,7 +60,7 @@ export const createMainCategories = async (req, res) => {
       success: true,
       error: false,
       mainCategory: categories,
-      message: "Main Category Create Successfull.",
+      message: `Successfull to Create ${name} Main Category`,
     });
   } catch (error) {
     // Handle errors
@@ -76,7 +93,7 @@ export const createSubCategory = async (req, res) => {
     res.status(201).json({
       success: true,
       error: false,
-      message: "Successfull to Create Sub Category ",
+      message: `Successfull to Create ${name} Sub Category`,
       data: subCategories,
     });
   } catch (error) {
@@ -116,7 +133,7 @@ export const createChildCategory = async (req, res) => {
     return res.status(201).json({
       success: true,
       error: false,
-      message: "Successfull to Create Child Category.",
+      message: `Successfull to Create ${name} Child Category`,
       childCategory: childCategories,
     });
   } catch (error) {
@@ -162,7 +179,7 @@ export const getAllCategories = async (req, res) => {
       success: true,
       error: false,
       message: "Successfully fetched all categories.",
-      data: getAllCategories,
+      mainCategories: getAllCategories,
     });
   } catch (error) {
     return res.status(500).json({
@@ -241,6 +258,75 @@ export const getChildCategoryCount = async (req, res) => {
       error: true,
       message:
         error.message || "Internal Server Error to Get Child Category Count!",
+    });
+  }
+};
+
+//✅ Step 08 : Delete Main Category And Upload Category Image Controller
+export const deleteMainCategory = async (req, res) => {
+  try {
+    const allMainCategory = await mainCategory.find();
+    const mainCategories = await mainCategory.findById(req.params.id);
+
+    if (!mainCategories) {
+      return res.status(404).json({
+        message: "Main Category Not Found with this id.",
+        error: true,
+        success: false,
+      });
+    }
+
+    const subCategories = await subCategory.find({
+      mainCategoryId: req.params.id,
+    });
+
+    for (let i = 0; i < subCategories.length; i++) {
+      const childCategories = await childCategory.find({
+        subCategoryId: subCategories[i]._id,
+      });
+
+      for (let j = 0; j < childCategories.length; j++) {
+        await childCategory.findByIdAndDelete(childCategories[j]._id);
+      }
+
+      await subCategory.findByIdAndDelete(subCategories[i]._id);
+    }
+
+    await mainCategory.findByIdAndDelete(req.params.id);
+
+    // Get Image url From user query parameter
+    const imageUrl = mainCategories.image;
+
+    if (imageUrl) {
+      // Make an Array of this image url by split("/")
+      const urlArr = imageUrl.split("/");
+
+      // Take the Last element of the Array
+      const image = urlArr[urlArr.length - 1];
+
+      // And Finally get a name of image without extention like (.jpg, .png, .jpeg)
+      const imageName = image.split(".")[0];
+
+      // In Cloudinary Remove image
+      if (imageName) {
+        await cloudinary.uploader.destroy(imageName);
+      }
+    }
+
+    res.status(200).json({
+      success: true,
+      error: false,
+      mainCategoryCount: allMainCategory.length - 1 || 0,
+      message: `Successfull to Delete ${mainCategories.name} Category`,
+    });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({
+      success: false,
+      error: true,
+      message:
+        error.message ||
+        `Internal Server Error to Delete ${mainCategories.name} Category!`,
     });
   }
 };

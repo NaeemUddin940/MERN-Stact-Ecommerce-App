@@ -1,8 +1,9 @@
 import { Router } from "express";
 import {
   createChildCategory,
-  createMainCategories,
+  createMainCategory,
   createSubCategory,
+  deleteMainCategory,
   getAllCategories,
   getChildCategoryCount,
   getMainCategoryCount,
@@ -18,7 +19,7 @@ categoryRoute.post(
   "/create-main-category",
   authenticated,
   upload.single("image"),
-  createMainCategories
+  createMainCategory
 );
 
 // Create Sub Category
@@ -53,6 +54,13 @@ categoryRoute.get(
   "/get-child-category-count",
   authenticated,
   getChildCategoryCount
+);
+
+// Delete Main Category
+categoryRoute.delete(
+  "/delete-main-category/:id",
+  authenticated,
+  deleteMainCategory
 );
 
 export default categoryRoute;
