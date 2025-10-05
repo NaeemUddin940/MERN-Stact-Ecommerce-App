@@ -10,6 +10,7 @@ import {
   getChildCategoryCount,
   getMainCategoryCount,
   getSubCategoryCount,
+  updateChildCategory,
   updateMainCategory,
   updateSubCategory,
 } from "../controllers/category.controller.js";
@@ -90,5 +91,12 @@ categoryRoute.put(
 
 // Update Sub Category
 categoryRoute.put("/update-sub-category/:id", authenticated, updateSubCategory);
+
+// Update Child Category
+categoryRoute.put(
+  "/update-child-category/:id",
+  authenticated,
+  updateChildCategory
+);
 
 export default categoryRoute;

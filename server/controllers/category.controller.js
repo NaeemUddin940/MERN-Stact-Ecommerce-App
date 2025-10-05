@@ -440,8 +440,6 @@ export const updateMainCategory = async (req, res) => {
   }
 };
 
-
-
 //✅ Step 12 : Update Sub Category Controller
 export const updateSubCategory = async (req, res) => {
   try {
@@ -463,8 +461,33 @@ export const updateSubCategory = async (req, res) => {
     res.status(500).json({
       success: false,
       error: true,
-      message:
-        error.message || "Internal Server Error to Update Sub Category!",
+      message: error.message || "Internal Server Error to Update Sub Category!",
+    });
+  }
+};
+
+//✅ Step 13 : Update Child Category Controller
+export const updateChildCategory = async (req, res) => {
+  try {
+    const { name } = req.body;
+    const oldChildCategoryName = await childCategory.findById(req.params.id);
+    await childCategory.findOneAndUpdate(
+      { _id: req.params.id },
+      { name: name, slug: name.toLowerCase().replace(/\s+/g, "-") },
+      { new: true }
+    );
+
+    res.status(200).json({
+      success: true,
+      error: false,
+      message: `Successfull to Update ${oldChildCategoryName.name} to ${name} Category`,
+    });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({
+      success: false,
+      error: true,
+      message: error.message || "Internal Server Error to Update Sub Category!",
     });
   }
 };
