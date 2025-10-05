@@ -3,6 +3,7 @@ import {
   createChildCategory,
   createMainCategory,
   createSubCategory,
+  deleteChildCategory,
   deleteMainCategory,
   deleteSubCategory,
   getAllCategories,
@@ -65,6 +66,15 @@ categoryRoute.delete(
 );
 
 // Delete Sub Category
-categoryRoute.delete("/delete-sub-category/:id", authenticated, deleteSubCategory);
+categoryRoute.delete(
+  "/delete-sub-category/:id",
+  authenticated,
+  deleteSubCategory
+);
+categoryRoute.delete(
+  "/delete-child-category/:id",
+  authenticated,
+  deleteChildCategory
+);
 
 export default categoryRoute;

@@ -21,7 +21,7 @@ export const createMainCategory = async (req, res) => {
     for (let i = 0; i < mainCategories.length; i++) {
       if (mainCategories[i].name === name) {
         return res.status(400).json({
-          message: `This ${name} Category Already have in Databse.`,
+          message: `This ${name} Category Already Exist in Databse.`,
           error: true,
           success: false,
         });
@@ -84,12 +84,24 @@ export const createSubCategory = async (req, res) => {
     if (!category)
       return res.status(404).json({ message: "Main category not found" });
 
+    const isExistSubCategories = await subCategory.find();
+    for (let i = 0; i < isExistSubCategories.length; i++) {
+      if (isExistSubCategories[i].name === name) {
+        return res.status(400).json({
+          message: `This ${name} Category Exist in Databse.`,
+          error: true,
+          success: false,
+        });
+      }
+    }
+
     // Create Sub Category
     const subCategories = await subCategory.create({
       name,
       slug: name.toLowerCase().replace(/\s+/g, "-"),
       mainCategoryId,
     });
+
     res.status(201).json({
       success: true,
       error: false,
@@ -114,6 +126,16 @@ export const createChildCategory = async (req, res) => {
 
     // 2. Perform DB operations or business logic
     const subCategories = await subCategory.findById(subCategoryId);
+    const isChildCategoriesExist = await childCategory.find();
+    for (let i = 0; i < isChildCategoriesExist.length; i++) {
+      if (isChildCategoriesExist[i].name === name) {
+        return res.status(400).json({
+          message: `This ${name} Category Exist in Databse.`,
+          error: true,
+          success: false,
+        });
+      }
+    }
 
     if (!subCategories) {
       return res.status(404).json({
@@ -339,7 +361,6 @@ export const deleteMainCategory = async (req, res) => {
   }
 };
 
-
 //✅ Step 09 : Delete Sub Category Controller
 export const deleteSubCategory = async (req, res) => {
   try {
@@ -366,6 +387,28 @@ export const deleteSubCategory = async (req, res) => {
       success: false,
       error: true,
       message: error.message || "Internal Server Error to Delete Sub Category!",
+    });
+  }
+};
+
+//✅ Step 10 : Delete Child Category Controller
+export const deleteChildCategory = async (req, res) => {
+  try {
+    const childCategoryNameToShow = await childCategory.findById(req.params.id);
+    await childCategory.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+      success: true,
+      error: false,
+      message: `Successfull to Delete ${childCategoryNameToShow.name} Category`,
+    });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({
+      success: false,
+      error: true,
+      message:
+        error.message || "Internal Server Error to Delete Child Category!",
     });
   }
 };
