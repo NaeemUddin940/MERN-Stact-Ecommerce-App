@@ -130,49 +130,41 @@ export const createChildCategory = async (req, res) => {
   }
 };
 
-// ✅ Step 04 : Import করা model গুলোর ওপর ভিত্তি করে সব Main Category, SubCategory এবং Child Category একসাথে এনে nested আকারে পাঠানোর function
+// ✅ Step 04 : Finally get all categories
 export const getAllCategories = async (req, res) => {
   try {
-    // 🔹 Step 1: সব Main Category খুঁজে বের করা (lean() ব্যবহার করলে mongoose document না, plain JS object ফেরত দেয়)
-    const categories = await mainCategory.find().lean();
+    // Main and sub and Child Category get from Database
+    const mainCategories = await mainCategory.find().lean();
+    const subCategories = await subCategory.find().lean();
+    const childCategories = await childCategory.find().lean();
 
-    // 🔹 Step 2: প্রতিটি Main Category-এর জন্য SubCategory গুলো খুঁজে বের করা
-    const result = await Promise.all(
-      categories.map(async (cat) => {
-        // 🟢 SubCategory গুলো বের করা যেগুলোর mainCategoryId বর্তমান cat._id এর সমান
-        const subCats = await subCategory
-          .find({ mainCategoryId: cat._id })
-          .lean();
+    // Make Nested like MainCategory => SubCategory => ChildCategory
+    const getAllCategories = mainCategories.map((mainCat) => {
+      // Filter Sub Category using mainCategoryId
+      const matchedSubCategory = subCategories.filter(
+        (subCat) => String(subCat.mainCategoryId) === String(mainCat._id)
+      );
 
-        // 🔹 Step 3: প্রতিটি SubCategory-এর জন্য Child Category গুলো বের করা
-        const subWithChild = await Promise.all(
-          subCats.map(async (sub) => {
-            // 🟡 Child Category খুঁজে বের করা যেগুলোর subCategoryId বর্তমান sub._id এর সমান
-            const childCats = await childCategory
-              .find({
-                subCategoryId: sub._id,
-              })
-              .lean();
-
-            // 🧩 SubCategory object এর সাথে তার Child Category গুলো merge করে ফেরত দিচ্ছি
-            return { ...sub, childCategories: childCats };
-          })
+      // 🟢 প্রতিটি subCategory এর childCategories filter করা
+      const subWithChild = matchedSubCategory.map((subCat) => {
+        const matchChildCategory = childCategories.filter(
+          (childCat) => String(childCat.subCategoryId) === String(subCat._id)
         );
+        return { ...subCat, childCategories: matchChildCategory };
+      });
 
-        // 🧩 Main Category object এর সাথে তার SubCategory ও SubCategory এর মধ্যে Child Category গুলো merge করছি
-        return { ...cat, subCategories: subWithChild };
-      })
-    );
+      // 🟢 mainCategory object এর সাথে nested subCategory ও childCategory attach করা
+      return { ...mainCat, subCategories: subWithChild };
+    });
 
-    // ✅ সবকিছু সফলভাবে হলে success response পাঠানো হচ্ছে
+    // ✅ Response পাঠানো
     return res.status(200).json({
       success: true,
       error: false,
-      message: "Successfull to Get All Category.",
-      data: result,
+      message: "Successfully fetched all categories.",
+      data: getAllCategories,
     });
   } catch (error) {
-    // ❌ কোনো error হলে catch এ এসে error message পাঠানো হচ্ছে
     return res.status(500).json({
       success: false,
       error: true,
