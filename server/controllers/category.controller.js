@@ -2,6 +2,7 @@ import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 import mainCategory from "../models/mainCategory.model.js";
 import subCategory from "../models/subCategory.model.js";
+import childCategory from "../models/childCategory.model.js";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CONFIG_CLOUDE_NAME,
@@ -31,7 +32,7 @@ export const createMainCategories = async (req, res) => {
     });
 
     // Create Main Category and Save it on MongoDb
-    await mainCategory.create({
+    const categories = await mainCategory.create({
       name,
       image: categoryImage,
       slug: name.toLowerCase().replace(/\s+/g, "-"),
@@ -41,6 +42,7 @@ export const createMainCategories = async (req, res) => {
     res.status(200).json({
       success: true,
       error: false,
+      mainCategory: categories,
       message: "Main Category Create Successfull.",
     });
   } catch (error) {
@@ -71,13 +73,59 @@ export const createSubCategory = async (req, res) => {
       slug: name.toLowerCase().replace(/\s+/g, "-"),
       mainCategoryId,
     });
-    res.status(201).json({ success: true, data: subCategories });
+    res.status(201).json({
+      success: true,
+      error: false,
+      message: "Successfull to Create Sub Category ",
+      data: subCategories,
+    });
   } catch (error) {
     // Handle errors
     res.status(500).json({
       success: false,
       error: true,
       message: error.message || "Internal Server Error to Create Sub-Category!",
+    });
+  }
+};
+
+//✅ Step 02 : Sub Category Create Controller
+export const createChildCategory = async (req, res) => {
+  try {
+    // 1. Extract data from req.body, req.params, or req.query
+    const { name, subCategoryId } = req.body;
+
+    // 2. Perform DB operations or business logic
+    const subCategories = await subCategory.findById(subCategoryId);
+
+    if (!subCategories) {
+      return res.status(404).json({
+        message: "Sub Category Not Found!",
+        error: true,
+        success: false,
+      });
+    }
+
+    const childCategories = await childCategory.create({
+      name,
+      slug: name.toLowerCase().replace(/\s+/g, "-"),
+      subCategoryId,
+    });
+
+    // 3. Send success response
+    return res.status(201).json({
+      success: true,
+      error: false,
+      message: "Successfull to Create Child Category.",
+      childCategory: childCategories,
+    });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({
+      success: false,
+      error: true,
+      message:
+        error.message || "Internal Server Error to Create Child Category!",
     });
   }
 };
