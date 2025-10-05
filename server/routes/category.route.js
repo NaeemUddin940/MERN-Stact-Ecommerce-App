@@ -86,6 +86,7 @@ categoryRoute.delete(
 categoryRoute.put(
   "/update-main-category/:id",
   authenticated,
+  upload.single("image"),
   updateMainCategory
 );
 

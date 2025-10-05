@@ -28,12 +28,6 @@ export const createMainCategory = async (req, res) => {
       }
     }
 
-    if (mainCategories.slug === name.toLowerCase().replace(/\s+/g, "-")) {
-      return res.status(400).json({
-        message: "Main Category Already Exist With This Name.",
-      });
-    }
-
     // Cloudinary Image upload options
     const options = {
       use_filename: true,
@@ -417,20 +411,59 @@ export const deleteChildCategory = async (req, res) => {
 export const updateMainCategory = async (req, res) => {
   try {
     const { name } = req.body;
-    const oldMainCategoryName = await mainCategory.findById(req.params.id);
-    await mainCategory.findOneAndUpdate(
+
+    // 1️⃣ পুরনো category data বের করো
+    const mainCategories = await mainCategory.findById(req.params.id);
+    if (!mainCategories) {
+      return res.status(404).json({
+        success: false,
+        message: "Main category not found!",
+      });
+    }
+
+    // 2️⃣ পুরনো image public_id বের করো
+    const oldImageUrl = mainCategories.image;
+    if (oldImageUrl) {
+      const urlArr = oldImageUrl.split("/");
+      const image = urlArr[urlArr.length - 1];
+      const imageName = image.split(".")[0];
+
+      // Cloudinary থেকে পুরনো image delete করো
+      await cloudinary.uploader.destroy(imageName);
+    }
+
+    // 3️⃣ Cloudinary upload options
+    const options = {
+      use_filename: true,
+      unique_filename: false,
+      overwrite: true,
+    };
+
+    // 4️⃣ নতুন image upload
+    const result = await cloudinary.uploader.upload(req.file.path, options);
+    const categoryImage = result.secure_url;
+
+    // লোকাল থেকে image delete করো
+    fs.unlinkSync(`uploads/${req.file.filename}`);
+
+    // 5️⃣ MongoDB update করো
+    const updatedCategory = await mainCategory.findOneAndUpdate(
       { _id: req.params.id },
-      { name: name, slug: name.toLowerCase().replace(/\s+/g, "-") },
+      {
+        name: name,
+        slug: name.toLowerCase().replace(/\s+/g, "-"),
+        image: categoryImage,
+      },
       { new: true }
     );
 
+    // 6️⃣ Response পাঠাও
     res.status(200).json({
       success: true,
       error: false,
-      message: `Successfull to Update ${oldMainCategoryName.name} to ${name} Category`,
+      message: `Successfull to Update ${mainCategories.name} to ${updatedCategory.name} Category`,
     });
   } catch (error) {
-    // Handle errors
     res.status(500).json({
       success: false,
       error: true,
