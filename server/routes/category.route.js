@@ -10,6 +10,7 @@ import {
   getChildCategoryCount,
   getMainCategoryCount,
   getSubCategoryCount,
+  updateMainCategory,
 } from "../controllers/category.controller.js";
 import upload from "../middlewares/multer.js";
 import { authenticated } from "../middlewares/authenticated.js";
@@ -71,10 +72,19 @@ categoryRoute.delete(
   authenticated,
   deleteSubCategory
 );
+
+// Delete Child Category
 categoryRoute.delete(
   "/delete-child-category/:id",
   authenticated,
   deleteChildCategory
+);
+
+// Update Main Category
+categoryRoute.put(
+  "/update-main-category/:id",
+  authenticated,
+  updateMainCategory
 );
 
 export default categoryRoute;

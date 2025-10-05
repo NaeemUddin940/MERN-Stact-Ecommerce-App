@@ -412,3 +412,30 @@ export const deleteChildCategory = async (req, res) => {
     });
   }
 };
+
+//✅ Step 11 : Update Main Category Controller
+export const updateMainCategory = async (req, res) => {
+  try {
+    const { name } = req.body;
+    const mainCategoryNameToShow = await mainCategory.findById(req.params.id);
+    await mainCategory.findOneAndUpdate(
+      { _id: req.params.id },
+      { name: name, slug: name.toLowerCase().replace(/\s+/g, "-") },
+      { new: true }
+    );
+
+    res.status(200).json({
+      success: true,
+      error: false,
+      message: `Successfull to Update ${mainCategoryNameToShow.name} to ${name} Category`,
+    });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({
+      success: false,
+      error: true,
+      message:
+        error.message || "Internal Server Error to Update Main Category!",
+    });
+  }
+};
