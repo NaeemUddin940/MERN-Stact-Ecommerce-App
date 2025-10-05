@@ -4,6 +4,7 @@ import {
   createMainCategory,
   createSubCategory,
   deleteMainCategory,
+  deleteSubCategory,
   getAllCategories,
   getChildCategoryCount,
   getMainCategoryCount,
@@ -62,5 +63,8 @@ categoryRoute.delete(
   authenticated,
   deleteMainCategory
 );
+
+// Delete Sub Category
+categoryRoute.delete("/delete-sub-category/:id", authenticated, deleteSubCategory);
 
 export default categoryRoute;

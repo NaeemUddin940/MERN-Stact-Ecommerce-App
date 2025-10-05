@@ -174,6 +174,14 @@ export const getAllCategories = async (req, res) => {
       return { ...mainCat, subCategories: subWithChild };
     });
 
+    if (getAllCategories.length <= 0) {
+      return res.status(404).json({
+        message: "Not Found any Categories.",
+        error: true,
+        success: false,
+      });
+    }
+
     // ✅ Response পাঠানো
     return res.status(200).json({
       success: true,
@@ -327,6 +335,37 @@ export const deleteMainCategory = async (req, res) => {
       message:
         error.message ||
         `Internal Server Error to Delete ${mainCategories.name} Category!`,
+    });
+  }
+};
+
+
+//✅ Step 09 : Delete Sub Category Controller
+export const deleteSubCategory = async (req, res) => {
+  try {
+    const subCategoryNameToShow = await subCategory.findById(req.params.id);
+
+    const childCategories = await childCategory.find({
+      subCategoryId: req.params.id,
+    });
+
+    for (let j = 0; j < childCategories.length; j++) {
+      await childCategory.findByIdAndDelete(childCategories[j]._id);
+    }
+
+    await subCategory.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+      success: true,
+      error: false,
+      message: `Successfull to Delete ${subCategoryNameToShow.name} Category`,
+    });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({
+      success: false,
+      error: true,
+      message: error.message || "Internal Server Error to Delete Sub Category!",
     });
   }
 };
