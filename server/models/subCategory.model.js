@@ -18,7 +18,7 @@ const subCategorySchema = new mongoose.Schema(
       ref: "MainCategory",
       required: true,
     },
-  },  
+  },
   { timestamps: true }
 );
 

@@ -1,5 +1,14 @@
 import { Router } from "express";
-
+import { createMainCategories } from "../controllers/category.controller.js";
+import upload from "../middlewares/multer.js";
+import { authenticated } from "../middlewares/authenticated.js";
 const categoryRoute = Router();
+
+categoryRoute.post(
+  "/create-main-category",
+  authenticated,
+  upload.single("image"),
+  createMainCategories
+);
 
 export default categoryRoute;
