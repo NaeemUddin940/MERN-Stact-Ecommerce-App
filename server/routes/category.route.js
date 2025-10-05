@@ -11,6 +11,7 @@ import {
   getMainCategoryCount,
   getSubCategoryCount,
   updateMainCategory,
+  updateSubCategory,
 } from "../controllers/category.controller.js";
 import upload from "../middlewares/multer.js";
 import { authenticated } from "../middlewares/authenticated.js";
@@ -86,5 +87,8 @@ categoryRoute.put(
   authenticated,
   updateMainCategory
 );
+
+// Update Sub Category
+categoryRoute.put("/update-sub-category/:id", authenticated, updateSubCategory);
 
 export default categoryRoute;

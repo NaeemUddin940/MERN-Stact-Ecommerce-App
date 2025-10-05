@@ -417,7 +417,7 @@ export const deleteChildCategory = async (req, res) => {
 export const updateMainCategory = async (req, res) => {
   try {
     const { name } = req.body;
-    const mainCategoryNameToShow = await mainCategory.findById(req.params.id);
+    const oldMainCategoryName = await mainCategory.findById(req.params.id);
     await mainCategory.findOneAndUpdate(
       { _id: req.params.id },
       { name: name, slug: name.toLowerCase().replace(/\s+/g, "-") },
@@ -427,7 +427,7 @@ export const updateMainCategory = async (req, res) => {
     res.status(200).json({
       success: true,
       error: false,
-      message: `Successfull to Update ${mainCategoryNameToShow.name} to ${name} Category`,
+      message: `Successfull to Update ${oldMainCategoryName.name} to ${name} Category`,
     });
   } catch (error) {
     // Handle errors
@@ -436,6 +436,35 @@ export const updateMainCategory = async (req, res) => {
       error: true,
       message:
         error.message || "Internal Server Error to Update Main Category!",
+    });
+  }
+};
+
+
+
+//✅ Step 12 : Update Sub Category Controller
+export const updateSubCategory = async (req, res) => {
+  try {
+    const { name } = req.body;
+    const oldSubCategoryName = await subCategory.findById(req.params.id);
+    await subCategory.findOneAndUpdate(
+      { _id: req.params.id },
+      { name: name, slug: name.toLowerCase().replace(/\s+/g, "-") },
+      { new: true }
+    );
+
+    res.status(200).json({
+      success: true,
+      error: false,
+      message: `Successfull to Update ${oldSubCategoryName.name} to ${name} Category`,
+    });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({
+      success: false,
+      error: true,
+      message:
+        error.message || "Internal Server Error to Update Sub Category!",
     });
   }
 };
