@@ -15,10 +15,10 @@ export const postDataFromFrontend = async (url, formData) => {
     const data = await response.json(); // ✅ parse JSON
     return data; // ✅ return to caller
   } catch (error) {
-    return res.status(500).json({
+    return {
       message: error.message || "Internal Server Error!",
       error: true,
       success: false,
-    });
+    };
   }
 };

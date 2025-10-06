@@ -48,7 +48,7 @@ export default function Login() {
           </CardDescription>
           <CardAction>
             <Button variant="link">
-              <Link to="/user/sign-up" className="text-black">
+              <Link to="/user/register" className="text-black">
                 Sign Up
               </Link>
             </Button>

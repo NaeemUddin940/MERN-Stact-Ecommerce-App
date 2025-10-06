@@ -68,7 +68,7 @@ export default function MainHeader() {
                     <span className="mx-2">/</span>
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <Link className="hover:text-chart-4" to="/user/sign-up">
+                        <Link className="hover:text-chart-4" to="/user/register">
                           Register
                         </Link>
                       </TooltipTrigger>
@@ -135,7 +135,7 @@ export default function MainHeader() {
                     <Link to="/user/login">Login</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/user/sign-up">register</Link>
+                    <Link to="/user/register">register</Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

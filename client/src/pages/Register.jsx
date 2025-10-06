@@ -14,10 +14,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { postDataFromFrontend } from "@/utils/api";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export default function SignUp() {
+export default function Register() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -31,6 +32,7 @@ export default function SignUp() {
     setFormData({ ...formData, [name]: value });
   }
 
+  const navigate = useNavigate();
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -45,8 +47,10 @@ export default function SignUp() {
         // backend থেকে আসা success message
         toast.success(res.message);
 
-        // Optional: reset form
+        localStorage.setItem("userEmail", formData.email);
+
         setFormData({ name: "", email: "", password: "" });
+        navigate("/user/verify-otp");
       }
     } catch (error) {
       toast.error("Something went wrong, Please try again.");
@@ -126,16 +130,14 @@ export default function SignUp() {
               </div>
             </div>
             <div>
-              {loading ? (
-                <Loader />
-              ) : (
-                <Button
-                  type="submit"
-                  variant="modern"
-                  className="w-full mt-4 rounded-md">
-                  Sign Up
-                </Button>
-              )}
+              <Button
+                type="submit"
+                variant="modern"
+                disabled={loading ? "disabled" : ""}
+                className="w-full flex items-center justify-center mt-4 rounded-md">
+                {loading ? <Loader /> : " "}
+                Sign Up
+              </Button>
             </div>
           </form>
         </CardContent>

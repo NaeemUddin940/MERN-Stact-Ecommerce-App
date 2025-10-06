@@ -10,23 +10,23 @@ const Loader = () => {
 
 const StyledWrapper = styled.div`
   .loader {
-    border: 4px solid rgba(0, 0, 0, 0.1);
+    border: 4px solid rgba(0, 0, 0, 0.5);
     border-left-color: transparent;
     border-radius: 50%;
   }
 
   .loader {
-    border: 4px solid rgba(0, 0, 0, 0.1);
+    border: 4px solid rgba(0, 0, 0, 0.5);
     border-left-color: transparent;
-    width: 36px;
-    height: 36px;
+    width: 25px;
+    height: 25px;
   }
 
   .loader {
-    border: 4px solid rgba(0, 0, 0, 0.1);
+    border: 3px solid rgba(0, 0, 0, 0.5);
     border-left-color: transparent;
-    width: 36px;
-    height: 36px;
+    width: 25px;
+    height: 25px;
     animation: spin89345 1s linear infinite;
   }
 

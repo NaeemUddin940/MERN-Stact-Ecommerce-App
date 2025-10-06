@@ -5,7 +5,6 @@ import NotFound from "./pages/NotFound";
 import Shop from "./pages/Shop";
 import Login from "./pages/Login";
 import ProductDetails from "./pages/ProductDetails";
-import SignUp from "./pages/SignUp";
 import Cart from "./pages/Cart";
 import ForgotPassword from "./pages/ForgotPassword";
 import CheckoutPage from "./pages/Checkout";
@@ -19,7 +18,6 @@ import HomeSlides from "@/Admin/pages/AddHomeSliders/AddHomeSliders";
 import ProductsList from "./Admin/pages/Products/ProductsList";
 import AdminLogin from "./Admin/pages/Auth/AdminLogin";
 import AdminSignUp from "./Admin/pages/Auth/AdminSignUp";
-import { VerifyOtp } from "./pages/VerifyOtp";
 import HomeSliderLists from "./Admin/pages/HomeSliderLists/HomeSliderLists";
 import AddHomeSliders from "@/Admin/pages/AddHomeSliders/AddHomeSliders";
 import AddCategory from "./Admin/pages/AddCategory/AddCategory";
@@ -28,6 +26,8 @@ import AddChildCategory from "./Admin/pages/AddChildCategory/AddChildCategory";
 import CategoryList from "./Admin/pages/AllCategoryList/AllCategoryList";
 import Users from "./Admin/pages/Users/Users";
 import Orders from "./Admin/pages/Orders/Orders";
+import Register from "./pages/Register";
+import VerifyOtp from "./pages/VerifyOtp";
 
 function App() {
   return (
@@ -40,10 +40,10 @@ function App() {
         <Route path="/my-account" element={<UsersProfile />} />
         <Route path="/product-details/:id" element={<ProductDetails />} />
       </Route>
-      <Route path="/verify-otp" element={<VerifyOtp />} />
+      <Route path="/user/verify-otp" element={<VerifyOtp />} />
       <Route path="/user/login" element={<Login />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/user/sign-up" element={<SignUp />} />
+      <Route path="/user/register" element={<Register />} />
 
       {/* Admin ROutes Define Here */}
       <Route
