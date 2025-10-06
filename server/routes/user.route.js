@@ -5,6 +5,7 @@ import {
   refreshTokenController,
   registerUserController,
   resetPasswordController,
+  sendAgainOtp,
   userAvatarRemoveController,
   userAvatarUploadController,
   userDetails,
@@ -15,12 +16,15 @@ import {
 } from "../controllers/user.controller.js";
 import { authenticated } from "../middlewares/authenticated.js";
 import upload from "../middlewares/multer.js";
+import { validateSendAgainOtp } from "../validations/validateSendAgainOtp.js";
 
 const userRoute = Router();
 
 userRoute.post("/register", registerUserController);
 
 userRoute.post("/verifyEmail", verifyEmailController);
+
+userRoute.post("/send-again-otp", validateSendAgainOtp, sendAgainOtp);
 
 userRoute.post("/login", loginUserController);
 
@@ -50,6 +54,6 @@ userRoute.post(
 
 userRoute.put("/change-password", resetPasswordController);
 userRoute.post("/refresh-token", refreshTokenController);
-userRoute.get("/user-details", authenticated, userDetails)
+userRoute.get("/user-details", authenticated, userDetails);
 
 export default userRoute;

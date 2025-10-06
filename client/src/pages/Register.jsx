@@ -48,6 +48,7 @@ export default function Register() {
         toast.success(res.message);
 
         localStorage.setItem("userEmail", formData.email);
+        localStorage.setItem("userName", formData.name);
 
         setFormData({ name: "", email: "", password: "" });
         navigate("/user/verify-otp");

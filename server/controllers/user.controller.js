@@ -8,6 +8,7 @@ import generateRefreshToken from "../utils/generateRefreshToken.js";
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 import generateOTP from "../utils/generateOTP.js";
+import { validationResult } from "express-validator";
 import verifyForgotPasswordEmailTemplate from "../utils/verifyforgotPasswordEmailTemplate.js";
 
 cloudinary.config({
@@ -150,6 +151,49 @@ export async function verifyEmailController(req, res) {
   }
 }
 
+export async function sendAgainOtp(req, res) {
+  try {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: errors.array()[0].msg, // only first error message
+      });
+    }
+
+    const { name, email } = req.body;
+
+    const user = await userModel.findOne({ email });
+    // Generate VerifyCode / OTP
+    const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // Send Verification Email
+    await sendEmail({
+      sendTo: email,
+      subject: "Verify Your Email",
+      text: "",
+      html: verifyEmailTemplate(name, verifyCode),
+    });
+
+    user.otp = verifyCode;
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      error: false,
+      message: "Successfull to Send OTP.",
+    });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({
+      success: false,
+      error: true,
+      message: error.message || "Internal Server Error to Send OTP!",
+    });
+  }
+}
 // This is user Login Controller
 export async function loginUserController(req, res) {
   try {

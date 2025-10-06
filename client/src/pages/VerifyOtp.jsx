@@ -14,10 +14,9 @@ import { useNavigate } from "react-router-dom";
 export default function VerifyOtp() {
   const [otpValue, setOtpValue] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isSentOtp, setIsSentOtp] = useState(false);
 
   const navigate = useNavigate();
-
-  const email = localStorage.getItem("userEmail");
 
   const handleOTPComplete = async (value) => {
     setOtpValue(value);
@@ -28,7 +27,7 @@ export default function VerifyOtp() {
       setLoading(true);
 
       const res = await postDataFromFrontend("/api/user/verifyEmail", {
-        email: email,
+        email: localStorage.getItem("userEmail"),
         otp: otpValue,
       });
       if (res.success) {
@@ -38,14 +37,30 @@ export default function VerifyOtp() {
         toast.error(res.message);
       }
     } catch (error) {
-      toast.error("Something went wrong, Please try again.");
+      toast.error("Failed to Verify Email.");
     } finally {
       setLoading(false);
     }
   }
 
   async function sendOTP() {
-    
+    try {
+      setIsSentOtp(true);
+
+      const res = await postDataFromFrontend("/api/user/send-again-otp", {
+        name: localStorage.getItem("userName"),
+        email: localStorage.getItem("userEmail"),
+      });
+      if (res.success) {
+        toast.success(res.message);
+      } else {
+        toast.error(res.message);
+      }
+    } catch (error) {
+      toast.error("Failed to Send OTP.");
+    } finally {
+      setIsSentOtp(false);
+    }
   }
 
   return (
@@ -72,7 +87,10 @@ export default function VerifyOtp() {
 
             <h3 className="text-xl font-bold">Verify OTP</h3>
             <p>
-              OTP send to <span className="text-[#8b14e7]">{email}</span>
+              OTP send to{" "}
+              <span className="text-[#8b14e7]">
+                {localStorage.getItem("userEmail")}
+              </span>
             </p>
             <InputOTP maxLength={6} onComplete={handleOTPComplete}>
               <InputOTPGroup>
@@ -87,7 +105,7 @@ export default function VerifyOtp() {
             <button
               className="cursor-pointer hover:text-chart-4"
               onClick={sendOTP}>
-              Send Again
+              {isSentOtp ? "Sending...." : "Send Again"}
             </button>
           </div>
           <Button
