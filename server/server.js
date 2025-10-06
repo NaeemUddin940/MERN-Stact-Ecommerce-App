@@ -8,6 +8,7 @@ import helmet from "helmet";
 import connectDB from "./config/connectDB.js";
 import userRoute from "./routes/user.route.js";
 import categoryRoute from "./routes/category.route.js";
+import productRoute from "./routes/product.route.js";
 const app = express();
 
 const port = process.env.PORT || 8080;
@@ -25,16 +26,26 @@ app.use(
   })
 );
 
+
+
 // Database Connect
 connectDB();
+
+
 
 // Home Page Route
 app.get("/", (req, res) => {
   res.send("Hello, Express!");
 });
 
+
+
 app.use("/api/user", userRoute);
 app.use("/api/user/admin", categoryRoute);
+app.use("/api/user/admin", productRoute)
+
+
+
 
 // Server is Running
 app.listen(port, () => {
