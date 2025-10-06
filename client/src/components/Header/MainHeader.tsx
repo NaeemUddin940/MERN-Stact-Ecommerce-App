@@ -135,7 +135,7 @@ export default function MainHeader() {
                     <Link to="/user/login">Login</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/user/register">register</Link>
+                    <Link to="/user/sign-up">register</Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
