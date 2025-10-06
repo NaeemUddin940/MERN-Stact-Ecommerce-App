@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const productSchema = new mongoose.Schema(
   {
@@ -52,7 +53,7 @@ const productSchema = new mongoose.Schema(
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
-      required: true,
+      // required: true,
     },
     inStockCount: {
       type: Number,
@@ -70,7 +71,7 @@ const productSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    isNew: {
+    isNewProduct: {
       type: Boolean,
       default: false,
     },
@@ -85,6 +86,7 @@ const productSchema = new mongoose.Schema(
     discount: {
       type: Number,
     },
+
     size: [{ type: String }, { default: null }],
     ram: [{ type: String }, { default: null }],
     storage: [{ type: String }, { default: null }],
@@ -92,6 +94,7 @@ const productSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+productSchema.plugin(mongoosePaginate);
 
 const productsCollection = mongoose.model("products", productSchema);
 export default productsCollection;
