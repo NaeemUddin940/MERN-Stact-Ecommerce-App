@@ -10,7 +10,11 @@ import { ToastContainer } from "react-toastify";
 
 createRoot(document.getElementById("root")!).render(
   <ProductProvider>
-    <ToastContainer pauseOnHover={false} position="top-center" />
+    <ToastContainer
+      pauseOnHover={false}
+      position="top-center"
+      autoClose={1000}
+    />
     <NavItemProvider>
       <CategoryProvider>
         <BrowserRouter>

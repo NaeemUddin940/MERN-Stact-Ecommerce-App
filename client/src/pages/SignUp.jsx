@@ -1,3 +1,4 @@
+import Loader from "@/components/Loader/Loader";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,8 +12,10 @@ import {
 import GoogleLoginButton from "@/components/ui/GoogleLoginButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { postDataFromFrontend } from "@/utils/api";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -21,21 +24,35 @@ export default function SignUp() {
     password: "",
   });
 
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+  const [loading, setLoading] = useState(false);
+
+  function handleChange(e) {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   }
 
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    setFormData({
-      name: "",
-      email: "",
-      password: "",
-    });
+    try {
+      const res = await postDataFromFrontend("/api/user/register", formData);
 
-    console.log(formData);
+      if (!res.success) {
+        // backend থেকে আসা error message
+        toast.error(res.message);
+      } else {
+        // backend থেকে আসা success message
+        toast.success(res.message);
+
+        // Optional: reset form
+        setFormData({ name: "", email: "", password: "" });
+      }
+    } catch (error) {
+      toast.error("Something went wrong, Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -81,7 +98,6 @@ export default function SignUp() {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Enter Your Name"
-                  required
                 />
               </div>
               <div className="grid gap-2">
@@ -93,7 +109,6 @@ export default function SignUp() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="m@example.com"
-                  required
                 />
               </div>
               <div className="grid gap-2">
@@ -107,16 +122,21 @@ export default function SignUp() {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Enter Your Password!"
-                  required
                 />
               </div>
             </div>
-            <Button
-              type="submit"
-              variant="modern"
-              className="w-full mt-4 rounded-md">
-              Sign Up
-            </Button>
+            <div>
+              {loading ? (
+                <Loader />
+              ) : (
+                <Button
+                  type="submit"
+                  variant="modern"
+                  className="w-full mt-4 rounded-md">
+                  Sign Up
+                </Button>
+              )}
+            </div>
           </form>
         </CardContent>
         <CardFooter className="flex-col gap-2">

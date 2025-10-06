@@ -132,10 +132,10 @@ export default function MainHeader() {
                 </Tooltip>
                 <DropdownMenuContent className="data-[state=open]:animate-slide-in-bottom data-[state=closed]:animate-fade-out delay-200">
                   <DropdownMenuItem asChild>
-                    <Link to="/auth/login">Login</Link>
+                    <Link to="/user/login">Login</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/auth/register">register</Link>
+                    <Link to="/user/register">register</Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
