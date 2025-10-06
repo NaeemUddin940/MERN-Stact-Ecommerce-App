@@ -17,6 +17,8 @@ import {
 import { authenticated } from "../middlewares/authenticated.js";
 import upload from "../middlewares/multer.js";
 import { validateSendAgainOtp } from "../validations/validateSendAgainOtp.js";
+import { loginValidator } from "../validations/loginValidations.js";
+import { validateRequest } from "../middlewares/validationRequest.js";
 
 const userRoute = Router();
 
@@ -24,9 +26,14 @@ userRoute.post("/register", registerUserController);
 
 userRoute.post("/verifyEmail", verifyEmailController);
 
-userRoute.post("/send-again-otp", validateSendAgainOtp, sendAgainOtp);
+userRoute.post(
+  "/send-again-otp",
+  validateSendAgainOtp,
+  validateRequest,
+  sendAgainOtp
+);
 
-userRoute.post("/login", loginUserController);
+userRoute.post("/login", loginValidator, validateRequest, loginUserController);
 
 userRoute.get("/logout", authenticated, logoutUserController);
 

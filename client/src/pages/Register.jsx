@@ -113,7 +113,7 @@ export default function Register() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="m@example.com"
+                  placeholder="example@gmail.com"
                 />
               </div>
               <div className="grid gap-2">

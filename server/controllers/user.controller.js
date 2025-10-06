@@ -153,15 +153,6 @@ export async function verifyEmailController(req, res) {
 
 export async function sendAgainOtp(req, res) {
   try {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        success: false,
-        error: true,
-        message: errors.array()[0].msg, // only first error message
-      });
-    }
 
     const { name, email } = req.body;
 

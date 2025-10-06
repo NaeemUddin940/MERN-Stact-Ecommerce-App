@@ -11,13 +11,43 @@ import {
 import GoogleLoginButton from "@/components/ui/GoogleLoginButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { postDataFromFrontend } from "@/utils/api";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default function Login() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-  function ForgotPassword(e: React.MouseEvent<HTMLButtonElement>) {
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  }
+
+  async function submitForm(e) {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+      const res = await postDataFromFrontend("/api/user/login", formData);
+      if (res.success) {
+        toast.success(res.message);
+        navigate("/");
+      } else {
+        toast.error(res.message);
+      }
+    } catch (error) {
+      toast.error("Failed to Send Data");
+    } finally {
+      setLoading(false);
+    }
+  }
+  function ForgotPassword(e) {
     e.preventDefault(); // prevent form submission
     navigate("/verify-otp");
     toast.success("OTP Send");
@@ -41,22 +71,22 @@ export default function Login() {
       }}
       className="flex items-center  justify-center h-screen">
       <Card className="w-full max-w-sm text-black border-slate-300 shadow-shadow border-2 shadow-md">
-        <CardHeader>
-          <CardTitle className="text-lg">Login to your account</CardTitle>
-          <CardDescription className="text-black">
-            Enter your email below to login to your Account
-          </CardDescription>
-          <CardAction>
-            <Button variant="link">
-              <Link to="/user/register" className="text-black">
-                Sign Up
-              </Link>
-            </Button>
-          </CardAction>
-        </CardHeader>
+        <form onSubmit={submitForm}>
+          <CardHeader>
+            <CardTitle className="text-lg">Login to your account</CardTitle>
+            <CardDescription className="text-black">
+              Enter your email below to login to your Account
+            </CardDescription>
+            <CardAction>
+              <Button variant="link">
+                <Link to="/user/register" className="text-black">
+                  Sign Up
+                </Link>
+              </Button>
+            </CardAction>
+          </CardHeader>
 
-        <CardContent>
-          <form>
+          <CardContent>
             <div className="flex flex-col gap-6">
               {/* Email */}
               <div className="grid gap-2">
@@ -64,8 +94,10 @@ export default function Login() {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="m@example.com"
-                  required
+                  name="email"
+                  value={FormData.email}
+                  onChange={handleChange}
+                  placeholder="example@gamil.com"
                 />
               </div>
 
@@ -80,18 +112,27 @@ export default function Login() {
                     Forgot your password?
                   </button>
                 </div>
-                <Input id="password" type="password" required />
+                <Input
+                  id="password"
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
               </div>
             </div>
-          </form>
-        </CardContent>
+          </CardContent>
 
-        <CardFooter className="flex-col gap-2 w-full">
-          <Button type="submit" variant="modern" className="w-full rounded-md">
-            Login
-          </Button>
-          <GoogleLoginButton />
-        </CardFooter>
+          <CardFooter className="flex-col gap-4 mt-7 w-full">
+            <Button
+              type="submit"
+              variant="modern"
+              className="w-full rounded-md">
+              Login
+            </Button>
+            <GoogleLoginButton />
+          </CardFooter>
+        </form>
       </Card>
     </div>
   );
