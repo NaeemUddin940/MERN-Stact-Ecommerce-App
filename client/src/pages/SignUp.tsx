@@ -11,9 +11,33 @@ import {
 import GoogleLoginButton from "@/components/ui/GoogleLoginButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function SignUp() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  }
+
+  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setFormData({
+      name: "",
+      email: "",
+      password: "",
+    });
+
+    console.log(formData);
+  };
+
   return (
     <div
       style={{
@@ -46,13 +70,16 @@ export default function SignUp() {
           </CardAction>
         </CardHeader>
         <CardContent>
-          <form>
-            <div className="flex flex-col gap-6">
+          <form onSubmit={submitHandler}>
+            <div className="flex flex-col placeholder:text-black gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="name">Name</Label>
                 <Input
                   id="name"
                   type="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="Enter Your Name"
                   required
                 />
@@ -62,6 +89,9 @@ export default function SignUp() {
                 <Input
                   id="email"
                   type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="m@example.com"
                   required
                 />
@@ -70,15 +100,26 @@ export default function SignUp() {
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
                 </div>
-                <Input id="password" type="password" required />
+                <Input
+                  id="password"
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="Enter Your Password!"
+                  required
+                />
               </div>
             </div>
+            <Button
+              type="submit"
+              variant="modern"
+              className="w-full mt-4 rounded-md">
+              Sign Up
+            </Button>
           </form>
         </CardContent>
         <CardFooter className="flex-col gap-2">
-          <Button type="submit" variant="modern" className="w-full rounded-md">
-            Sign Up
-          </Button>
           <GoogleLoginButton />
         </CardFooter>
       </Card>
