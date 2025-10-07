@@ -122,16 +122,12 @@ export default function MainHeader() {
                     {" "}
                     <DropdownMenu>
                       <DropdownMenuTrigger>
-                        <div className="flex items-center  cursor-pointer bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-lg justify-center gap-4">
-                          {/* <img
-                            className="h-10 w-10 rounded-full"
-                            src=""
+                        <div className="flex items-center cursor-pointer rounded-full py-1 justify-center gap-4">
+                          <img
+                            className="h-10 w-10 rounded-full object-cover border-2"
+                            src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                             alt=""
-                          /> */}
-                          <div className="flex text-sm flex-col justify-center items-start">
-                            <h5 className="uppercase">MD. NAEEM UDDIN</h5>
-                            <p>mdnaeemuddin14@gmail.com</p>
-                          </div>
+                          />
                         </div>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>

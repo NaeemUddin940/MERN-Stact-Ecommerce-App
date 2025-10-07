@@ -18,10 +18,7 @@ app.use(express.json());
 // app.use(cors());
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://mern-stact-ecommerce-app.vercel.app",
-    ],
+    origin: "*",
     credentials: true,
   })
 );
