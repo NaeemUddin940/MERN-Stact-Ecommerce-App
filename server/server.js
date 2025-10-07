@@ -15,8 +15,13 @@ const port = process.env.PORT || 8080;
 
 // Middlewares setup
 app.use(express.json());
-app.use(cors());
-// app.options("http://localhost:5173", cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan());
@@ -26,26 +31,17 @@ app.use(
   })
 );
 
-
-
 // Database Connect
 connectDB();
-
-
 
 // Home Page Route
 app.get("/", (req, res) => {
   res.send("Hello, Express!");
 });
 
-
-
 app.use("/api/user", userRoute);
 app.use("/api/user/admin", categoryRoute);
-app.use("/api/user/admin", productRoute)
-
-
-
+app.use("/api/user/admin", productRoute);
 
 // Server is Running
 app.listen(port, () => {

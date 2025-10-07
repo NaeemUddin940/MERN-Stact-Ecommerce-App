@@ -4,9 +4,10 @@ export async function authenticated(req, res, next) {
     const token =
       req.cookies.accessToken || req?.header?.authorization?.split(" ")[1];
 
+    console.log(token);
     if (!token) {
       return res.status(401).json({
-        message: "You have to login first to access this page.",
+        message: "Access Token Not Found!",
         success: false,
         error: true,
       });

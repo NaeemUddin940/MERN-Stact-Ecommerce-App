@@ -12,7 +12,7 @@ import {
 import GoogleLoginButton from "@/components/ui/GoogleLoginButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { postDataFromFrontend } from "@/utils/api";
+import { postData } from "@/utils/PostData";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -38,7 +38,7 @@ export default function Register() {
     setLoading(true);
 
     try {
-      const res = await postDataFromFrontend("/api/user/register", formData);
+      const res = await postData("/api/user/register", formData);
 
       if (!res.success) {
         // backend থেকে আসা error message
@@ -54,7 +54,7 @@ export default function Register() {
         navigate("/user/verify-otp");
       }
     } catch (error) {
-      toast.error("Something went wrong, Please try again.");
+      toast.error("Failed to Post Data on Backend");
     } finally {
       setLoading(false);
     }

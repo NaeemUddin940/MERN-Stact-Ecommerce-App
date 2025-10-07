@@ -7,7 +7,7 @@ import {
 import shield from "/shield.png";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { postDataFromFrontend } from "@/utils/api";
+import { postData } from "@/utils/PostData";
 import Loader from "@/components/Loader/Loader";
 import { useNavigate } from "react-router-dom";
 
@@ -26,7 +26,7 @@ export default function VerifyOtp() {
     try {
       setLoading(true);
 
-      const res = await postDataFromFrontend("/api/user/verifyEmail", {
+      const res = await postData("/api/user/verifyEmail", {
         email: localStorage.getItem("userEmail"),
         otp: otpValue,
       });
@@ -47,7 +47,7 @@ export default function VerifyOtp() {
     try {
       setIsSentOtp(true);
 
-      const res = await postDataFromFrontend("/api/user/send-again-otp", {
+      const res = await postData("/api/user/send-again-otp", {
         name: localStorage.getItem("userName"),
         email: localStorage.getItem("userEmail"),
       });

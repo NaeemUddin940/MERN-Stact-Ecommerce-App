@@ -1,3 +1,4 @@
+import Loader from "@/components/Loader/Loader";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,46 +12,54 @@ import {
 import GoogleLoginButton from "@/components/ui/GoogleLoginButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { postDataFromFrontend } from "@/utils/api";
+import { useAuthContext } from "@/context/AuthContext";
+import { postData } from "@/utils/PostData";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { setIsLogin } = useAuthContext();
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({ email: "", password: "" });
 
+  // handle input changes
   function handleChange(e) {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   }
 
+  // login form submit
   async function submitForm(e) {
     e.preventDefault();
+    setLoading(true);
 
     try {
-      setLoading(true);
-      const res = await postDataFromFrontend("/api/user/login", formData);
+      const res = await postData("/api/user/login", formData, {
+        credentials: "include", // 🔥 cookie support
+      });
+
       if (res.success) {
+        setIsLogin(true);
         toast.success(res.message);
-        navigate("/");
+        setFormData({ email: "", password: "" });
+        navigate("/"); // redirect after login
       } else {
         toast.error(res.message);
       }
     } catch (error) {
-      toast.error("Failed to Send Data");
+      toast.error("Failed to send data");
     } finally {
       setLoading(false);
     }
   }
+
+  // forgot password handler
   function ForgotPassword(e) {
-    e.preventDefault(); // prevent form submission
+    e.preventDefault();
     navigate("/verify-otp");
-    toast.success("OTP Send");
+    toast.success("OTP sent");
   }
 
   return (
@@ -69,13 +78,13 @@ export default function Login() {
         radial-gradient(circle at 50% 60%, rgba(147,112,219,0.3) 0%, transparent 60%)
       `,
       }}
-      className="flex items-center  justify-center h-screen">
-      <Card className="w-full max-w-sm text-black border-slate-300 shadow-shadow border-2 shadow-md">
+      className="flex items-center justify-center h-screen">
+      <Card className="w-full max-w-sm text-black border-slate-300 border-2 shadow-md">
         <form onSubmit={submitForm}>
           <CardHeader>
             <CardTitle className="text-lg">Login to your account</CardTitle>
             <CardDescription className="text-black">
-              Enter your email below to login to your Account
+              Enter your email and password to login
             </CardDescription>
             <CardAction>
               <Button variant="link">
@@ -95,9 +104,10 @@ export default function Login() {
                   id="email"
                   type="email"
                   name="email"
-                  value={FormData.email}
+                  value={formData.email}
                   onChange={handleChange}
-                  placeholder="example@gamil.com"
+                  placeholder="example@gmail.com"
+                  required
                 />
               </div>
 
@@ -108,7 +118,7 @@ export default function Login() {
                   <button
                     onClick={ForgotPassword}
                     type="button"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline">
+                    className="ml-auto text-sm underline hover:underline-offset-4">
                     Forgot your password?
                   </button>
                 </div>
@@ -118,6 +128,7 @@ export default function Login() {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
+                  required
                 />
               </div>
             </div>
@@ -127,7 +138,9 @@ export default function Login() {
             <Button
               type="submit"
               variant="modern"
-              className="w-full rounded-md">
+              disabled={loading}
+              className="w-full rounded-md flex items-center justify-center gap-2">
+              {loading && <Loader />}
               Login
             </Button>
             <GoogleLoginButton />

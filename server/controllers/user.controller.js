@@ -8,7 +8,6 @@ import generateRefreshToken from "../utils/generateRefreshToken.js";
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 import generateOTP from "../utils/generateOTP.js";
-import { validationResult } from "express-validator";
 import verifyForgotPasswordEmailTemplate from "../utils/verifyforgotPasswordEmailTemplate.js";
 
 cloudinary.config({
@@ -153,7 +152,6 @@ export async function verifyEmailController(req, res) {
 
 export async function sendAgainOtp(req, res) {
   try {
-
     const { name, email } = req.body;
 
     const user = await userModel.findOne({ email });
@@ -185,6 +183,7 @@ export async function sendAgainOtp(req, res) {
     });
   }
 }
+
 // This is user Login Controller
 export async function loginUserController(req, res) {
   try {
@@ -262,6 +261,33 @@ export async function loginUserController(req, res) {
     });
   }
 }
+
+export const checkIsLogin = async (req, res) => {
+  try {
+    const token =
+      req.cookies.accessToken || req?.header?.authorization?.split(" ")[1];
+
+    if (!token) {
+      return res.status(401).json({
+        message: "Access Token Not Found!",
+        success: false,
+        error: true,
+      });
+    }
+    res.status(200).json({
+      success: true,
+      error: false,
+      message: "Successfull to Check Login",
+    });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({
+      success: false,
+      error: true,
+      message: error.message || "Internal Server Error to Check Login!",
+    });
+  }
+};
 
 // This is user Logout Controller
 export async function logoutUserController(req, res) {

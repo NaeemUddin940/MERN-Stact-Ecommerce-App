@@ -7,22 +7,25 @@ import { NavItemProvider } from "./context/NavItemContext";
 import { CategoryProvider } from "./context/CategoryContext";
 import { ThemeProvider } from "./components/ui/ThemeProvider";
 import { ToastContainer } from "react-toastify";
+import { AuthProvider } from "./context/AuthContext";
 
 createRoot(document.getElementById("root")!).render(
-  <ProductProvider>
-    <ToastContainer
-      pauseOnHover={false}
-      position="top-center"
-      autoClose={1000}
-    />
-    <NavItemProvider>
-      <CategoryProvider>
-        <BrowserRouter>
-          <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-            <App />
-          </ThemeProvider>
-        </BrowserRouter>
-      </CategoryProvider>
-    </NavItemProvider>
-  </ProductProvider>
+  <AuthProvider>
+    <ProductProvider>
+      <ToastContainer
+        pauseOnHover={false}
+        position="top-center"
+        autoClose={1000}
+      />
+      <NavItemProvider>
+        <CategoryProvider>
+          <BrowserRouter>
+            <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+              <App />
+            </ThemeProvider>
+          </BrowserRouter>
+        </CategoryProvider>
+      </NavItemProvider>
+    </ProductProvider>
+  </AuthProvider>
 );

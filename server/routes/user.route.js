@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  checkIsLogin,
   loginUserController,
   logoutUserController,
   refreshTokenController,
@@ -34,6 +35,8 @@ userRoute.post(
 );
 
 userRoute.post("/login", loginValidator, validateRequest, loginUserController);
+
+userRoute.get("/checkislogin", checkIsLogin);
 
 userRoute.get("/logout", authenticated, logoutUserController);
 
