@@ -18,10 +18,36 @@ app.use(express.json());
 // app.use(cors());
 app.use(
   cors({
-    origin: "*",
+    origin: [
+      "http://localhost:5173",
+      "https://mern-stact-ecommerce-app.vercel.app/",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
+
+// ✅ Allowed Origins List
+// const allowedOrigins = [
+//   "http://localhost:5173", // local frontend
+//   "https://yourapp.vercel.app", // vercel frontend
+// ];
+
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       // Allow requests with no origin (like mobile apps, Postman)
+//       if (!origin) return callback(null, true);
+//       if (allowedOrigins.includes(origin)) {
+//         return callback(null, true);
+//       } else {
+//         return callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//     credentials: true,
+//   })
+// );
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan());
