@@ -23,7 +23,7 @@ export default function Home() {
       {/* Home Page Section 2 FreeShipping & Small Banner*/}
       <div className="page-2 container-sm md:container-md my-10 ">
         <div className="bg-secondary border-2 rounded-sm  DmSans border-chart-4 flex flex-col lg:flex-row lg:justify-between justify-center items-center pr-5">
-          <div className="flex items-center gap-5 py-4 xl:py-0 xl:px-0 px-4">
+          <div className="flex items-center gap-5 mt-2 xl:py-0 xl:px-0 px-4">
             <img className="hidden xl:block" src="./truck.png" alt="" />
             <p className="text-[30px] lg:text-4xl text-center font-medium ">
               Free Shipping
@@ -31,7 +31,7 @@ export default function Home() {
           </div>
           <Separator orientation="vertical" className="h-10 hidden lg:block" />
           <div>
-            <p className="text-[18px] lg:text-2xl mb-5 lg:mb-0">
+            <p className="text-[18px] mt-2 lg:text-2xl lg:mb-0">
               Free Delivery Now On Your First Order and over $200
             </p>
           </div>

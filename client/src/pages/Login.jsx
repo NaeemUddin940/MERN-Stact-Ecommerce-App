@@ -64,8 +64,14 @@ export default function Login() {
   // forgot password handler
   async function ForgotPassword(e) {
     e.preventDefault();
+    console.log("object");
+    if (forgotEmail.email === "") {
+      toast.error("Please Enter Your Email.");
+      return;
+    }
 
     try {
+      console.log(forgotEmail);
       const res = await postData("/api/user/forgot-password", forgotEmail);
       if (res.success) {
         toast.success(`OTP Send to ${forgotEmail.email}`);
@@ -75,7 +81,7 @@ export default function Login() {
         toast.error(`Failed to send OTP ${forgotEmail.email}`);
       }
     } catch (error) {
-      toast.error("Failed to Send Your Email.");
+      console.error("Failed to Send Your Email.");
     }
   }
 

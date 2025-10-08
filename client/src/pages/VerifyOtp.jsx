@@ -64,7 +64,7 @@ export default function VerifyOtp() {
         toast.error(res.message);
       }
     } catch (error) {
-      toast.error("Failed to Send OTP.");
+      console.error("Failed to Send OTP.");
     } finally {
       setIsSentOtp(false);
     }
@@ -78,10 +78,10 @@ export default function VerifyOtp() {
         otp: otpValue,
       });
       if (res.success) {
-        toast.success("Successfull to Verify Your Email.");
+        toast.success(res.message);
         navigate("/user/forgot-password");
       } else {
-        toast.error("Failed to Verify Your Email.");
+        toast.error(res.message);
       }
     } catch (error) {
       toast.error("Falied to Verify");

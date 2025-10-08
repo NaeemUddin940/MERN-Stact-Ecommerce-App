@@ -20,6 +20,7 @@ import upload from "../middlewares/multer.js";
 import { validateSendAgainOtp } from "../validations/validateSendAgainOtp.js";
 import { loginValidator } from "../validations/loginValidations.js";
 import { validateRequest } from "../middlewares/validationRequest.js";
+import { changePasswordValidator } from "../validations/changePassword.js";
 
 const userRoute = Router();
 
@@ -62,7 +63,13 @@ userRoute.post(
   verifyForgotPasswordOTPController
 );
 
-userRoute.put("/change-password", resetPasswordController);
+userRoute.put(
+  "/change-password",
+  changePasswordValidator,
+  validateRequest,
+  resetPasswordController
+);
+
 userRoute.post("/refresh-token", refreshTokenController);
 userRoute.get("/user-details", authenticated, userDetails);
 

@@ -631,49 +631,50 @@ export async function verifyForgotPasswordOTPController(req, res) {
 //  This is user Reset Password Controller
 export async function resetPasswordController(req, res) {
   try {
-    // Get email, password and confirm password
-    const { email, password, confirmPassword } = req.body;
+    const { email, newPassword, confirmPassword } = req.body;
+    console.log(
+      "Email:",
+      email,
+      "New Password:",
+      newPassword,
+      "Confirm:",
+      confirmPassword
+    );
 
-    if (!email || !password || !confirmPassword) {
-      return res.status(400).json({
-        message:
-          "Please Provide your valid Email, New Password and Confirm Password.",
-        error: true,
-        succes: false,
-      });
-    }
-
-    // Check with this email user have or not
     const user = await userModel.findOne({ email });
-
-    // Check new Password and confirm password is match or not
-    if (password !== confirmPassword) {
-      return res.status(401).json({
-        message: "New Password and Confirm Password is not Matched.",
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found with this email.",
         success: false,
         error: true,
       });
     }
+    if (newPassword !== confirmPassword) {
+      return res.status(400).json({
+        message: "Password do not Match!",
+        succes: false,
+        error: true,
+      });
+    }
 
-    // HashedPassword
     const salt = await bcryptjs.genSalt(10);
-    const hashPassword = await bcryptjs.hash(password, salt);
+    const hashPassword = await bcryptjs.hash(newPassword, salt);
 
-    // Set into databse new hashed password
-    await userModel.findOneAndUpdate(user._id, {
-      password: hashPassword,
-    });
+    await userModel.findOneAndUpdate(
+      { _id: user._id },
+      { password: hashPassword }
+    );
 
     return res.status(200).json({
-      mesage: "Password Update Successfull.",
+      message: "Password changed successfully.",
       success: true,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
       message: error.message || "Failed to Change Password.",
-      error: true,
       success: false,
+      error: true,
     });
   }
 }
