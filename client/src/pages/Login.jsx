@@ -35,7 +35,7 @@ export default function Login() {
     const { name, value } = e.target;
     setForgotEmail({ ...forgotEmail, [name]: value });
   }
-  console.log(forgotEmail);
+  
   // login form submit
   async function submitForm(e) {
     e.preventDefault();
@@ -71,7 +71,6 @@ export default function Login() {
     }
 
     try {
-      console.log(forgotEmail);
       const res = await postData("/api/user/forgot-password", forgotEmail);
       if (res.success) {
         toast.success(`OTP Send to ${forgotEmail.email}`);

@@ -7,6 +7,8 @@ import { Gift, PieChart, Warehouse } from "lucide-react";
 import { StatsCard } from "../../Components/Dashboard/StatisticsCard";
 import RecentOrders from "../../Components/Dashboard/RecentOrders";
 import ProductsList from "../../Components/Dashboard/ProductsList";
+import { toast } from "react-toastify";
+import { useAuthContext } from "@/context/AuthContext";
 const stats = [
   {
     title: "New Orders",
@@ -38,6 +40,10 @@ const stats = [
   },
 ];
 export default function Dashboard() {
+  const { user } = useAuthContext();
+  setTimeout(() => {
+    toast.success(`${user.name} Welcome to Your Store.`);
+  }, 1000);
   return (
     <div>
       <div className="flex flex-1 flex-col">
