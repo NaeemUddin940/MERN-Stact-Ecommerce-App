@@ -3,6 +3,7 @@ import MainHeader from "@/components/Header/MainHeader";
 import Navigation from "@/components/Header/Navigation";
 import TopNavbar from "@/components/Header/TopNavbar";
 import ServicesSection from "@/components/Home/ServicesSection";
+import Loader from "@/pages/PageLoader";
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 
@@ -16,7 +17,9 @@ export default function PublicLayouts() {
   return (
     <div>
       {loader ? (
-        <div>Loading.....</div>
+        <div className="h-screen flex items-center justify-center">
+          <Loader />
+        </div>
       ) : (
         <div>
           <TopNavbar />
