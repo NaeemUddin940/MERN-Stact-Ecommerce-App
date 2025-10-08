@@ -20,7 +20,7 @@ import { toast } from "react-toastify";
 
 export default function Login() {
   const navigate = useNavigate();
-  const { setIsLogin } = useAuthContext();
+  const { setIsLogin, setAuthChanged } = useAuthContext();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [forgotEmail, setForgotEmail] = useState({ email: "" });
@@ -35,7 +35,7 @@ export default function Login() {
     const { name, value } = e.target;
     setForgotEmail({ ...forgotEmail, [name]: value });
   }
-  
+
   // login form submit
   async function submitForm(e) {
     e.preventDefault();
@@ -49,6 +49,7 @@ export default function Login() {
       if (res.success) {
         setIsLogin(true);
         toast.success(res.message);
+        setAuthChanged((prev) => !prev);
         setFormData({ email: "", password: "" });
         navigate("/"); // redirect after login
       } else {

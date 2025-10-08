@@ -24,11 +24,10 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { useAuthContext } from "@/context/AuthContext";
 import { getData } from "@/utils/GetData";
-import { postData } from "@/utils/PostData";
 
 export default function MainHeader() {
   const { navItem } = usenavItemContext();
-  const { setIsLogin, isLogin } = useAuthContext();
+  const { setIsLogin, isLogin, setAuthChanged, user } = useAuthContext();
 
   useEffect(() => {
     async function checkIsLogin() {
@@ -57,6 +56,8 @@ export default function MainHeader() {
         setIsLogin(false);
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
+        localStorage.removeItem("role");
+        setAuthChanged((prev) => !prev);
       } else {
         toast.error(data.message);
       }
@@ -104,7 +105,7 @@ export default function MainHeader() {
                       </Link>
                     </TooltipTrigger>
                     <TooltipContent side="bottom">Login</TooltipContent>
-                    <span className="mx-2">/</span>
+                    <span className="mx-2">|</span>
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <Link
@@ -120,39 +121,64 @@ export default function MainHeader() {
 
                 {isLogin && (
                   <div>
-                    {" "}
-                    <DropdownMenu>
-                      <DropdownMenuTrigger>
-                        <div className="flex items-center cursor-pointer rounded-full py-1 justify-center gap-4">
-                          <img
-                            className="h-10 w-10 rounded-full object-cover border-2"
-                            src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            alt=""
-                          />
-                        </div>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent>
-                        <DropdownMenuItem>
-                          <Link to="/my-account" className="flex gap-2">
-                            <FaRegUser />
-                            My Account
-                          </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          {" "}
-                          <IoBagCheckSharp />
-                          Orders
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <IoMdHeartEmpty />
-                          My Lists
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={logout}>
-                          <IoLogOutOutline />
-                          Log Out
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                    {localStorage.getItem("role") === "ADMIN" ? (
+                      <DropdownMenu>
+                        <DropdownMenuTrigger>
+                          <div className="flex items-center cursor-pointer rounded-full py-1 justify-center gap-4">
+                            <img
+                              className="h-10 w-10 rounded-full object-cover border-2"
+                              src={user?.avatar}
+                              alt=""
+                            />
+                          </div>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                          <DropdownMenuItem>
+                            <Link to="/admin" className="flex gap-2">
+                              <FaRegUser />
+                              Go to Admin Dashboard
+                            </Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={logout}>
+                            <IoLogOutOutline />
+                            Log Out
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    ) : (
+                      <DropdownMenu>
+                        <DropdownMenuTrigger>
+                          <div className="flex items-center cursor-pointer rounded-full py-1 justify-center gap-4">
+                            <img
+                              className="h-10 w-10 rounded-full object-cover border-2"
+                              src={user?.avatar}
+                              alt=""
+                            />
+                          </div>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                          <DropdownMenuItem>
+                            <Link to="/my-account" className="flex gap-2">
+                              <FaRegUser />
+                              My Account
+                            </Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            {" "}
+                            <IoBagCheckSharp />
+                            Orders
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            <IoMdHeartEmpty />
+                            My Lists
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={logout}>
+                            <IoLogOutOutline />
+                            Log Out
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    )}
                   </div>
                 )}
               </Tooltip>

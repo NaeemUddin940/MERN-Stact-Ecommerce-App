@@ -5,14 +5,14 @@ import Loader from "../Components/ui/isAdminLoader";
 import { useEffect, useState } from "react";
 
 export default function AdminRoute({ children }) {
-  const { checking, authorized } = useAuthContext();
+  const { checking, authChanged } = useAuthContext();
   const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoader(false), 2000);
     return () => clearTimeout(timer);
   });
-  if (checking || loader) {
+  if (checking) {
     return (
       <div className="h-screen flex items-center justify-center">
         <Loader />
@@ -20,7 +20,7 @@ export default function AdminRoute({ children }) {
     );
   }
 
-  if (!authorized) {
+  if (!authChanged) {
     return <Navigate to="/user/login" replace />;
   }
 

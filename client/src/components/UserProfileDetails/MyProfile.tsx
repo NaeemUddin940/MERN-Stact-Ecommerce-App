@@ -9,13 +9,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
-import { FiUser } from "react-icons/fi";
+import { useAuthContext } from "@/context/AuthContext";
 
 export default function MyProfile() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-
+  const { user } = useAuthContext();
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState<Date | undefined>(undefined);
   return (
@@ -23,7 +23,11 @@ export default function MyProfile() {
       <div>
         <div className="flex items-center gap-4 mb-6">
           <div className="w-12 h-12 bg-blue-100 flex items-center justify-center rounded-full">
-            <FiUser className="text-blue-600" size={24} />
+            <img
+              src={user?.avatar}
+              alt={user?.name}
+              className="h-full w-full rounded-full object-cover"
+            />
           </div>
           <h1 className="text-2xl font-bold">Personal Information</h1>
         </div>
@@ -36,8 +40,8 @@ export default function MyProfile() {
             <label className="block text-gray-700">Name</label>
             <Input
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={user?.name}
+              // onChange={(e) => setName(e.target.value)}
               placeholder="Enter Your Name"
             />
           </div>
@@ -45,17 +49,17 @@ export default function MyProfile() {
             <label className="block text-gray-700">Email</label>
             <Input
               type="email"
-              value={email}
+              value={user?.email}
               placeholder="mdnaeemuddin14@gmail.com"
-              onChange={(e) => setEmail(e.target.value)}
+              // onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div>
             <label className="block text-gray-700">Phone</label>
             <Input
               type="tel"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              value={user?.phone}
+              // onChange={(e) => setPhone(e.target.value)}
               placeholder="+880 *** *** ****"
             />
           </div>
