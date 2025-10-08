@@ -42,7 +42,7 @@ function App() {
       </Route>
       <Route path="/user/verify-otp" element={<VerifyOtp />} />
       <Route path="/user/login" element={<Login />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/user/forgot-password" element={<ForgotPassword />} />
       <Route path="/user/register" element={<Register />} />
 
       {/* Admin ROutes Define Here */}

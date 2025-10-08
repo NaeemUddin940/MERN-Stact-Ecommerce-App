@@ -22,6 +22,10 @@ export default function VerifyOtp() {
     setOtpValue(value);
   };
 
+  const registerdEmail = localStorage.getItem("userEmail");
+  const forgotPasswordEmail = localStorage.getItem("forgotEmail");
+
+  // Verify Registered Email
   async function OTPVerify() {
     try {
       setLoading(true);
@@ -43,13 +47,16 @@ export default function VerifyOtp() {
     }
   }
 
+  // Send Again OTP
   async function sendOTP() {
     try {
       setIsSentOtp(true);
 
       const res = await postData("/api/user/send-again-otp", {
         name: localStorage.getItem("userName"),
-        email: localStorage.getItem("userEmail"),
+        email: localStorage.getItem("forgotEmail")
+          ? localStorage.getItem("forgotEmail")
+          : localStorage.getItem("userEmail"),
       });
       if (res.success) {
         toast.success(res.message);
@@ -60,6 +67,24 @@ export default function VerifyOtp() {
       toast.error("Failed to Send OTP.");
     } finally {
       setIsSentOtp(false);
+    }
+  }
+
+  // Verify Forgot Email
+  async function VerifyForgotEmail() {
+    try {
+      const res = await postData("/api/user/verify-forgot-password-otp", {
+        email: forgotPasswordEmail,
+        otp: otpValue,
+      });
+      if (res.success) {
+        toast.success("Successfull to Verify Your Email.");
+        navigate("/user/forgot-password");
+      } else {
+        toast.error("Failed to Verify Your Email.");
+      }
+    } catch (error) {
+      toast.error("Falied to Verify");
     }
   }
 
@@ -89,7 +114,7 @@ export default function VerifyOtp() {
             <p>
               OTP send to{" "}
               <span className="text-[#8b14e7]">
-                {localStorage.getItem("userEmail")}
+                {forgotPasswordEmail ? forgotPasswordEmail : registerdEmail}
               </span>
             </p>
             <InputOTP maxLength={6} onComplete={handleOTPComplete}>
@@ -109,7 +134,7 @@ export default function VerifyOtp() {
             </button>
           </div>
           <Button
-            onClick={OTPVerify}
+            onClick={VerifyForgotEmail ? VerifyForgotEmail : OTPVerify}
             className="mt-3 rounded-2xl w-full"
             variant="modern">
             {loading ? <Loader /> : null}

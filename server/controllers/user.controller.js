@@ -594,7 +594,7 @@ export async function verifyForgotPasswordOTPController(req, res) {
     }
 
     // otp Expires
-    const currentDate = new Date.toISOString();
+    const currentDate = new Date().toISOString();
     if (user.otpExpires < currentDate) {
       return res.status(400).json({
         message: "OTP is Expired",

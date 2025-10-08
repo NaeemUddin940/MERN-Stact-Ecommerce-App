@@ -18,7 +18,10 @@ app.use(express.json());
 // app.use(cors());
 app.use(
   cors({
-    origin: ["https://mern-stact-ecommerce-app.vercel.app"],
+    origin: [
+      "http://localhost:5173",
+      "https://mern-stact-ecommerce-app.vercel.app",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
@@ -65,6 +68,7 @@ app.get("/", (req, res) => {
 app.use("/api/user", userRoute);
 app.use("/api/user/admin", categoryRoute);
 app.use("/api/user/admin", productRoute);
+app.use("/api", productRoute);
 
 // Server is Running
 app.listen(port, () => {

@@ -1,29 +1,69 @@
 import { useState } from "react";
 import { FiUser, FiShoppingCart } from "react-icons/fi";
-import { LogOut } from "lucide-react";
+import { Image, LogOut } from "lucide-react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import MyLists from "@/components/UserProfileDetails/MyLists";
 import MyOrders from "@/components/UserProfileDetails/MyOrders";
 import MyProfile from "@/components/UserProfileDetails/MyProfile";
-
+// import { postData } from "@/utils/PostData";
 
 export default function UsersProfile() {
   const [activeTab, setActiveTab] = useState("myProfile");
-
+  // const [image, setImage] = useState(null);
   const history = useNavigate();
+
+  // function handleImageUpload(e) {
+  //   const file = e.target.files[0];
+  //   if (!file) return;
+
+  //   setImage(file); // optional, if you want to keep for preview
+
+  //   async function postImage() {
+  //     try {
+  //       const formData = new FormData();
+  //       formData.append("avatar", file); // use the actual file
+
+  //       const res = await fetch("/api/user/upload-avatar", formData);
+
+  //       if (res.success) {
+  //         toast.success("Image uploaded!");
+  //       } else {
+  //         toast.error(res.message || "Image not uploaded");
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //       toast.error("Upload failed");
+  //     }
+  //   }
+
+  //   postImage();
+  // }
   return (
     <div className="flex mt-8  container-sm md:container-md mx-auto gap-6">
       {/* Left Sidebar Tabs */}
       <div className="w-60 border-1 shadow-lg dark:border-slate-600 dark:shadow-slate-800 rounded-lg p-4">
         <div className="flex flex-col items-center mb-8">
-          <div className="w-28 h-28 relative rounded-full overflow-hidden mb-2">
+          <div className="w-28 h-28 relative flex items-center group justify-center rounded-full group overflow-hidden mb-2">
             <img
               className="rounded-full"
               src="https://i.pravatar.cc/150?img=3"
               alt="profile"
             />
+            <div className="flex flex-col absolute bg-black w-28 h-28 top-0 left-0 opacity-0 group-hover:opacity-80 group-hover:animate-fade-in items-center justify-center">
+              <Image size={30} />
+              <h4 className="text-xl mt-1 hover:opacity-15 pointer-events-none">
+                Add Image
+              </h4>
+              <input
+                type="file"
+                name="avatar"
+                // onChange={handleImageUpload}
+                className="absolute top-0 left-0 h-full w-full z-50 opacity-0 cursor-pointer"
+              />
+            </div>
           </div>
+
           <h2 className="font-bold text-lg">MD. NAEEM UDDIN</h2>
           <p className="text-gray-500">mdnaeemuddin14@gmail.com</p>
         </div>

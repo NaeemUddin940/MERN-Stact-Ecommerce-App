@@ -40,7 +40,7 @@ userRoute.get("/checkislogin", checkIsLogin);
 
 userRoute.get("/logout", authenticated, logoutUserController);
 
-userRoute.put(
+userRoute.post(
   "/upload-avatar",
   upload.single("avatar"),
   authenticated,

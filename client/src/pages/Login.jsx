@@ -23,6 +23,7 @@ export default function Login() {
   const { setIsLogin } = useAuthContext();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [forgotEmail, setForgotEmail] = useState({ email: "" });
 
   // handle input changes
   function handleChange(e) {
@@ -30,6 +31,11 @@ export default function Login() {
     setFormData({ ...formData, [name]: value });
   }
 
+  function forgotEmailChange(e) {
+    const { name, value } = e.target;
+    setForgotEmail({ ...forgotEmail, [name]: value });
+  }
+  console.log(forgotEmail);
   // login form submit
   async function submitForm(e) {
     e.preventDefault();
@@ -56,10 +62,21 @@ export default function Login() {
   }
 
   // forgot password handler
-  function ForgotPassword(e) {
+  async function ForgotPassword(e) {
     e.preventDefault();
-    navigate("/verify-otp");
-    toast.success("OTP sent");
+
+    try {
+      const res = await postData("/api/user/forgot-password", forgotEmail);
+      if (res.success) {
+        toast.success(`OTP Send to ${forgotEmail.email}`);
+        localStorage.setItem("forgotEmail", forgotEmail.email);
+        navigate("/user/verify-otp");
+      } else {
+        toast.error(`Failed to send OTP ${forgotEmail.email}`);
+      }
+    } catch (error) {
+      toast.error("Failed to Send Your Email.");
+    }
   }
 
   return (
@@ -104,10 +121,11 @@ export default function Login() {
                   id="email"
                   type="email"
                   name="email"
-                  value={formData.email}
-                  onChange={handleChange}
+                  value={formData.email || forgotEmail.email}
+                  onChange={(e) => {
+                    handleChange(e), forgotEmailChange(e);
+                  }}
                   placeholder="example@gmail.com"
-                  required
                 />
               </div>
 
@@ -128,7 +146,6 @@ export default function Login() {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  required
                 />
               </div>
             </div>

@@ -44,7 +44,7 @@ export default function verifyForgotPasswordEmailTemplate(
 
             <tr>
               <td style="background:#f8fafc;padding:12px 24px;text-align:center;color:#94a3b8;font-size:12px;">
-                This code is valid for ${expiry} minutes. For help, contact <a href="mailto:${supportEmail}" style="color:#0b6efd;text-decoration:none;">{{supportEmail}}</a>.
+                This code is valid for ${expiry} minutes. For help, contact <a href="mailto:${supportEmail}" style="color:#0b6efd;text-decoration:none;">${supportEmail}</a>.
               </td>
             </tr>
           </table>

@@ -24,6 +24,7 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { useAuthContext } from "@/context/AuthContext";
 import { getData } from "@/utils/GetData";
+import { postData } from "@/utils/PostData";
 
 export default function MainHeader() {
   const { navItem } = usenavItemContext();
