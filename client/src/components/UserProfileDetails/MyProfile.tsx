@@ -41,7 +41,7 @@ export default function MyProfile() {
             <Input
               type="text"
               value={user?.name}
-              // onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               placeholder="Enter Your Name"
             />
           </div>
@@ -51,7 +51,7 @@ export default function MyProfile() {
               type="email"
               value={user?.email}
               placeholder="mdnaeemuddin14@gmail.com"
-              // onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div>
@@ -59,7 +59,7 @@ export default function MyProfile() {
             <Input
               type="tel"
               value={user?.phone}
-              // onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => setPhone(e.target.value)}
               placeholder="+880 *** *** ****"
             />
           </div>

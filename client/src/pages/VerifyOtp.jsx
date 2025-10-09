@@ -23,6 +23,7 @@ export default function VerifyOtp() {
   };
 
   const email = localStorage.getItem("userEmail");
+  const forgotEmail = localStorage.getItem("forgotEmail");
 
   // Verify Registered Email
   async function OTPVerify() {
@@ -30,12 +31,17 @@ export default function VerifyOtp() {
       setLoading(true);
 
       const res = await postData("/api/user/verifyEmail", {
-        email,
+        email: email || forgotEmail,
         otp: otpValue,
       });
       if (res.success) {
         toast.success(res.message);
-        navigate("/user/login");
+        localStorage.removeItem("userEmail");
+        if (forgotEmail && !email) {
+          navigate("/user/forgot-password");
+        } else {
+          navigate("/user/login");
+        }
       } else {
         toast.error(res.message);
       }
@@ -46,38 +52,39 @@ export default function VerifyOtp() {
     }
   }
 
-  // // Send Again OTP
-  // async function sendOTP() {
-  //   try {
-  //     setIsSentOtp(true);
+  // Send Again OTP
+  async function sendOTP() {
+    try {
+      setIsSentOtp(true);
 
-  //     const res = await postData("/api/user/send-again-otp", {
-  //       name: localStorage.getItem("userName"),
-  //       email: localStorage.getItem("forgotEmail")
-  //         ? localStorage.getItem("forgotEmail")
-  //         : localStorage.getItem("userEmail"),
-  //     });
-  //     if (res.success) {
-  //       toast.success(res.message);
-  //     } else {
-  //       toast.error(res.message);
-  //     }
-  //   } catch (error) {
-  //     console.error("Failed to Send OTP.");
-  //   } finally {
-  //     setIsSentOtp(false);
-  //   }
-  // }
+      const res = await postData("/api/user/send-again-otp", {
+        name: localStorage.getItem("userName"),
+        email: email || localStorage.getItem("forgotEmail"),
+      });
+      if (res.success) {
+        toast.success(res.message);
+        localStorage.removeItem("forgotEmail");
+        setIsSentOtp(false);
+      } else {
+        toast.error(res.message);
+      }
+    } catch (error) {
+      console.error("Failed to Send OTP.");
+    } finally {
+      setIsSentOtp(false);
+    }
+  }
 
   // // Verify Forgot Email
   // async function VerifyForgotEmail() {
   //   try {
   //     const res = await postData("/api/user/verify-forgot-password-otp", {
-  //       email: forgotPasswordEmail,
+  //       email: localStorage.getItem("forgotEmail"),
   //       otp: otpValue,
   //     });
   //     if (res.success) {
   //       toast.success(res.message);
+  //       localStorage.removeItem("forgotEmail");
   //       navigate("/user/forgot-password");
   //     } else {
   //       toast.error(res.message);
@@ -111,7 +118,10 @@ export default function VerifyOtp() {
 
             <h3 className="text-xl font-bold">Verify OTP</h3>
             <p>
-              OTP send to <span className="text-[#8b14e7]">jkasdjkf</span>
+              OTP send to{" "}
+              <span className="text-[#8b14e7]">
+                {email || localStorage.getItem("forgotEmail")}
+              </span>
             </p>
             <InputOTP maxLength={6} onComplete={handleOTPComplete}>
               <InputOTPGroup>
@@ -125,9 +135,8 @@ export default function VerifyOtp() {
             </InputOTP>
             <button
               className="cursor-pointer hover:text-chart-4"
-              // onClick={sendOTP}
-              >
-              // {isSentOtp ? "Sending...." : "Send Again"}
+              onClick={sendOTP}>
+              {isSentOtp ? "Sending...." : "Send Again"}
             </button>
           </div>
           <Button

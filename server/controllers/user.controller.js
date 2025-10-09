@@ -57,7 +57,7 @@ export async function registerUserController(req, res) {
       email: email,
       password: hashPassword,
       otp: verifyCode,
-      otpExpires: Date.now() + 300000, //5 Minutes
+      otpExpires: Date.now() + 300000,
     });
 
     await user.save();
@@ -152,7 +152,7 @@ export async function verifyEmailController(req, res) {
 
 export async function sendAgainOtp(req, res) {
   try {
-    const { name, email } = req.body;
+    const { email } = req.body;
 
     const user = await userModel.findOne({ email });
     // Generate VerifyCode / OTP
@@ -163,7 +163,7 @@ export async function sendAgainOtp(req, res) {
       sendTo: email,
       subject: "Verify Your Email",
       text: "",
-      html: verifyEmailTemplate(name, verifyCode),
+      html: verifyEmailTemplate(user.name, verifyCode),
     });
 
     user.otp = verifyCode;
@@ -367,7 +367,7 @@ export async function userAvatarUploadController(req, res) {
     await user.save();
 
     return res.status(200).json({
-      message: "File Successfully Uploaded",
+      message: "Successfully Image Upload",
       _id: userId,
       avatar: result.secure_url,
       success: true,
@@ -511,7 +511,7 @@ export async function userForgotPasswordController(req, res) {
     const user = await userModel.findOne({ email });
     if (!user) {
       return res.status(404).json({
-        message: "Your Email is not valid. Please Provide your valide Email.",
+        message: "User Not Found With This Email, Please Register First.",
         error: true,
         success: false,
       });

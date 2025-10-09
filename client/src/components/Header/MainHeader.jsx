@@ -127,7 +127,7 @@ export default function MainHeader() {
                           <div className="flex items-center cursor-pointer rounded-full py-1 justify-center gap-4">
                             <img
                               className="h-10 w-10 rounded-full object-cover border-2"
-                              src={user?.avatar}
+                              src={user?.avatar ? user.avatar : "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"}
                               alt=""
                             />
                           </div>

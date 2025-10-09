@@ -65,7 +65,7 @@ export default function Login() {
   // forgot password handler
   async function ForgotPassword(e) {
     e.preventDefault();
-    console.log("object");
+
     if (forgotEmail.email === "") {
       toast.error("Please Enter Your Email.");
       return;
@@ -78,7 +78,7 @@ export default function Login() {
         localStorage.setItem("forgotEmail", forgotEmail.email);
         navigate("/user/verify-otp");
       } else {
-        toast.error(`Failed to send OTP ${forgotEmail.email}`);
+        toast.error(res.message);
       }
     } catch (error) {
       console.error("Failed to Send Your Email.");
