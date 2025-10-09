@@ -632,14 +632,6 @@ export async function verifyForgotPasswordOTPController(req, res) {
 export async function resetPasswordController(req, res) {
   try {
     const { email, newPassword, confirmPassword } = req.body;
-    console.log(
-      "Email:",
-      email,
-      "New Password:",
-      newPassword,
-      "Confirm:",
-      confirmPassword
-    );
 
     const user = await userModel.findOne({ email });
     if (!user) {

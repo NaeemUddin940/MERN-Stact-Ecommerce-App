@@ -22,8 +22,7 @@ export default function VerifyOtp() {
     setOtpValue(value);
   };
 
-  const registerdEmail = localStorage.getItem("userEmail");
-  const forgotPasswordEmail = localStorage.getItem("forgotEmail");
+  const email = localStorage.getItem("userEmail");
 
   // Verify Registered Email
   async function OTPVerify() {
@@ -31,7 +30,7 @@ export default function VerifyOtp() {
       setLoading(true);
 
       const res = await postData("/api/user/verifyEmail", {
-        email: localStorage.getItem("userEmail"),
+        email,
         otp: otpValue,
       });
       if (res.success) {
@@ -47,46 +46,46 @@ export default function VerifyOtp() {
     }
   }
 
-  // Send Again OTP
-  async function sendOTP() {
-    try {
-      setIsSentOtp(true);
+  // // Send Again OTP
+  // async function sendOTP() {
+  //   try {
+  //     setIsSentOtp(true);
 
-      const res = await postData("/api/user/send-again-otp", {
-        name: localStorage.getItem("userName"),
-        email: localStorage.getItem("forgotEmail")
-          ? localStorage.getItem("forgotEmail")
-          : localStorage.getItem("userEmail"),
-      });
-      if (res.success) {
-        toast.success(res.message);
-      } else {
-        toast.error(res.message);
-      }
-    } catch (error) {
-      console.error("Failed to Send OTP.");
-    } finally {
-      setIsSentOtp(false);
-    }
-  }
+  //     const res = await postData("/api/user/send-again-otp", {
+  //       name: localStorage.getItem("userName"),
+  //       email: localStorage.getItem("forgotEmail")
+  //         ? localStorage.getItem("forgotEmail")
+  //         : localStorage.getItem("userEmail"),
+  //     });
+  //     if (res.success) {
+  //       toast.success(res.message);
+  //     } else {
+  //       toast.error(res.message);
+  //     }
+  //   } catch (error) {
+  //     console.error("Failed to Send OTP.");
+  //   } finally {
+  //     setIsSentOtp(false);
+  //   }
+  // }
 
-  // Verify Forgot Email
-  async function VerifyForgotEmail() {
-    try {
-      const res = await postData("/api/user/verify-forgot-password-otp", {
-        email: forgotPasswordEmail,
-        otp: otpValue,
-      });
-      if (res.success) {
-        toast.success(res.message);
-        navigate("/user/forgot-password");
-      } else {
-        toast.error(res.message);
-      }
-    } catch (error) {
-      toast.error("Falied to Verify");
-    }
-  }
+  // // Verify Forgot Email
+  // async function VerifyForgotEmail() {
+  //   try {
+  //     const res = await postData("/api/user/verify-forgot-password-otp", {
+  //       email: forgotPasswordEmail,
+  //       otp: otpValue,
+  //     });
+  //     if (res.success) {
+  //       toast.success(res.message);
+  //       navigate("/user/forgot-password");
+  //     } else {
+  //       toast.error(res.message);
+  //     }
+  //   } catch (error) {
+  //     toast.error("Falied to Verify");
+  //   }
+  // }
 
   return (
     <div
@@ -112,10 +111,7 @@ export default function VerifyOtp() {
 
             <h3 className="text-xl font-bold">Verify OTP</h3>
             <p>
-              OTP send to{" "}
-              <span className="text-[#8b14e7]">
-                {forgotPasswordEmail ? forgotPasswordEmail : registerdEmail}
-              </span>
+              OTP send to <span className="text-[#8b14e7]">jkasdjkf</span>
             </p>
             <InputOTP maxLength={6} onComplete={handleOTPComplete}>
               <InputOTPGroup>
@@ -129,12 +125,13 @@ export default function VerifyOtp() {
             </InputOTP>
             <button
               className="cursor-pointer hover:text-chart-4"
-              onClick={sendOTP}>
-              {isSentOtp ? "Sending...." : "Send Again"}
+              // onClick={sendOTP}
+              >
+              // {isSentOtp ? "Sending...." : "Send Again"}
             </button>
           </div>
           <Button
-            onClick={VerifyForgotEmail ? VerifyForgotEmail : OTPVerify}
+            onClick={OTPVerify}
             className="mt-3 rounded-2xl w-full"
             variant="modern">
             {loading ? <Loader /> : null}
