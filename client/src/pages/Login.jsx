@@ -49,6 +49,7 @@ export default function Login() {
       if (res.success) {
         setIsLogin(true);
         toast.success(res.message);
+        localStorage.setItem("accessToken", res.data.accessToken);
         setAuthChanged((prev) => !prev);
         setFormData({ email: "", password: "" });
         navigate("/"); // redirect after login

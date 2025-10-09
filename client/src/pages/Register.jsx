@@ -46,7 +46,6 @@ export default function Register() {
       } else {
         // backend থেকে আসা success message
         toast.success(res.message);
-
         localStorage.setItem("userEmail", formData.email);
         localStorage.setItem("userName", formData.name);
 

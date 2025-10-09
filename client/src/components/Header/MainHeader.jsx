@@ -17,7 +17,7 @@ import { usenavItemContext } from "../../context/NavItemContext";
 import CartSidebar from "../Cart/CartSidebar";
 import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
 import { DialogDescription, DialogTitle } from "../ui/dialog";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";

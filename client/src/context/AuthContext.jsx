@@ -28,9 +28,11 @@ export const AuthProvider = ({ children }) => {
         setChecking(false);
       }
     }
-
-    getUserDetails();
-  }, [authChanged]);
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      getUserDetails();
+    }
+  }, [authChanged, user]);
 
   const state = {
     isLogin,
