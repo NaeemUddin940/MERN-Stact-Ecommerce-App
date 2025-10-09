@@ -14,7 +14,7 @@ createRoot(document.getElementById("root")!).render(
     <ProductProvider>
       <ToastContainer
         pauseOnHover={false}
-        position="top-center"
+        position="top-right"
         autoClose={1000}
       />
       <NavItemProvider>
