@@ -23,7 +23,11 @@ const userSchema = new mongoose.Schema(
       default: null,
     },
     mobile: {
-      type: Number,
+      type: String,
+      default: null,
+    },
+    dob: {
+      type: Date,
       default: null,
     },
     access_token: {

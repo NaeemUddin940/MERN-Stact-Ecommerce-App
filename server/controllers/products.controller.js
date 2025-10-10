@@ -88,6 +88,7 @@ export const getAllProducts = async (req, res) => {
   }
 };
 
+// Filter Products
 export const filterProducts = async (req, res) => {
   try {
     // 1️⃣ Query parameters
@@ -200,3 +201,4 @@ export const filterProducts = async (req, res) => {
     });
   }
 };
+

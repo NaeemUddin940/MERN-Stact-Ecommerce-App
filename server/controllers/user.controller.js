@@ -382,7 +382,7 @@ export async function userAvatarUploadController(req, res) {
   }
 }
 
-//This is User avatar Remove Controller
+// This is User avatar Remove Controller
 export async function userAvatarRemoveController(req, res) {
   try {
     // Get Image url From user query parameter
@@ -715,7 +715,6 @@ export async function refreshTokenController(req, res) {
 export async function userDetails(req, res) {
   try {
     const userid = req.user.id;
-    console.log(userid);
 
     const user = await userModel
       .findById(userid)
@@ -735,3 +734,35 @@ export async function userDetails(req, res) {
     });
   }
 }
+
+// Update User Details
+export const userDetailsUpdate = async (req, res) => {
+  try {
+    const { name, email, mobile, dob } = req.body;
+    const userid = req.user.id;
+    console.log(userid);
+    const updateUser = await userModel.findByIdAndUpdate(
+      { _id: userid },
+      {
+        name,
+        email,
+        mobile,
+        dob,
+      }
+    );
+    console.log(updateUser);
+    res.status(200).json({
+      success: true,
+      error: false,
+      updateUser,
+      message: "Successfull to Update User Details.",
+    });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({
+      success: false,
+      error: true,
+      message: error.message || "Internal Server Error to Update User Details!",
+    });
+  }
+};
