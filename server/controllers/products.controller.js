@@ -202,3 +202,35 @@ export const filterProducts = async (req, res) => {
   }
 };
 
+// update Products
+export const updateProducts = async (req, res) => {
+  try {
+    const updatedProduct = await productsCollection.findByIdAndUpdate(
+      req.params.id,
+      { ...req.body },
+      { new: true } // 👈 updated doc return করবে
+    );
+
+    if (!updatedProduct) {
+      return res.status(404).json({
+        success: false,
+        error: true,
+        message: "Product not found!",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      error: false,
+      updatedProduct,
+      message: "✅ Successfully updated product!",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: true,
+      message:
+        error.message || "❌ Internal Server Error while updating product!",
+    });
+  }
+};

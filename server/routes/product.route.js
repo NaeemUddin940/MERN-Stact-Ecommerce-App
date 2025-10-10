@@ -3,6 +3,7 @@ import {
   createProducts,
   filterProducts,
   getAllProducts,
+  updateProducts,
 } from "../controllers/products.controller.js";
 import { authenticated } from "../middlewares/authenticated.js";
 import upload from "../middlewares/multer.js";
@@ -20,5 +21,7 @@ productRoute.post(
 productRoute.get("/get-all-products", authenticated, getAllProducts);
 
 productRoute.get("/filter-products", filterProducts);
+
+productRoute.put("/update-products/:id", updateProducts);
 
 export default productRoute;
