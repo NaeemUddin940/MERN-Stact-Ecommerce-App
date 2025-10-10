@@ -7,7 +7,7 @@ export async function authenticated(req, res, next) {
     console.log(token);
     if (!token) {
       return res.status(401).json({
-        message: "Access Token Not Found!",
+        message: "Access Token Not Found! Please Login First.",
         success: false,
         error: true,
       });
