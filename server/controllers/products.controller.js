@@ -234,3 +234,26 @@ export const updateProducts = async (req, res) => {
     });
   }
 };
+
+// Delete products
+export const deleteProducts = async (req, res) => {
+  try {
+    await productsCollection.findByIdAndDelete(req.params.id)
+    res
+      .status(200)
+      .json({
+        success: true,
+        error: false,
+        message: "Successfull to Delete Products.",
+      });
+  } catch (error) {
+    // Handle errors
+    res
+      .status(500)
+      .json({
+        success: false,
+        error: true,
+        message: error.message || "Internal Server Error to Delete Products!",
+      });
+  }
+};

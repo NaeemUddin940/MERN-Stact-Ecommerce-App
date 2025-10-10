@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   createProducts,
+  deleteProducts,
   filterProducts,
   getAllProducts,
   updateProducts,
@@ -23,5 +24,7 @@ productRoute.get("/get-all-products", authenticated, getAllProducts);
 productRoute.get("/filter-products", filterProducts);
 
 productRoute.put("/update-products/:id", updateProducts);
+
+productRoute.delete("/delete-products/:id", deleteProducts);
 
 export default productRoute;
