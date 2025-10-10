@@ -238,22 +238,50 @@ export const updateProducts = async (req, res) => {
 // Delete products
 export const deleteProducts = async (req, res) => {
   try {
-    await productsCollection.findByIdAndDelete(req.params.id)
-    res
-      .status(200)
-      .json({
-        success: true,
-        error: false,
-        message: "Successfull to Delete Products.",
-      });
-  } catch (error) {
-    // Handle errors
-    res
-      .status(500)
-      .json({
+    // 1️⃣ Find the product first
+    const product = await productsCollection.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({
         success: false,
-        error: true,
-        message: error.message || "Internal Server Error to Delete Products!",
+        message: "Product not found!",
       });
+    }
+
+    // 2️⃣ Get all product images (array of Cloudinary URLs)
+    const imageUrls = product.productimages;
+
+    // 3️⃣ Loop through images and delete from Cloudinary
+    for (const url of imageUrls) {
+      // Split the Cloudinary URL
+      const parts = url.split("/");
+      
+      // Find the position of "upload"
+      const uploadIndex = parts.indexOf("upload");
+      
+      // Slice path after "upload/vXXXX/"
+      const publicIdWithExt = parts.slice(uploadIndex + 2).join("/");
+      
+      // Remove the extension (.jpg/.png/.jpeg)
+      const publicId = publicIdWithExt.split(".")[0];
+      
+      // Delete from Cloudinary
+      await cloudinary.uploader.destroy(publicId);
+    }
+
+    // 4️⃣ Delete product from MongoDB
+    await productsCollection.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+      success: true,
+      error: false,
+      message: "✅ Successfully deleted product and images from Cloudinary.",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: true,
+      message:
+        error.message || "❌ Internal Server Error while deleting product!",
+    });
   }
 };
