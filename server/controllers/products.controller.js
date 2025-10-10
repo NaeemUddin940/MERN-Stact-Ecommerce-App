@@ -254,22 +254,33 @@ export const deleteProducts = async (req, res) => {
     for (const url of imageUrls) {
       // Split the Cloudinary URL
       const parts = url.split("/");
-      
+      //[
+      //   'https:',
+      //   '',
+      //   'res.cloudinary.com',
+      //   'dmheqmcqq',
+      //   'image',
+      //   'upload',
+      //   'v1760110295',
+      //   '303a0fd59f_or73os.png'
+      // ]
       // Find the position of "upload"
-      const uploadIndex = parts.indexOf("upload");
-      
+      const uploadIndex = parts.indexOf("upload");  //  5
+
+
       // Slice path after "upload/vXXXX/"
-      const publicIdWithExt = parts.slice(uploadIndex + 2).join("/");
-      
+      const publicIdWithExt = parts.slice(uploadIndex + 2).join("/");  //303a0fd59f_or73os.png
+
+
       // Remove the extension (.jpg/.png/.jpeg)
-      const publicId = publicIdWithExt.split(".")[0];
+      const publicId = publicIdWithExt.split(".")[0];   // 303a0fd59f_or73os
       
       // Delete from Cloudinary
       await cloudinary.uploader.destroy(publicId);
     }
 
     // 4️⃣ Delete product from MongoDB
-    await productsCollection.findByIdAndDelete(req.params.id);
+    // await productsCollection.findByIdAndDelete(req.params.id);
 
     res.status(200).json({
       success: true,
