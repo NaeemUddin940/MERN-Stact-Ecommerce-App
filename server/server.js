@@ -9,6 +9,7 @@ import connectDB from "./config/connectDB.js";
 import userRoute from "./routes/user.route.js";
 import categoryRoute from "./routes/category.route.js";
 import productRoute from "./routes/product.route.js";
+import cartRouter from "./routes/cart.route.js";
 const app = express();
 
 const port = process.env.PORT || 8080;
@@ -28,26 +29,6 @@ app.use(
   })
 );
 
-// ✅ Allowed Origins List
-// const allowedOrigins = [
-//   "http://localhost:5173", // local frontend
-//   "https://yourapp.vercel.app", // vercel frontend
-// ];
-
-// app.use(
-//   cors({
-//     origin: function (origin, callback) {
-//       // Allow requests with no origin (like mobile apps, Postman)
-//       if (!origin) return callback(null, true);
-//       if (allowedOrigins.includes(origin)) {
-//         return callback(null, true);
-//       } else {
-//         return callback(new Error("Not allowed by CORS"));
-//       }
-//     },
-//     credentials: true,
-//   })
-// );
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan());
@@ -69,6 +50,7 @@ app.use("/api/user", userRoute);
 app.use("/api/user/admin", categoryRoute);
 app.use("/api/user/admin", productRoute);
 app.use("/api", productRoute);
+app.use("/api/user", cartRouter);
 
 // Server is Running
 app.listen(port, () => {

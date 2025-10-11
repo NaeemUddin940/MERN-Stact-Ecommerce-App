@@ -4,7 +4,6 @@ export async function authenticated(req, res, next) {
     const token =
       req.cookies.accessToken || req?.header?.authorization?.split(" ")[1];
 
-    console.log(token);
     if (!token) {
       return res.status(401).json({
         message: "Access Token Not Found! Please Login First.",
