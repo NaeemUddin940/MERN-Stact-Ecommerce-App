@@ -4,7 +4,7 @@ import { createContext, useState, useContext, useEffect } from "react";
 // 1️⃣ Context তৈরি করো
 export const AuthContext = createContext();
 
-// 2️⃣ Provider Component 
+// 2️⃣ Provider Component
 export const AuthProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
   const [checking, setChecking] = useState(false);
@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }) => {
       }
     }
     const token = localStorage.getItem("accessToken");
+    if (!token) return;
     if (token) {
       getUserDetails();
     }
