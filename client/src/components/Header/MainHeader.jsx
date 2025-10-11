@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Heart, ShoppingCart, User } from "lucide-react";
 
@@ -28,7 +28,7 @@ import { getData } from "@/utils/GetData";
 export default function MainHeader() {
   const { navItem } = usenavItemContext();
   const { setIsLogin, isLogin, setAuthChanged, user } = useAuthContext();
-
+  const navigate = useNavigate();
   useEffect(() => {
     async function checkIsLogin() {
       const res = await getData("/api/user/checkislogin");
@@ -57,6 +57,7 @@ export default function MainHeader() {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         localStorage.removeItem("role");
+        navigate("/");
         setAuthChanged((prev) => !prev);
       } else {
         toast.error(data.message);
@@ -127,7 +128,11 @@ export default function MainHeader() {
                           <div className="flex items-center cursor-pointer rounded-full py-1 justify-center gap-4">
                             <img
                               className="h-10 w-10 rounded-full object-cover border-2"
-                              src={user?.avatar ? user.avatar : "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"}
+                              src={
+                                user?.avatar
+                                  ? user.avatar
+                                  : "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
+                              }
                               alt=""
                             />
                           </div>

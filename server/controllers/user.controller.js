@@ -617,9 +617,18 @@ export async function verifyForgotPasswordOTPController(req, res) {
 //  This is user Reset Password Controller
 export async function resetPasswordController(req, res) {
   try {
-    const { email, newPassword, confirmPassword } = req.body;
+    const { email, oldPassword, newPassword, confirmPassword } = req.body;
+console.log(email);
+    if (!oldPassword || !newPassword || !confirmPassword) {
+      return res.status(400).json({
+        message: "Please Provide Required Field.",
+        error: true,
+        success: false,
+      });
+    }
 
     const user = await userModel.findOne({ email });
+    console.log(user);
     if (!user) {
       return res.status(404).json({
         message: "User not found with this email.",
@@ -627,9 +636,18 @@ export async function resetPasswordController(req, res) {
         error: true,
       });
     }
+
+    const isPassMatch = await bcryptjs.compare(oldPassword, user.password);
+
+    if (!isPassMatch) {
+      return res.status(400).json({
+        message: "Old Password is incorrect.",
+        success: false,
+      });
+    }
     if (newPassword !== confirmPassword) {
       return res.status(400).json({
-        message: "Password do not Match!",
+        message: "New Password and Confirm Password do not Match!",
         succes: false,
         error: true,
       });
@@ -740,7 +758,7 @@ export const userDetailsUpdate = async (req, res) => {
   try {
     const { name, email, mobile, dob } = req.body;
     const userid = req.user.id;
-    console.log(userid);
+
     const updateUser = await userModel.findByIdAndUpdate(
       { _id: userid },
       {

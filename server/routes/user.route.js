@@ -64,16 +64,11 @@ userRoute.post(
   verifyForgotPasswordOTPController
 );
 
-userRoute.put(
-  "/change-password",
-  changePasswordValidator,
-  validateRequest,
-  resetPasswordController
-);
+userRoute.put("/change-password", resetPasswordController);
 
 userRoute.post("/refresh-token", refreshTokenController);
 userRoute.get("/user-details", authenticated, userDetails);
 
-userRoute.put("/user-details-update", authenticated, userDetailsUpdate)
+userRoute.put("/user-details-update", authenticated, userDetailsUpdate);
 
 export default userRoute;

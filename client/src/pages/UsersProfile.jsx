@@ -9,7 +9,6 @@ import MyProfile from "@/components/UserProfileDetails/MyProfile";
 import { UploadImage } from "@/utils/UploadImage";
 import { useAuthContext } from "@/context/AuthContext";
 import Loader from "@/components/Loader/Loader";
-// import { postData } from "@/utils/PostData";
 
 export default function UsersProfile() {
   const [activeTab, setActiveTab] = useState("myProfile");

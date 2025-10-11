@@ -11,29 +11,30 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [authChanged, setAuthChanged] = useState(false);
 
-  useEffect(() => {
-    async function getUserDetails() {
-      try {
-        const res = await getData("/api/user/user-details");
-        setUser(res.data);
-        localStorage.setItem("role", res.data.role);
-        if (res.data?.role === "ADMIN") {
-          setAuthChanged(true);
-          setChecking(true);
-        }
-      } catch (error) {
-        console.error("❌ Failed to Fetch User Data to Authorization.");
-        setAuthChanged(false);
-      } finally {
-        setChecking(false);
+  async function getUserDetails() {
+    try {
+      const res = await getData("/api/user/user-details");
+      setUser(res.data);
+      localStorage.setItem("role", res.data.role);
+      localStorage.setItem("email", res.data.email);
+      if (res.data?.role === "ADMIN") {
+        setAuthChanged(true);
+        setChecking(true);
       }
+    } catch (error) {
+      console.error("❌ Failed to Fetch User Data to Authorization.");
+      setAuthChanged(false);
+    } finally {
+      setChecking(false);
     }
+  }
+  useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (!token) return;
     if (token) {
       getUserDetails();
     }
-  }, [authChanged, user]);
+  }, []);
 
   const state = {
     isLogin,

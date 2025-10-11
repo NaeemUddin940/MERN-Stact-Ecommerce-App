@@ -1,6 +1,7 @@
 import { body } from "express-validator";
 
 export const changePasswordValidator = [
+  body("oldPassword").notEmpty().withMessage("Please Enter Your Old Password."),
   body("newPassword")
     .notEmpty()
     .withMessage("Please Enter Your Change Password.")
