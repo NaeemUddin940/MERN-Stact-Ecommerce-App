@@ -76,3 +76,84 @@ export const getCartItem = async (req, res) => {
     });
   }
 };
+
+
+// Update Cart Item Quantity
+export const updateCartItemQuantity = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { productId, quantity } = req.body;
+
+    const cartItem = await cartCollection.findOneAndUpdate(
+      { userId, productId },
+      { quantity },
+      { new: true }
+    );
+
+    if (!cartItem) {
+      return res.status(404).json({
+        success: false,
+        error: true,
+        message: "Cart Item Not Found!",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      error: false,
+      data: cartItem,
+      message: "Successfull to Update Cart Item Quantity.",
+    });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({
+      success: false,
+      error: true,
+      message: error.message || "Internal Server Error to Update Cart Item Quantity!",
+    });
+  }
+};
+
+
+// Delete Cart Item
+export const deleteCartItem = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { productId } = req.body;
+
+    const cartItem = await cartCollection.findOneAndDelete({
+      userId,
+      productId,
+    });
+
+    if (!cartItem) {
+      return res.status(404).json({
+        success: false,
+        error: true,
+        message: "Cart Item Not Found!",
+      });
+    }
+
+    await userModel.updateOne(
+      { _id: userId },
+      {
+        $pull: {
+          shopping_cart: productId,
+        },
+      }
+    );
+
+    res.status(200).json({
+      success: true,
+      error: false,
+      message: "Successfull to Delete Cart Item.",
+    });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({
+      success: false,
+      error: true,
+      message: error.message || "Internal Server Error to Delete Cart Item!",
+    });
+  }
+};
