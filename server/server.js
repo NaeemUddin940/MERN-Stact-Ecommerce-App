@@ -10,6 +10,7 @@ import userRoute from "./routes/user.route.js";
 import categoryRoute from "./routes/category.route.js";
 import productRoute from "./routes/product.route.js";
 import cartRouter from "./routes/cart.route.js";
+import myListRouter from "./routes/myList.route.js";
 const app = express();
 
 const port = process.env.PORT || 8080;
@@ -51,6 +52,7 @@ app.use("/api/user/admin", categoryRoute);
 app.use("/api/user/admin", productRoute);
 app.use("/api", productRoute);
 app.use("/api/user", cartRouter);
+app.use("/api/mylist", myListRouter);
 
 // Server is Running
 app.listen(port, () => {
