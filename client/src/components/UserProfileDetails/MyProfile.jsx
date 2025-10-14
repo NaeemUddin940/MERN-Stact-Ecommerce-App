@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon, XIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Label } from "@/components/ui/label";
@@ -13,7 +13,7 @@ import { getData } from "@/utils/GetData";
 import { putData } from "@/utils/PutData";
 import { toast } from "react-toastify";
 import { Input } from "../ui/input";
-import { postData } from "@/utils/PostData";
+import { Collapse } from "react-collapse";
 
 export default function MyProfile() {
   const [user, setUser] = useState(null);
@@ -37,7 +37,7 @@ export default function MyProfile() {
   async function getUserDetails() {
     try {
       const res = await getData("/api/user/user-details");
-      setUser(res.data);
+      setUser((prev) => ({ ...prev, ...res.data }));
     } catch (error) {
       console.error("❌ Failed to Fetch User Data to Authorization.");
     }
@@ -150,16 +150,23 @@ export default function MyProfile() {
           </div>
         </div>
 
-        <Button
-          type="button"
-          variant={showChangePassField ? "modern" : "destructive"}
-          onClick={
-            showChangePassField
-              ? submitChangePassword
-              : () => setShowChangePassField(true)
-          }>
-          {showChangePassField ? "Save Changes" : "Change Password"}
-        </Button>
+        <div className="flex gap-5">
+          <Button
+            type="button"
+            variant={showChangePassField ? "modern" : "destructive"}
+            onClick={
+              showChangePassField
+                ? submitChangePassword
+                : () => setShowChangePassField(true)
+            }>
+            {showChangePassField ? "Save Changes" : "Change Password"}
+          </Button>
+          {showChangePassField && (
+            <Button onClick={() => setShowChangePassField(false)}>
+              <XIcon />
+            </Button>
+          )}
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-6 gap-5 w-full">
@@ -247,36 +254,38 @@ export default function MyProfile() {
         </form>
 
         {/* Change Password */}
-        {showChangePassField && (
-          <form
-            onSubmit={submitChangePassword}
-            className="block lg:col-span-2 flex-col gap-4">
-            <InputField
-              label="Old Password"
-              type="password"
-              name={"oldPassword"}
-              value={changePassword.oldPassword}
-              onChange={changePasswordInfo}
-              placeholder="Enter Current Password"
-            />
-            <InputField
-              label="New Password"
-              type="password"
-              name={"newPassword"}
-              value={changePassword.newPassword}
-              onChange={changePasswordInfo}
-              placeholder="Enter New Password"
-            />
-            <InputField
-              label="Confirm Password"
-              type="password"
-              name={"confirmPassword"}
-              value={changePassword.confirmPassword}
-              onChange={changePasswordInfo}
-              placeholder="Confirm New Password"
-            />
-          </form>
-        )}
+        <Collapse isOpened={showChangePassField ? true : false}>
+          {showChangePassField && (
+            <form
+              onSubmit={submitChangePassword}
+              className="block lg:col-span-2 flex-col gap-4">
+              <InputField
+                label="Old Password"
+                type="password"
+                name={"oldPassword"}
+                value={changePassword.oldPassword}
+                onChange={changePasswordInfo}
+                placeholder="Enter Current Password"
+              />
+              <InputField
+                label="New Password"
+                type="password"
+                name={"newPassword"}
+                value={changePassword.newPassword}
+                onChange={changePasswordInfo}
+                placeholder="Enter New Password"
+              />
+              <InputField
+                label="Confirm Password"
+                type="password"
+                name={"confirmPassword"}
+                value={changePassword.confirmPassword}
+                onChange={changePasswordInfo}
+                placeholder="Confirm New Password"
+              />
+            </form>
+          )}
+        </Collapse>
       </div>
     </div>
   );

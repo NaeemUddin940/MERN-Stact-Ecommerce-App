@@ -28,6 +28,7 @@ import Users from "./Admin/pages/Users/Users";
 import Orders from "./Admin/pages/Orders/Orders";
 import Register from "./pages/Register";
 import VerifyOtp from "./pages/VerifyOtp";
+import AdminProfile from "./Admin/pages/Profile/AdminProfile";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
           </AdminRoutes>
         }>
         <Route index element={<Navigate to="dashboard" replace />} />
+        <Route path="profile" element={<AdminProfile />} />
         <Route path="admin-account" element={<AdminAccount />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="home-slides" element={<HomeSlides />} />

@@ -262,32 +262,33 @@ export async function loginUserController(req, res) {
   }
 }
 
-export const checkIsLogin = async (req, res) => {
-  try {
-    const token =
-      req.cookies.accessToken || req?.header?.authorization?.split(" ")[1];
+// export const checkIsLogin = async (req, res) => {
+//   try {
+//     const token =
+//       req.cookies.accessToken || req?.header?.authorization?.split(" ")[1];
+//       console.log(token);
 
-    if (!token) {
-      return res.status(401).json({
-        message: "Access Token Not Found!",
-        success: false,
-        error: true,
-      });
-    }
-    res.status(200).json({
-      success: true,
-      error: false,
-      message: "Successfull to Check Login",
-    });
-  } catch (error) {
-    // Handle errors
-    res.status(500).json({
-      success: false,
-      error: true,
-      message: error.message || "Internal Server Error to Check Login!",
-    });
-  }
-};
+//     if (!token) {
+//       return res.status(401).json({
+//         message: "Access Token Not Found!",
+//         success: false,
+//         error: true,
+//       });
+//     }
+//     res.status(200).json({
+//       success: true,
+//       error: false,
+//       message: "Successfull to Check Login",
+//     });
+//   } catch (error) {
+//     // Handle errors
+//     res.status(500).json({
+//       success: false,
+//       error: true,
+//       message: error.message || "Internal Server Error to Check Login!",
+//     });
+//   }
+// };
 
 // This is user Logout Controller
 export async function logoutUserController(req, res) {

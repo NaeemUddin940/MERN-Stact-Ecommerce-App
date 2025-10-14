@@ -19,7 +19,7 @@ import { ChevronDown } from "lucide-react";
 
 export default function TopNavbar() {
   return (
-    <section className="flex items-center px-10 md:px-0 border-y-1 justify-center bg-background overflow-hidden animate-slide-in-top delay-100">
+    <section className="flex items-center px-10 md:px-0 border-y-1 justify-center bg-background overflow-hidden  delay-100">
       <div className="flex container-sm md:container-md items-center justify-center lg:justify-between  py-1 border-ring">
         <div className="hidden lg:flex items-center offer">
           <p className="font-medium animate-slide-in-top delay-300">

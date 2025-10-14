@@ -23,36 +23,31 @@ export default function Login() {
   const { setIsLogin, setAuthChanged } = useAuthContext();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [forgotEmail, setForgotEmail] = useState({ email: "" });
 
-  // handle input changes
   function handleChange(e) {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
-  function forgotEmailChange(e) {
-    const { name, value } = e.target;
-    setForgotEmail({ ...forgotEmail, [name]: value });
-  }
+ 
 
-  // login form submit
+  // ✅ Login Handler
   async function submitForm(e) {
     e.preventDefault();
     setLoading(true);
 
     try {
       const res = await postData("/api/user/login", formData, {
-        credentials: "include", // 🔥 cookie support
+        credentials: "include",
       });
 
       if (res.success) {
-        setIsLogin(true);
         toast.success(res.message);
         localStorage.setItem("accessToken", res.data.accessToken);
+        setIsLogin(true);
         setAuthChanged((prev) => !prev);
         setFormData({ email: "", password: "" });
-        navigate("/"); // redirect after login
+        navigate("/");
       } else {
         toast.error(res.message);
       }
@@ -63,26 +58,28 @@ export default function Login() {
     }
   }
 
-  // forgot password handler
-  async function ForgotPassword(e) {
-    e.preventDefault();
-
-    if (forgotEmail.email === "") {
-      toast.error("Please Enter Your Email.");
+  // ✅ Forgot Password Handler
+  async function ForgotPassword() {
+    if (formData.email === "") {
+      toast.error("Please enter your email.");
       return;
     }
 
     try {
-      const res = await postData("/api/user/forgot-password", forgotEmail);
+      const res = await postData("/api/user/forgot-password", {
+        email: formData.email,
+      });
+
       if (res.success) {
-        toast.success(`OTP Send to ${forgotEmail.email}`);
-        localStorage.setItem("forgotEmail", forgotEmail.email);
+        toast.success(`OTP sent to ${formData.email}`);
+        localStorage.setItem("forgotEmail", formData.email);
         navigate("/user/verify-otp");
       } else {
         toast.error(res.message);
       }
     } catch (error) {
-      console.error("Failed to Send Your Email.");
+      console.error(error);
+      toast.error("Failed to send your email.");
     }
   }
 
@@ -90,17 +87,17 @@ export default function Login() {
     <div
       style={{
         backgroundImage: `
-        linear-gradient(180deg, 
-          rgba(245,245,220,1) 0%, 
-          rgba(255,223,186,0.8) 25%, 
-          rgba(255,182,193,0.6) 50%, 
-          rgba(147,112,219,0.7) 75%, 
-          rgba(72,61,139,0.9) 100%
-        ),
-        radial-gradient(circle at 30% 20%, rgba(255,255,224,0.4) 0%, transparent 50%),
-        radial-gradient(circle at 70% 80%, rgba(72,61,139,0.6) 0%, transparent 70%),
-        radial-gradient(circle at 50% 60%, rgba(147,112,219,0.3) 0%, transparent 60%)
-      `,
+          linear-gradient(180deg,
+            rgba(245,245,220,1) 0%,
+            rgba(255,223,186,0.8) 25%,
+            rgba(255,182,193,0.6) 50%,
+            rgba(147,112,219,0.7) 75%,
+            rgba(72,61,139,0.9) 100%
+          ),
+          radial-gradient(circle at 30% 20%, rgba(255,255,224,0.4) 0%, transparent 50%),
+          radial-gradient(circle at 70% 80%, rgba(72,61,139,0.6) 0%, transparent 70%),
+          radial-gradient(circle at 50% 60%, rgba(147,112,219,0.3) 0%, transparent 60%)
+        `,
       }}
       className="flex items-center justify-center h-screen">
       <Card className="w-full max-w-sm text-black border-slate-300 border-2 shadow-md">
@@ -128,10 +125,8 @@ export default function Login() {
                   id="email"
                   type="email"
                   name="email"
-                  value={formData.email || forgotEmail.email}
-                  onChange={(e) => {
-                    handleChange(e), forgotEmailChange(e);
-                  }}
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="example@gmail.com"
                 />
               </div>

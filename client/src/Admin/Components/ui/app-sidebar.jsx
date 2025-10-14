@@ -4,7 +4,7 @@ import {
   ChevronDown,
   Image,
   LayoutDashboard,
-  LogOut,
+  LogOutIcon,
   ShoppingBasket,
   Users,
 } from "lucide-react";
@@ -23,7 +23,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
   Sheet,
   SheetContent,
@@ -31,6 +31,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import AddProduct from "../Products/AddProducts";
+import { useAuthContext } from "@/context/AuthContext";
 
 const items = [
   {
@@ -39,7 +40,7 @@ const items = [
     icon: LayoutDashboard,
   },
   {
-    title: "Home Slidesr",
+    title: "Home Slider",
     url: "/admin/home-slides",
     icon: Image,
     subItems: [
@@ -80,40 +81,41 @@ const items = [
     url: "/admin/orders",
     icon: IoBagCheckOutline,
   },
-  {
-    title: "Logout",
-    url: "/log-out",
-    icon: LogOut,
-  },
 ];
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ ...props }) {
+  const { logout } = useAuthContext();
+  const navigate = useNavigate();
   const [subMenuIndex, setSubMenuIndex] = React.useState(null);
 
   return (
     <Sidebar collapsible="icon" {...props}>
+      {/* ✅ Header Section */}
       <SidebarHeader>
         <SidebarMenu>
           <Link to="/" className="flex items-center gap-5 cursor-pointer">
             <SidebarMenuButton
               tooltip="Visit Website"
-              className="bg-primary text-primary-foreground cursor-pointer hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 h-10 duration-200 ease-linear flex items-center ">
-              <img src={logo} className="w-5" alt="PollenPop" /> Visite Website
+              className="bg-primary text-primary-foreground cursor-pointer hover:bg-primary/90 active:bg-primary/90 min-w-8 h-10 duration-200 ease-linear flex items-center">
+              <img src={logo} className="w-5" alt="PollenPop" /> Visit Website
             </SidebarMenuButton>
           </Link>
         </SidebarMenu>
       </SidebarHeader>
+
+      {/* ✅ Sidebar Menu Section */}
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Admin Panel</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item, i) => (
-                <SidebarMenuItem key={i} className="hover:shadow-lg ">
+                <SidebarMenuItem key={i} className="hover:shadow-lg">
                   {item.subItems ? (
                     <div>
+                      {/* Main Menu Button */}
                       <SidebarMenuButton
-                        className="cursor-pointer flex hover:bg-chart-1 items-center justify-between"
+                        className="cursor-pointer flex hover:bg-chart-4 items-center justify-between"
                         onClick={() =>
                           setSubMenuIndex(
                             subMenuIndex === item.title ? null : item.title
@@ -131,6 +133,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         </span>
                       </SidebarMenuButton>
 
+                      {/* Submenu Section */}
                       <div className="ml-7 border-l pl-3">
                         {item.subItems.map((subItem) => (
                           <Collapse
@@ -184,10 +187,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   )}
                 </SidebarMenuItem>
               ))}
+
+              {/* ✅ Logout Button (fixed) */}
+              <SidebarMenuButton
+                onClick={() => logout(navigate)}
+                className="flex items-center gap-4 px-2 hover:bg-chart-4">
+                <LogOutIcon />
+                Log Out
+              </SidebarMenuButton>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+
       <SidebarRail />
     </Sidebar>
   );

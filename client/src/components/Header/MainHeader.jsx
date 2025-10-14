@@ -17,61 +17,21 @@ import { usenavItemContext } from "../../context/NavItemContext";
 import CartSidebar from "../Cart/CartSidebar";
 import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
 import { DialogDescription, DialogTitle } from "../ui/dialog";
-import { useEffect } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
-import { toast } from "react-toastify";
 import { useAuthContext } from "@/context/AuthContext";
-import { getData } from "@/utils/GetData";
 
 export default function MainHeader() {
   const { navItem } = usenavItemContext();
-  const { setIsLogin, isLogin, setAuthChanged, user } = useAuthContext();
+  const { setIsLogin, isLogin, user, logout } = useAuthContext();
   const navigate = useNavigate();
-  useEffect(() => {
-    async function checkIsLogin() {
-      const res = await getData("/api/user/checkislogin");
-
-      if (res.success) {
-        setIsLogin(true);
-      } else {
-        setIsLogin(false);
-      }
-    }
-    checkIsLogin();
-  }, []);
-
-  async function logout() {
-    try {
-      const res = await fetch("http://localhost:8000/api/user/logout", {
-        method: "GET",
-        credentials: "include", // send cookies automatically
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
-        toast.success(data.message);
-        setIsLogin(false);
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        localStorage.removeItem("role");
-        navigate("/");
-        setAuthChanged((prev) => !prev);
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      toast.error("Failed to Log Out.");
-    }
-  }
 
   return (
     <header>
       <section className="flex bg-background border-b-1 border-ring justify-center items-center">
         <div className="container-sm md:container-md flex items-center gap-5 justify-between">
-          <div className="animate-slide-in-left flex items-center">
+          <div className=" flex items-center">
             <div className="lg:hidden">
               <Sidebar navItem={navItem} />
             </div>
@@ -177,7 +137,7 @@ export default function MainHeader() {
                             <IoMdHeartEmpty />
                             My Lists
                           </DropdownMenuItem>
-                          <DropdownMenuItem onClick={logout}>
+                          <DropdownMenuItem onClick={() => logout(navigate)}>
                             <IoLogOutOutline />
                             Log Out
                           </DropdownMenuItem>
