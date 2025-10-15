@@ -12,7 +12,7 @@ import {
   Image,
 } from "lucide-react";
 import { putData } from "@/utils/PutData";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import { getData } from "@/utils/GetData";
 import InputField from "@/components/ui/InputField";
 import { useNavigate } from "react-router-dom";

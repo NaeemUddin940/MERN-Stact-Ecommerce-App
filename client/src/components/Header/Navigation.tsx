@@ -61,7 +61,7 @@ export default function Navigation() {
 
   return (
     <div
-      className={`lg:flex bg-background border-t-2 border-b-2 hidden items-center justify-center shadow shadow-gray-300 py-1 transition-transform duration-500
+      className={`lg:flex bg-background hidden items-center justify-center border-b-1 py-1 transition-transform duration-500
         ${fixedNav ? "fixed top-0 w-full z-50" : "relative"}
         ${showNav ? "translate-y-0" : "-translate-y-full"}
       `}>

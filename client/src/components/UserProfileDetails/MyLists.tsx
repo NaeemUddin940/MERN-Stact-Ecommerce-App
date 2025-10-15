@@ -10,6 +10,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import { Collapse } from "react-collapse";
 import React from "react";
+import { Card } from "../ui/card";
 
 export default function MyLists() {
   const [openRow, setOpenRow] = useState<number | null>(null);
@@ -50,7 +51,7 @@ export default function MyLists() {
   ];
 
   return (
-    <div className="w-full">
+    <Card className="w-full p-6">
       <h2 className="text-2xl font-bold mb-4">My Lists</h2>
       <div className="w-[1150px] overflow-x-auto border border-gray-200 rounded-sm">
         <Table className="min-w-[1000px] border-collapse border border-gray-200">
@@ -167,6 +168,6 @@ export default function MyLists() {
           </TableBody>
         </Table>
       </div>
-    </div>
+    </Card>
   );
 }

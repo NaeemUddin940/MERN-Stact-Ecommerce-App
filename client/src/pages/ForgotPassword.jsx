@@ -11,7 +11,7 @@ import { putData } from "@/utils/PutData";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 export default function ForgotPassword() {
   const [showNewPassword, setShowNewPassword] = useState(false);

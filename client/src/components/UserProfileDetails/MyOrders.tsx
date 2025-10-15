@@ -1,10 +1,11 @@
 import { Minus, Plus, StarIcon, Trash2 } from "lucide-react";
 import React from "react";
+import { Card } from "../ui/card";
 
 export default function MyOrders() {
   return (
-    <div>
-      <div className="lg:col-span-8 overflow-y-auto space-y-4">
+    <Card >
+      <div className="lg:col-span-8 p-5 overflow-y-auto space-y-4">
         <h3 className="text-3xl font-bold">My Orders</h3>
         <p>
           There are <span className="text-chart-1">2</span> Orders.
@@ -92,6 +93,6 @@ export default function MyOrders() {
           </button>
         </div>
       </div>
-    </div>
+    </Card>
   );
 }

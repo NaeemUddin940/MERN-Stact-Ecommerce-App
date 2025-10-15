@@ -21,6 +21,8 @@ import upload from "../middlewares/multer.js";
 import { validateSendAgainOtp } from "../validations/validateSendAgainOtp.js";
 import { loginValidator } from "../validations/loginValidations.js";
 import { validateRequest } from "../middlewares/validationRequest.js";
+import { addressValidation } from "../validations/addressValidation.js";
+import { addAddressController } from "../controllers/address.controller.js";
 // import { changePasswordValidator } from "../validations/changePassword.js";
 
 const userRoute = Router();
@@ -67,8 +69,17 @@ userRoute.post(
 userRoute.put("/change-password", resetPasswordController);
 
 userRoute.post("/refresh-token", refreshTokenController);
+
 userRoute.get("/user-details", authenticated, userDetails);
 
 userRoute.put("/user-details-update", authenticated, userDetailsUpdate);
+
+userRoute.post(
+  "/add-address",
+  authenticated,
+  addressValidation,
+  validateRequest,
+  addAddressController
+);
 
 export default userRoute;

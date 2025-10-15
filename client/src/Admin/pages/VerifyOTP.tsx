@@ -5,7 +5,7 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import shield from "/shield.png";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { ArrowButton } from "@/components/ui/ArrowButton";
 

@@ -29,7 +29,7 @@ export default function MainHeader() {
 
   return (
     <header>
-      <section className="flex bg-background border-b-1 border-ring justify-center items-center">
+      <section className="flex bg-background border-b-1 justify-center items-center">
         <div className="container-sm md:container-md flex items-center gap-5 justify-between">
           <div className=" flex items-center">
             <div className="lg:hidden">

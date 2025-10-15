@@ -16,7 +16,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import { postData } from "@/utils/PostData";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -28,8 +28,6 @@ export default function Login() {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
-
- 
 
   // ✅ Login Handler
   async function submitForm(e) {

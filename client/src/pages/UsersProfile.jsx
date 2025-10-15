@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FiUser, FiShoppingCart } from "react-icons/fi";
-import { Image, LogOut } from "lucide-react";
+import { Image, LogOut, MapPinHouse } from "lucide-react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import MyLists from "@/components/UserProfileDetails/MyLists";
@@ -9,6 +9,7 @@ import MyProfile from "@/components/UserProfileDetails/MyProfile";
 import { UploadImage } from "@/utils/UploadImage";
 import { useAuthContext } from "@/context/AuthContext";
 import Loader from "@/components/Loader/Loader";
+import AddAddress from "@/components/UserProfileDetails/AddAddress";
 
 export default function UsersProfile() {
   const [activeTab, setActiveTab] = useState("myProfile");
@@ -107,6 +108,16 @@ export default function UsersProfile() {
         </button>
 
         <button
+          onClick={() => setActiveTab("addAddress")}
+          className={`flex items-center gap-3 p-2 w-full text-left rounded-md transition ${
+            activeTab === "addAddress"
+              ? "bg-violet-500 text-foreground font-semibold"
+              : "text-gray-600 hover:bg-gray-100"
+          }`}>
+          <MapPinHouse size={17} /> Add Address
+        </button>
+
+        <button
           onClick={() => {
             toast.warning("You Are Log Out, Now Log in Agian..");
             history("/auth/login");
@@ -116,44 +127,19 @@ export default function UsersProfile() {
               ? "bg-blue-100 text-foreground font-semibold"
               : "text-gray-600 hover:bg-gray-100 active:bg-violet-500"
           }`}>
-          <LogOut /> Log Out
+          <LogOut size={17} /> Log Out
         </button>
       </div>
 
       {/* Right Content */}
-      <div className="flex-1 bg-background dark:border-slate-600 dark:shadow-slate-800 border-1 shadow-lg rounded-lg p-6">
+      <div className="flex-1 ">
         {activeTab === "myProfile" && <MyProfile />}
 
         {activeTab === "myOrders" && <MyOrders />}
 
         {activeTab === "myLists" && <MyLists />}
 
-        {activeTab === "details" && (
-          <div>
-            <h2 className="text-2xl font-bold mb-4">Personal Details</h2>
-            <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-gray-700">Name</label>
-                <input type="text" className="w-full border rounded-md p-2" />
-              </div>
-              <div>
-                <label className="block text-gray-700">Email</label>
-                <input type="email" className="w-full border rounded-md p-2" />
-              </div>
-              <div>
-                <label className="block text-gray-700">Phone</label>
-                <input type="tel" className="w-full border rounded-md p-2" />
-              </div>
-              <div>
-                <label className="block text-gray-700">Date of Birth</label>
-                <input type="date" className="w-full border rounded-md p-2" />
-              </div>
-            </form>
-            <button className="mt-6 bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">
-              Save Changes
-            </button>
-          </div>
-        )}
+        {activeTab === "addAddress" && <AddAddress />}
       </div>
     </div>
   );

@@ -11,9 +11,10 @@ import {
 import InputField from "../ui/InputField";
 import { getData } from "@/utils/GetData";
 import { putData } from "@/utils/PutData";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";      
 import { Input } from "../ui/input";
 import { Collapse } from "react-collapse";
+import { Card } from "../ui/card";
 
 export default function MyProfile() {
   const [user, setUser] = useState(null);
@@ -133,7 +134,7 @@ export default function MyProfile() {
   }
 
   return (
-    <div className="p-5">
+    <Card className="p-5">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div className="flex items-center gap-4">
@@ -287,6 +288,6 @@ export default function MyProfile() {
           )}
         </Collapse>
       </div>
-    </div>
+    </Card>
   );
 }

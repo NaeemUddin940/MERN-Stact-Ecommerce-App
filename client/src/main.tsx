@@ -8,15 +8,17 @@ import { CategoryProvider } from "./context/CategoryContext";
 import { ThemeProvider } from "./components/ui/ThemeProvider";
 import { ToastContainer } from "react-toastify";
 import { AuthProvider } from "./context/AuthContext";
+import { Toaster } from "react-hot-toast";
 
 createRoot(document.getElementById("root")!).render(
   <AuthProvider>
     <ProductProvider>
-      <ToastContainer
+      {/* <ToastContainer
         pauseOnHover={false}
         position="top-right"
         autoClose={1000}
-      />
+      /> */}
+      <Toaster position="top-center" reverseOrder={false} />
       <NavItemProvider>
         <CategoryProvider>
           <BrowserRouter>
