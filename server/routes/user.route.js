@@ -22,8 +22,11 @@ import { validateSendAgainOtp } from "../validations/validateSendAgainOtp.js";
 import { loginValidator } from "../validations/loginValidations.js";
 import { validateRequest } from "../middlewares/validationRequest.js";
 import { addressValidation } from "../validations/addressValidation.js";
-import { addAddressController } from "../controllers/address.controller.js";
-// import { changePasswordValidator } from "../validations/changePassword.js";
+import {
+  addAddressController,
+  deleteAddress,
+  getAddress,
+} from "../controllers/address.controller.js";
 
 const userRoute = Router();
 
@@ -81,5 +84,9 @@ userRoute.post(
   validateRequest,
   addAddressController
 );
+
+userRoute.get("/get-address", authenticated, getAddress);
+
+userRoute.delete("/delete-address/:id", authenticated, deleteAddress);
 
 export default userRoute;

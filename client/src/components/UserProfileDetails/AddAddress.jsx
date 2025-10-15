@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
 import { postData } from "@/utils/PostData";
+import { getData } from "@/utils/GetData";
+import { Trash2 } from "lucide-react";
+import { DeleteData } from "@/utils/DeleteData";
 
 const AddAddress = () => {
   const [address, setAddress] = useState({
@@ -18,6 +21,8 @@ const AddAddress = () => {
     postalCode: "",
     country: "",
   });
+
+  const [getAddress, setGetAddress] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,6 +52,31 @@ const AddAddress = () => {
       toast.error(res.message);
     }
   };
+
+  useEffect(() => {
+    async function getAddress() {
+      try {
+        const res = await getData("/api/user/get-address");
+        if (res.success) {
+          setGetAddress(res.address);
+        }
+      } catch (error) {
+        console.error("Error to Get Address", error);
+      }
+    }
+
+    getAddress();
+  }, []);
+
+  async function handleDelete(id) {
+    const res = await DeleteData(`/api/user/delete-address/${id}`);
+    if (res.success) {
+      toast.success(res.message);
+      setGetAddress((prev) => prev.filter((item) => item._id !== id));
+    } else {
+      toast.error(res.message);
+    }
+  }
 
   return (
     <Card className="w-full p-2 sm:p-4 lg:p-6 shadow-lg border border-gray-200 dark:border-slate-800">
@@ -182,15 +212,21 @@ const AddAddress = () => {
         </form>
 
         <div>
-          <Card className="p-4 shadow-sm mt-4 bg-chart-1">
-            <CardContent className="flex items-center justify-between">
-              <p>{address.phone}</p>,<p>{address.address_line1}</p>,
-              {address.address_line2 && <p>{address.address_line2}</p>},
-              <p>{address.city}</p>,<p> {address.state}</p>,
-              <p>{address.postalCode}</p>
-              <p>{address.country}</p>
-            </CardContent>
-          </Card>
+          {getAddress.map((getAddress) => (
+            <Card className="p-4 shadow-sm mt-4 bg-chart-1">
+              <CardContent className="flex items-center justify-between">
+                <p>{getAddress.phone}</p>,<p>{getAddress.address_line1}</p>,
+                {getAddress.address_line2 && <p>{getAddress.address_line2}</p>},
+                <p>{getAddress.city}</p>,<p> {getAddress.state}</p>,
+                <p>{getAddress.postalCode}</p>
+                <p>{getAddress.country}</p>
+                <Trash2
+                  onClick={() => handleDelete(getAddress._id)}
+                  className="cursor-pointer hover:text-red-500 hover:bg-black hover:rounded-full p-1"
+                />
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </CardContent>
     </Card>
