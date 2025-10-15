@@ -13,7 +13,7 @@ export const addAddressController = async (req, res) => {
       country,
     } = req.body;
 
-    await addressModel.create({
+    const newAddress = await addressModel.create({
       userId: req.user.id,
       fullname,
       phone,
@@ -28,6 +28,7 @@ export const addAddressController = async (req, res) => {
     res.status(200).json({
       success: true,
       error: false,
+      newAddress,
       message: "Successfull to Add Address",
     });
   } catch (error) {

@@ -24,13 +24,32 @@ const AddAddress = () => {
 
   const [getAddress, setGetAddress] = useState([]);
 
+  // Input change handler
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAddress((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Fetch addresses from DB
+  const fetchAddresses = async () => {
+    try {
+      const res = await getData("/api/user/get-address");
+      if (res.success) {
+        setGetAddress(res.address);
+      }
+    } catch (error) {
+      console.error("Error fetching addresses:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAddresses();
+  }, []);
+
+  // Add new address
   const handleSubmit = async (e) => {
     e.preventDefault();
+    fetchAddresses();
 
     if (
       !address.fullname ||
@@ -48,27 +67,26 @@ const AddAddress = () => {
     const res = await postData("/api/user/add-address", address);
     if (res.success) {
       toast.success(res.message);
+      setGetAddress((prev) => [...prev, res.newAddress || address]);
+      // Reset form
+      setAddress({
+        fullname: "",
+        phone: "",
+        email: "",
+        address_line1: "",
+        address_line2: "",
+        city: "",
+        state: "",
+        postalCode: "",
+        country: "",
+      });
     } else {
       toast.error(res.message);
     }
   };
 
-  useEffect(() => {
-    async function getAddress() {
-      try {
-        const res = await getData("/api/user/get-address");
-        if (res.success) {
-          setGetAddress(res.address);
-        }
-      } catch (error) {
-        console.error("Error to Get Address", error);
-      }
-    }
-
-    getAddress();
-  }, []);
-
-  async function handleDelete(id) {
+  // Delete address
+  const handleDelete = async (id) => {
     const res = await DeleteData(`/api/user/delete-address/${id}`);
     if (res.success) {
       toast.success(res.message);
@@ -76,7 +94,7 @@ const AddAddress = () => {
     } else {
       toast.error(res.message);
     }
-  }
+  };
 
   return (
     <Card className="w-full p-2 sm:p-4 lg:p-6 shadow-lg border border-gray-200 dark:border-slate-800">
