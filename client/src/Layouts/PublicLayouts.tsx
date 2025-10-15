@@ -6,7 +6,6 @@ import ServicesSection from "@/components/Home/ServicesSection";
 import { Outlet } from "react-router-dom";
 
 export default function PublicLayouts() {
-  
   return (
     <div>
       <TopNavbar />

@@ -4,14 +4,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
+import { postData } from "@/utils/PostData";
 
 const AddAddress = () => {
   const [address, setAddress] = useState({
-    fullName: "",
+    fullname: "",
     phone: "",
     email: "",
-    addressLine1: "",
-    addressLine2: "",
+    address_line1: "",
+    address_line2: "",
     city: "",
     state: "",
     postalCode: "",
@@ -23,24 +24,28 @@ const AddAddress = () => {
     setAddress((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (
-      !address.fullName ||
+      !address.fullname ||
       !address.phone ||
-      !address.addressLine1 ||
+      !address.address_line1 ||
       !address.city ||
       !address.postalCode ||
-      !address.country
+      !address.country ||
+      !address.state
     ) {
       toast.error("Please fill all required fields!");
       return;
     }
 
-    toast.success("Address added successfully!");
-    console.log("Address data:", address);
-    // 👉 Here you can call API to save the address
+    const res = await postData("/api/user/add-address", address);
+    if (res.success) {
+      toast.success(res.message);
+    } else {
+      toast.error(res.message);
+    }
   };
 
   return (
@@ -58,8 +63,8 @@ const AddAddress = () => {
             <div>
               <Label className="text-sm sm:text-base">Full Name *</Label>
               <Input
-                name="fullName"
-                value={address.fullName}
+                name="fullname"
+                value={address.fullname}
                 onChange={handleChange}
                 placeholder="John Doe"
                 className="mt-1"
@@ -98,8 +103,8 @@ const AddAddress = () => {
             <div>
               <Label className="text-sm sm:text-base">Address Line 1 *</Label>
               <Input
-                name="addressLine1"
-                value={address.addressLine1}
+                name="address_line1"
+                value={address.address_line1}
                 onChange={handleChange}
                 placeholder="House, Road, Area"
                 className="mt-1"
@@ -110,8 +115,8 @@ const AddAddress = () => {
             <div>
               <Label className="text-sm sm:text-base">Address Line 2</Label>
               <Input
-                name="addressLine2"
-                value={address.addressLine2}
+                name="address_line2"
+                value={address.address_line2}
                 onChange={handleChange}
                 placeholder="Apartment, Building (optional)"
                 className="mt-1"
@@ -120,53 +125,54 @@ const AddAddress = () => {
           </div>
 
           {/* City, State */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <Label className="text-sm sm:text-base">City *</Label>
-              <Input
-                name="city"
-                value={address.city}
-                onChange={handleChange}
-                placeholder="Dhaka"
-                className="mt-1"
-              />
+          <div className="lg:grid lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <Label className="text-sm sm:text-base">City *</Label>
+                <Input
+                  name="city"
+                  value={address.city}
+                  onChange={handleChange}
+                  placeholder="Dhaka"
+                  className="mt-1"
+                />
+              </div>
+              <div>
+                <Label className="text-sm sm:text-base">State/Division</Label>
+                <Input
+                  name="state"
+                  value={address.state}
+                  onChange={handleChange}
+                  placeholder="Dhaka Division"
+                  className="mt-1"
+                />
+              </div>
             </div>
-            <div>
-              <Label className="text-sm sm:text-base">State/Division</Label>
-              <Input
-                name="state"
-                value={address.state}
-                onChange={handleChange}
-                placeholder="Dhaka Division"
-                className="mt-1"
-              />
+
+            {/* Postal Code, Country */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <Label className="text-sm sm:text-base">Postal Code *</Label>
+                <Input
+                  name="postalCode"
+                  value={address.postalCode}
+                  onChange={handleChange}
+                  placeholder="1207"
+                  className="mt-1"
+                />
+              </div>
+              <div>
+                <Label className="text-sm sm:text-base">Country *</Label>
+                <Input
+                  name="country"
+                  value={address.country}
+                  onChange={handleChange}
+                  placeholder="Bangladesh"
+                  className="mt-1"
+                />
+              </div>
             </div>
           </div>
-
-          {/* Postal Code, Country */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <Label className="text-sm sm:text-base">Postal Code *</Label>
-              <Input
-                name="postalCode"
-                value={address.postalCode}
-                onChange={handleChange}
-                placeholder="1207"
-                className="mt-1"
-              />
-            </div>
-            <div>
-              <Label className="text-sm sm:text-base">Country *</Label>
-              <Input
-                name="country"
-                value={address.country}
-                onChange={handleChange}
-                placeholder="Bangladesh"
-                className="mt-1"
-              />
-            </div>
-          </div>
-
           {/* Submit Button */}
           <Button
             type="submit"
@@ -174,6 +180,18 @@ const AddAddress = () => {
             Save Address
           </Button>
         </form>
+
+        <div>
+          <Card className="p-4 shadow-sm mt-4 bg-chart-1">
+            <CardContent className="flex items-center justify-between">
+              <p>{address.phone}</p>,<p>{address.address_line1}</p>,
+              {address.address_line2 && <p>{address.address_line2}</p>},
+              <p>{address.city}</p>,<p> {address.state}</p>,
+              <p>{address.postalCode}</p>
+              <p>{address.country}</p>
+            </CardContent>
+          </Card>
+        </div>
       </CardContent>
     </Card>
   );

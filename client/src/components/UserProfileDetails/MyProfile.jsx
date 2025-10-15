@@ -11,7 +11,7 @@ import {
 import InputField from "../ui/InputField";
 import { getData } from "@/utils/GetData";
 import { putData } from "@/utils/PutData";
-import toast from "react-hot-toast";      
+import toast from "react-hot-toast";
 import { Input } from "../ui/input";
 import { Collapse } from "react-collapse";
 import { Card } from "../ui/card";
@@ -255,38 +255,38 @@ export default function MyProfile() {
         </form>
 
         {/* Change Password */}
-        <Collapse isOpened={showChangePassField ? true : false}>
-          {showChangePassField && (
-            <form
-              onSubmit={submitChangePassword}
-              className="block lg:col-span-2 flex-col gap-4">
-              <InputField
-                label="Old Password"
-                type="password"
-                name={"oldPassword"}
-                value={changePassword.oldPassword}
-                onChange={changePasswordInfo}
-                placeholder="Enter Current Password"
-              />
-              <InputField
-                label="New Password"
-                type="password"
-                name={"newPassword"}
-                value={changePassword.newPassword}
-                onChange={changePasswordInfo}
-                placeholder="Enter New Password"
-              />
-              <InputField
-                label="Confirm Password"
-                type="password"
-                name={"confirmPassword"}
-                value={changePassword.confirmPassword}
-                onChange={changePasswordInfo}
-                placeholder="Confirm New Password"
-              />
-            </form>
-          )}
-        </Collapse>
+        <div className="block w-full lg:col-span-2 lg:col-start-5 flex-col gap-4">
+          <Collapse isOpened={showChangePassField ? true : false}>
+            {showChangePassField && (
+              <form onSubmit={submitChangePassword}>
+                <InputField
+                  label="Old Password"
+                  type="password"
+                  name={"oldPassword"}
+                  value={changePassword.oldPassword}
+                  onChange={changePasswordInfo}
+                  placeholder="Enter Current Password"
+                />
+                <InputField
+                  label="New Password"
+                  type="password"
+                  name={"newPassword"}
+                  value={changePassword.newPassword}
+                  onChange={changePasswordInfo}
+                  placeholder="Enter New Password"
+                />
+                <InputField
+                  label="Confirm Password"
+                  type="password"
+                  name={"confirmPassword"}
+                  value={changePassword.confirmPassword}
+                  onChange={changePasswordInfo}
+                  placeholder="Confirm New Password"
+                />
+              </form>
+            )}
+          </Collapse>
+        </div>
       </div>
     </Card>
   );

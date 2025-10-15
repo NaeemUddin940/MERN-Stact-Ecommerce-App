@@ -8,7 +8,6 @@ import { useProductContext } from "../context/ProductContext";
 import BrandShowCase from "../components/Home/BrandShowCase";
 import ClientReview from "../components/Home/ClientReview";
 import { Separator } from "../components/ui/separator";
-import { useEffect, useState } from "react";
 
 export default function Home() {
   const { products } = useProductContext();

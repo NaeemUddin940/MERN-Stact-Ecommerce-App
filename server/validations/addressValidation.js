@@ -12,6 +12,6 @@ export const addressValidation = [
     .notEmpty()
     .withMessage("Please Enter Your House No, Village, Post, District."),
   body("city").notEmpty().withMessage("Please Enter Your City."),
-  body("division").notEmpty().withMessage("Please Enter Your Division."),
+  body("state").notEmpty().withMessage("Please Enter Your Division."),
   body("postalCode").notEmpty().withMessage("Please Enter Your Postal Code."),
 ];

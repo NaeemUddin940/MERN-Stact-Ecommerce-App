@@ -9,7 +9,7 @@ export const addAddressController = async (req, res) => {
       address_line2,
       city,
       postalCode,
-      division,
+      state,
       country,
     } = req.body;
 
@@ -20,7 +20,7 @@ export const addAddressController = async (req, res) => {
       address_line2,
       city,
       postalCode,
-      division,
+      state,
       country,
     });
 

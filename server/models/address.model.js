@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 const addressSchema = new mongoose.Schema(
   {
+    fullname: {
+      type: String,
+      default: "",
+    },
     address_line1: {
       type: String,
       default: null,
@@ -13,7 +17,7 @@ const addressSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    division: {
+    state: {
       type: String,
       default: "",
     },
