@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
@@ -10,6 +12,7 @@ import { Trash2 } from "lucide-react";
 import { DeleteData } from "@/utils/DeleteData";
 
 const AddAddress = () => {
+  const [phone, setPhone] = useState("");
   const [address, setAddress] = useState({
     fullname: "",
     phone: "",
@@ -121,21 +124,30 @@ const AddAddress = () => {
 
             {/* Phone */}
             <div>
-              <Label className="text-sm sm:text-base">Phone Number *</Label>
-              <Input
-                name="phone"
-                type="tel"
-                value={address.phone}
-                onChange={handleChange}
-                placeholder="+8801XXXXXXXXX"
-                className="mt-1"
-              />
+              <Label htmlFor="phone" className="text-sm sm:text-base">
+                Phone Number *
+              </Label>
+
+              <div className="mt-1">
+                <Input
+                  id="phone"
+                  name="phone"
+                  type="phone"
+                  value={address.phone}
+                  onChange={handleChange}
+                  placeholder="+8801000000xxxx"
+                  className="mt-1"
+                />
+              </div>
             </div>
 
             {/* Email */}
             <div>
-              <Label className="text-sm sm:text-base">Email</Label>
+              <Label htmlFor="email" className="text-sm sm:text-base">
+                Email
+              </Label>
               <Input
+                id="email"
                 name="email"
                 type="email"
                 value={address.email}
@@ -230,9 +242,18 @@ const AddAddress = () => {
         </form>
 
         <div>
-          {getAddress.map((getAddress) => (
-            <Card className="p-4 shadow-sm mt-4 bg-chart-1">
-              <CardContent className="flex items-center justify-between">
+          {getAddress.map((getAddress, index) => (
+            <Card key={index} className="p-4 shadow-sm mt-4 bg-chart-1">
+              <CardContent className="flex text-sm items-center justify-between">
+                <div className="pr-3">
+                  <Input
+                    type="radio"
+                    name="selectedAddress"
+                    value={index}
+                    id={`address-${index}`}
+                    className="mt-1 w-5 cursor-pointer"
+                  />
+                </div>
                 <p>{getAddress.phone}</p>,<p>{getAddress.address_line1}</p>,
                 {getAddress.address_line2 && <p>{getAddress.address_line2}</p>},
                 <p>{getAddress.city}</p>,<p> {getAddress.state}</p>,
@@ -240,7 +261,7 @@ const AddAddress = () => {
                 <p>{getAddress.country}</p>
                 <Trash2
                   onClick={() => handleDelete(getAddress._id)}
-                  className="cursor-pointer hover:text-red-500 hover:bg-black hover:rounded-full p-1"
+                  className="cursor-pointer ml-4 hover:text-red-500 hover:bg-black hover:rounded-full p-1"
                 />
               </CardContent>
             </Card>

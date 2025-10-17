@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Collapse } from "react-collapse";
 import {
   User,
   Box,
-  Settings,
   Truck,
   Package,
   DollarSign,
-  LogOut,
   Loader,
   Image,
 } from "lucide-react";
@@ -15,14 +13,10 @@ import { putData } from "@/utils/PutData";
 import toast from "react-hot-toast";
 import { getData } from "@/utils/GetData";
 import InputField from "@/components/ui/InputField";
-import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "@/context/AuthContext";
 
 export default function AdminProfile() {
-  const { logout } = useAuthContext();
   const [loader, setLoader] = useState(false);
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
   const [showChangePassField, setShowChangePassField] = useState(false);
   const [changePassword, setChangePassword] = useState({
     email: localStorage.getItem("email"),
@@ -93,7 +87,6 @@ export default function AdminProfile() {
   // Admin Image Upload
   function handleImageUpload(e) {
     const file = e.target.files[0];
-
     if (!file) return;
 
     async function postImage() {
@@ -102,7 +95,7 @@ export default function AdminProfile() {
         formData.append("avatar", file);
         setLoader(true);
         const res = await UploadImage("/api/user/upload-avatar", formData);
-
+        console.log(res);
         if (res.success) {
           toast.success(res.message);
           setLoader(false);
@@ -195,13 +188,31 @@ export default function AdminProfile() {
         {/* Main content */}
         <main className="space-y-6 mb-5">
           {/* Top bar for small screens */}
-          <header className="lg:hidden bg-white dark:bg-slate-800 p-3 rounded-2xl shadow-sm flex items-center justify-between">
+          {/* <header className="lg:hidden bg-white dark:bg-slate-800 p-3 rounded-2xl shadow-sm flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <img
-                src={user?.avatar}
-                alt="Admin avatar"
-                className="w-16 h-16 rounded-full object-cover ring-2 ring-slate-200 dark:ring-slate-700"
-              />
+              <div className="w-20 h-20 relative  flex items-center group justify-center rounded-full group overflow-hidden mb-2 ">
+                {loader ? (
+                  <Loader />
+                ) : (
+                  <img
+                    className="rounded-full group-hover:opacity-15 h-full w-full object-cover"
+                    src={user?.avatar}
+                    alt="profile"
+                  />
+                )}
+                <div className="flex flex-col absolute w-20 h-20 top-0 left-0 opacity-0 group-hover:opacity-80 group-hover:animate-fade-in items-center justify-center">
+                  <Image size={20} />
+                  <h4 className="text-sm mt-1 hover:opacity-15 pointer-events-none">
+                    Add Image
+                  </h4>
+                  <input
+                    type="file"
+                    name="avatar"
+                    onChange={handleImageUpload}
+                    className="absolute top-0 left-0 h-full w-full z-50 opacity-0 cursor-pointer"
+                  />
+                </div>
+              </div>
               <div>
                 <p className="text-sm font-medium">{user?.name}</p>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -215,12 +226,12 @@ export default function AdminProfile() {
                 Dashboard
               </button>
             </div>
-          </header>
+          </header> */}
 
           {/* Top section: profile + stats */}
-          <section className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <section className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Profile Card */}
-            <article className="md:col-span-4 bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm">
+            <article className="lg:col-span-4 col-span-12 bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm">
               <div className="flex flex-col items-start gap-4">
                 <div className="flex items-center gap-4">
                   <div className="w-20 h-20 relative  flex items-center group justify-center rounded-full group overflow-hidden mb-2 ">
@@ -308,22 +319,24 @@ export default function AdminProfile() {
             </article>
 
             {/* Stats cards */}
-            <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {stats.map((s) => (
-                <div
-                  key={s.id}
-                  className="bg-white h-25 dark:bg-slate-800 p-4 rounded-2xl shadow-sm flex items-center justify-between">
-                  <div>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
-                      {s.label}
-                    </p>
-                    <p className="text-lg font-semibold">{s.value}</p>
+            <div className="lg:col-span-8 col-span-12">
+              <div className=" grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {stats.map((s) => (
+                  <div
+                    key={s.id}
+                    className="bg-white h-25 dark:bg-slate-800 p-4 rounded-2xl shadow-sm flex items-center justify-between">
+                    <div>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
+                        {s.label}
+                      </p>
+                      <p className="text-lg font-semibold">{s.value}</p>
+                    </div>
+                    <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-700/50">
+                      <s.icon size={20} />
+                    </div>
                   </div>
-                  <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-700/50">
-                    <s.icon size={20} />
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </section>
         </main>

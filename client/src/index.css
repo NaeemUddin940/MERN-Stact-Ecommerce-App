@@ -122,6 +122,14 @@ xsczcx
   }
 }
 
+.react-international-phone-input {
+  width: 100%;
+  background: transparent;
+}
+.react-international-phone-background-color {
+  background-color: red;
+}
+
 @layer components {
   .main-category {
     @apply flex hover:bg-muted-foreground items-center justify-start my-1 w-full;

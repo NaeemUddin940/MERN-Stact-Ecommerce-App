@@ -7,7 +7,7 @@ export const UploadImage = async (url, formData) => {
     });
 
     const data = await response.json();
-    return data; 
+    return data;
   } catch (error) {
     return {
       message:

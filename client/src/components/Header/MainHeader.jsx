@@ -101,7 +101,13 @@ export default function MainHeader() {
                           <DropdownMenuItem>
                             <Link to="/admin" className="flex gap-2">
                               <FaRegUser />
-                              Go to Admin Dashboard
+                              Admin Dashboard
+                            </Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            <Link to="/admin/profile" className="flex gap-2">
+                              <FaRegUser />
+                              Admin Profile
                             </Link>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={logout}>

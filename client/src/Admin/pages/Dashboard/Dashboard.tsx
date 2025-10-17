@@ -7,7 +7,7 @@ import { Gift, PieChart, Warehouse } from "lucide-react";
 import { StatsCard } from "../../Components/Dashboard/StatisticsCard";
 import RecentOrders from "../../Components/Dashboard/RecentOrders";
 import ProductsList from "../../Components/Dashboard/ProductsList";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { useAuthContext } from "@/context/AuthContext";
 const stats = [
   {
